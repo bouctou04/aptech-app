@@ -1,0 +1,1 @@
+This folder must receive all class other class without (Database, Autoloader)
