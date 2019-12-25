@@ -1,96 +1,149 @@
 <?php
-class User
-  {
-     private $nom;
-     private $prenom;
-     private $adr_mail;
-     private $pseudo;
-     private $password;
-     private $date_birth;
-   // creation du constructeur
-     public function __construct($nom,$prenom,$adr_mail,$pseudo,$password,$date_birth)
-       {   
-           if(is_string($nom))
-              {
-                $this->nom=$nom;
-              }
-           if(is_string($prenom))
-              {
-                $this->prenom=$prenom;
-              }
-          if(is_string($adr_mail))
-              {
-                if(preg_match('#^[a-z0-9_.-]{2,}@gmail\.[a-z]{2,5}$#',$adr_mail))
-                  {
-                     $this->adr_mail=$adr_mail;
-                  }
-                  else{echo("adresse mail invalide ex:bouctou004@gamil.com");}
-              }
-          if(is_string($pseudo))
-             {
-                $this->pseudo=$pseudo;
-             }
-          if(is_string($password))
-             {
-                $this->password=$password;
-             }
-             if(is_string($date_birth))
-             {
-                $this->date_birth=$date_birth;
-             }
+class User {
+
+  // Create private attribute
+
+  private $nom;
+  private $prenom;
+  private $mailAdress;
+  private $pseudo;
+  private $password;
+  private $dateBirth;
+
+  // Create a constructor function
+
+  /**
+  * [string] nom (ex : Coulibaly)
+  * [string] prenom (ex : Dafé)
+  * [string] mail adress (ex : bouctou04@yahoo.fr)
+  * [string] pseudo (ex : bouctou04)
+  * [string] password (ex : abc123456)
+  * [string] date (N/A)
+  **/
+
+  public function __construct($nom, $prenom, $mailAdress, $pseudo, $password, $dateBirth) { 
+
+    if(is_string($nom)) {
+      $this->nom = $nom;
+    } else {
+      print('Error, last name must be a string');
+    }
+
+    if(is_string($prenom)) {
+      $this->prenom = $prenom;
+    }
+
+    if(is_string($mailAdress)) {
+      if(preg_match('#^[a-z0-9_.-]{2,}@[a-z0-9]+\.[a-z]{2,10}$#', $mailAdress)) {
+        $this->mailAdress = $mailAdress;
+      } else {
+        print('Error, this adress mail is invalid (ex : bouctou04@gmail.com)');
         }
-    //creation des setteur
-    public function setnom($nom)            
-       {
-         if(is_string($nom))
-           {
-             $this->nom=$nom;
-           }
-       }
-    public function setprenom($prenom)     
-        {
-          if(is_string($prenom))
-            {
-              $this->prenom=$prenom;
-            }
-        }
-    public function setadr_mail($adr_mail)  
-       {
-          if(is_string($adr_mail))
-           {
-             if(preg_match('#^[a-z0-9_.-]{2,}@gmail\.[a-z]{2,5}$#',$adr_mail))
-               {
-                  $this->adr_mail=$adr_mail;
-               }else{ echo"adresse mail invalide ex:bouctou004@gamil.com";}
-           }
-       }
-    public function setpseudo($pseudo)      
-       {
-            if(is_string($pseudo))
-            {
-              $this->pseudo=$pseudo;
-            }
-       }
-    public function setpassword($password)   
-       {
-        if(is_string($password))
-         {
-          $this->password=$password;
-         }
-       }
-    public function setdate_birth($date_birth) 
-       {
-        if(is_string($date_birth))
-         {
-          $this->date_birth=$date_birth;
-         }
-       }
-    //creation des getteur
-    public function getnom()           {return $this->nom;}
-    public function getprenom()     {return $this->prenom;}
-    public function getadr_mail() {return $this->adr_mail;}
-    public function getpseudo()     {return $this->pseudo;}
-    public function getpassword()  {return $this->password;}
-    public function getdate_birth() {return $this->date_birth;}
+    }
+    if(is_string($pseudo)) {
+      $this->pseudo = $pseudo;
+    } else {
+      print('Error, pseudo must be a string');
+    }
+
+    if(is_string($password)) {
+      $this->password = $password;
+    } else {
+      print('Error, password must be a string');
+    }
+
+    if(is_string($dateBirth)) {
+      $this->dateBirth = $dateBirth;
+    }
 
   }
+
+  // Setter && Getter
+
+  public function setNom($nom) {
+
+    if(is_string($nom)) {
+      $this->nom = $nom;
+    } else {
+      print('Error, name must be string');
+      }
+
+    }
+
+    public function setPrenom($prenom) {
+
+      if(is_string($prenom)) {
+        $this->prenom = $prenom;
+      } else {
+        print('Error, first name must be a string');
+      }
+
+    }
+
+    public function setMailAdress($mailAdress) {
+
+      if(is_string($mailAdress)) {
+        if(preg_match('#^[a-z0-9_.-]{2,}@[a-z0-9]+\.[a-z]{2,10}$#',$mailAdress)) {
+          $this->mailAdress = $mailAdress;
+        } else {
+          print('Error, this adress mail is invalid (ex : bouctou04@gmail.com)');
+              }
+      } else {
+        print('Error, mail adress must be a string');
+      }
+
+    }
+
+    public function setPseudo($pseudo) {
+
+      if(is_string($pseudo)) {
+        $this->pseudo = $pseudo;
+      } else {
+        print('Error, pseudo must be a string');
+      }
+
+    }
+
+    public function setPassword($password) {
+
+      if(is_string($password)) {
+        $this->password = $password;
+      } else {
+        print('Error, password must be a string');
+      }
+
+    }
+
+    public function setDateBirth($dateBirth) {
+
+      if(is_string($dateBirth)) {
+        $this->dateBirth = $dateBirth;
+      }
+
+    }
+
+    public function getNom() {
+      return $this->nom;
+    }
+
+    public function getPrenom() {
+      return $this->prenom;
+    }
+
+    public function getmailAdress() {
+      return $this->mailAdress;
+    }
+
+    public function getPseudo() {
+      return $this->pseudo;
+    }
+
+    public function getPassword() {
+      return $this->password;
+    }
+
+    public function getDateBirth(){
+      return $this->dateBirth;
+    }
+
+}
