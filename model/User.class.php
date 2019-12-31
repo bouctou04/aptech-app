@@ -145,5 +145,33 @@ class User {
     public function getDateBirth(){
       return $this->dateBirth;
     }
+//la fonction connexion qui permet à un utilisateur de se connecté
+  public function Connexion( $user,$pass)
+    {
+        if(is_string($user) and is_string($pass))
+        {
+           if($user==$this->pseudo and $pass==$this->password)
+           {
+             echo"bonjour";
+           }
+        }else{
+         echo"imposible";
+         }
+     }
+//la fonction inscription qui permet d'inscrir un utilisateur
+ public function inscription()
+   {
+      $bdd=new Database("localhost","aptech","root","");
+      $pdo=$bdd->getPdo();
+      $ins=$pdo->prepare('INSERT INTO user(nom,prenom,adresse,pseudo,pasword,date_naiss) 
+      values(:nom,:prenom,:adresse,:pseudo,:pasword,:date_naiss)');
+      $ins->execute(array(':nom'=>$this->nom,
+                          ':prenom'=>$this->prenom,
+                          ':adresse'=>$this->adr_mail,
+                          ':pseudo'=>$this->pseudo,
+                          ':pasword'=>$this->password,
+                          ':date_naiss'=>$this->date_birth      
+                         )); 
+    }
 
 }
