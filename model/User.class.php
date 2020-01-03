@@ -1,4 +1,5 @@
 <?php
+require '../core/Database.class.php';
 class User {
 
   // Create private attribute
@@ -159,19 +160,10 @@ class User {
          }
      }
 //la fonction inscription qui permet d'inscrir un utilisateur
- public function inscription()
-   {
-      $bdd=new Database("localhost","aptech","root","");
-      $pdo=$bdd->getPdo();
-      $ins=$pdo->prepare('INSERT INTO user(nom,prenom,adresse,pseudo,pasword,date_naiss) 
-      values(:nom,:prenom,:adresse,:pseudo,:pasword,:date_naiss)');
-      $ins->execute(array(':nom'=>$this->nom,
-                          ':prenom'=>$this->prenom,
-                          ':adresse'=>$this->adr_mail,
-                          ':pseudo'=>$this->pseudo,
-                          ':pasword'=>$this->password,
-                          ':date_naiss'=>$this->date_birth      
-                         )); 
-    }
+ public function inscription($nom, $prenom, $mailAdress, $pseudo, $password, $dateBirth) {
+    $req = $this->getPdo()->('INSERT INTO user () VALUES (?, ?, ?, ?, ?, ?)');
+    $req->execute(array($this->nom, $this->prenom, $this->mailAdress, $this->pseudo, $this->password, $this->dateBirth));
+    return $req;
+ }
 
 }
