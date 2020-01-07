@@ -1,23 +1,24 @@
 <?php
 require '../core/Database.class.php';
-class Login extends Database {
+class Login extends Database  {
 	private $id;
 	private $email;
 	private $password1;
 
-	public function __construct($email, $password) {
-		if(is_string($email)) {
-			$this->email = $email;
-		} else {
-			print('Error, email must be a string');
-		}
+	public function __construct($email, $password) 
+	  {
+			if(is_string($email)) {
+				$this->email = $email;
+			} else {
+				print('Error, email must be a string');
+			}
 
-		if(is_string($password)) {
-			$this->password1 = $password;
-		} else {
-			print('Error, password must be a string');
-		}
-	}
+			if(is_string($password)) {
+				$this->password1 = $password;
+			} else {
+				print('Error, password must be a string');
+			}
+	  }
 
 	public function getId() {
 		return $this->id;
@@ -53,5 +54,17 @@ class Login extends Database {
 		} else {
 			print('Error, password must be a string');
 		}
+	}
+	public function connexion()
+	{
+	    $req = $this->getPdo()->prepare("SELECT* FROM user WHERE pseudo = ? and pasword = ?");
+        $req->execute(array($this->email,$this->password1));
+	    $user = $req->rowCount();
+	    if($user)
+	     {
+		   return "bienvenue";
+	     }else {
+			 return "movais mot de passe ";
+		 }
 	}
 }

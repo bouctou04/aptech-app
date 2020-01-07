@@ -1,16 +1,14 @@
 <?php
 require '../core/Database.class.php';
-class User {
-
+class User extends Database  
+{
   // Create private attribute
-
-  private $nom;
-  private $prenom;
-  private $mailAdress;
-  private $pseudo;
-  private $password;
-  private $dateBirth;
-
+   private $nom;
+   private $prenom;
+   private $mailAdress;
+   private $pseudo;
+   private $password;
+   private $dateBirth;
   // Create a constructor function
 
   /**
@@ -160,10 +158,10 @@ class User {
          }
      }
 //la fonction inscription qui permet d'inscrir un utilisateur
- public function inscription($nom, $prenom, $mailAdress, $pseudo, $password, $dateBirth) {
-    $req = $this->getPdo()->('INSERT INTO user () VALUES (?, ?, ?, ?, ?, ?)');
+  public function inscription() {
+    $req = $this->getPdo()->prepare('INSERT INTO user(nom,prenom,adresse,pseudo,pasword,date_naiss)VALUES (?, ?, ?, ?, ?, ?)');
     $req->execute(array($this->nom, $this->prenom, $this->mailAdress, $this->pseudo, $this->password, $this->dateBirth));
     return $req;
- }
+   }
 
 }
