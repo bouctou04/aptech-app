@@ -1,5 +1,8 @@
 <?php
 session_start();
+$mdp = "Bamako123";
+$mdphash = sha1($mdp);
+echo $mdphash;
 	require 'frontend/Form.class.php';
 	require 'backend/Login.class.php';
 	$value = '';
@@ -42,7 +45,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 	<head>
-		<base href="/aptech-project/">
+		<base href="/aptech-app/">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="style/css/main.css">
@@ -59,7 +62,7 @@ session_start();
 						<span class="fa fa-expand text-primary"></span>
 					</div>
 					<div class="h4 font-weight-bold text-center mb-4">
-						Se connecter à son bureau de travail !
+						Se connecter à son espace universitaire !
 					</div>
 					<div class="col-12 pt-4">
 						<form class="form" method="POST">
