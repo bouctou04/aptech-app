@@ -1,0 +1,36 @@
+.opacity-1 {
+	opacity: 0.4;
+}
+.opacity-2 {
+	opacity: 0.5;
+}
+.opacity-3 {
+	opacity: 0.6;
+}
+.opacity-4 {
+	opacity: 0.7;
+}
+
+.table .thead-primary th {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Pour sm */
+@media (min-width: 576px) {}
+
+/* Pour md */
+@media (min-width: 768px) {}
+
+/* Pour lg */
+@media (min-width: 992px) {
+
+	.mt-lg-10,
+	.my-lg-10 {
+  	margin-top: 3rem !important;
+	}
+}
+
+/* Pour xl très grand */
+@media (min-width: 1200px) {}

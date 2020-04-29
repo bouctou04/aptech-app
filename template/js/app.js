@@ -1,1 +1,0 @@
-alert('JavaScript files are succefully includes');
