@@ -47,7 +47,7 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 							<?php
 								if(isset($donnees['img'])){ ?>
 							<p class="col-12">
-								<a href="../media/img/unnamed.gif"><img src="../media/img/unnamed.gif" class="w-100"></a>
+								<a href="../templates/media/img/unnamed.gif"><img src="../templates/media/img/unnamed.gif" class="w-100"></a>
 							</p>
 							<?php
 								}
@@ -56,7 +56,7 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 								<?= $donnees['contenu'] ?>
 							</p>
 							<p class="offset-2 col-8 offset-2">
-								<img class="w-100" src="../media/img/unnamed.gif">
+								<img class="w-100" src="../templates/media/img/unnamed.gif">
 							</p>
 							<p class="col-12">
 								<span class="opacity-1"><?= $donnees['date_pub'] ?></span>
@@ -131,6 +131,6 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 <?php require 'include/footer.php' ?>
 <?php 
 	}else { header('Location: 404.php'); }
-	 } else { header('Location: ../index.php'); }
+	 } else { header('Location: ../old-index.php'); }
 	
  ?>

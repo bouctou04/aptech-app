@@ -129,6 +129,6 @@ session_start();
  // Si la session n'est pas valide
  else {
  	// Rédirection
- 	header('Location: ../index.php');
+ 	header('Location: ../old-index.php');
  }
  ?>

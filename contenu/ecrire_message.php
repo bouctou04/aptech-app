@@ -75,7 +75,7 @@ session_start();
 							    		 ?>
 							    	<td class="row">
 							    		<div class="pr-2">
-							    			<img src="../media/img/FHI.png" class="rounded-pill" width="30">
+							    			<img src="../templates/media/img/FHI.png" class="rounded-pill" width="30">
 							    		</div>
 							    		<span class="font-weight-bold"><?php if($donnees['id_expediteur'] == $_SESSION['id']) { echo 'Moi : '; } else { echo '@'.$donnees['nom_utilisateur']; } ?> </span> 
 							    		<span class="opacity-4 pl-2"><?= $donnees['contenu']; ?></span>
@@ -103,5 +103,5 @@ session_start();
 						</div>
 <?php require 'include/footer.php' ?>
 <?php 
-} else { header('Location: ../index.php'); }
-	} else { header('Location: ../index.php'); } ?>
+} else { header('Location: ../old-index.php'); }
+	} else { header('Location: ../old-index.php'); } ?>

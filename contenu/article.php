@@ -48,7 +48,7 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 						<article class="row p-2 ml-2">
 							<h2 class="text-dark"><?= $donnees['titre'] ?></h2>
 							<p class="col-12">
-								<a href="../media/img/unnamed.gif"><img src="../media/img/unnamed.gif" class="w-100"></a>
+								<a href="../templates/media/img/unnamed.gif"><img src="../templates/media/img/unnamed.gif" class="w-100"></a>
 							</p>
 							<p class="col-12">
 								<?= $donnees['contenu']; ?>
@@ -121,5 +121,5 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 						</div>
 <?php require 'include/footer.php' ?>
 <?php } else { header('Location accueil.php'); }
-	} else { header('Location: ../index.php'); }
+	} else { header('Location: ../old-index.php'); }
  ?>

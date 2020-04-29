@@ -6,4 +6,4 @@ $_SESSION = array();
 // Destruction de la session
 session_destroy();
 // Rédirection
-header('Location: ../index.php');
+header('Location: ../old-index.php');

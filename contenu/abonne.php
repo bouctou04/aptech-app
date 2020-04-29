@@ -40,5 +40,5 @@ if(isset($_SESSION['id']) AND !empty($_SESSION['id'])) {
 // Si la session n'est pas active
  else {
  	// Redirection
-	header('Location: ../index.php');
+	header('Location: ../old-index.php');
 }

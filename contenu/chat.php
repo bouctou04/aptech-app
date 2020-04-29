@@ -105,4 +105,4 @@ session_start();
 						</div>
 <?php require 'include/footer.php' ?>
 
-<?php } else { header('Location: ../index.php'); } ?>
+<?php } else { header('Location: ../old-index.php'); } ?>

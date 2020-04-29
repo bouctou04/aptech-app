@@ -81,6 +81,6 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=gestion_universitaire_2;charset=utf8
 // Si la session n'est pas valide
 else {
 	// Rédirection
-	header('Location: ../index.php');
+	header('Location: ../old-index.php');
 }
 ?>

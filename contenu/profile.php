@@ -9,7 +9,7 @@ session_start();
 						<div class="row">
 							<div class="col-md-2">
 								<div class="pr-2">
-							    	<img src="../media/img/FHI.png" class="rounded-pill" width="100">
+							    	<img src="../templates/media/img/FHI.png" class="rounded-pill" width="100">
 							    	<a href="#">Modifier la photo de profil</a>
 							    </div>
 							</div>

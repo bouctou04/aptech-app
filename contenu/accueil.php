@@ -184,5 +184,5 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 	// Fermeture de if($_SESSION)
 	} 
 	// Si la session n'existe pas
-	else { header('Location: ../index.php'); }
+	else { header('Location: ../old-index.php'); }
  ?>

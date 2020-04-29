@@ -31,7 +31,7 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] > 0) {
 							    		 ?>
 							    	<td class="row">
 							    		<div class="pr-2">
-							    			<img src="../media/img/FHI.png" class="rounded-pill" width="30">
+							    			<img src="../templates/media/img/FHI.png" class="rounded-pill" width="30">
 							    		</div>
 							    		<span class="font-weight-bold"><a href="ecrire_message.php?id=<?= $donnees['id_utilisateur'] ?>">@<?= $donnees['nom_utilisateur'] ?></a> : Moi </span> 
 							    		<span class="opacity-4 pl-2"><?= $donnees['contenu'] ?></span>
@@ -70,5 +70,5 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] > 0) {
 // Si la session n'est pas valide
  else {
  	// Rédirection
-	header('Location: ../index.php');
+	header('Location: ../old-index.php');
 }
