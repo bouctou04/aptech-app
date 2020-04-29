@@ -32,6 +32,7 @@
 							<li class="d-inline mr-3">
 								<a href="message.php?id=<?= $_SESSION['id']; ?>" class="text-light"><span class="fa fa-envelope"></span> Message</a>
 							</li>
+                            kk
 							<li class="d-inline mr-3">
 								<a href="chat.php?id=<?= $_SESSION['id']; ?>" class="text-light"><span class="fa fa-comments"></span> Chat Générale</a>
 							</li>
