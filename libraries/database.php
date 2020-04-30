@@ -6,7 +6,7 @@
 function get_pdo() {
     $dsn = 'mysql';
     $host = '127.0.0.1';
-    $db_name = 'gestion_universitaire_2';
+    $db_name = 'aptech_app';
     $db_user = 'root';
     $db_password = '';
 

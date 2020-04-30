@@ -10,9 +10,8 @@
     </head>
     <body>
         <?= $page_content; ?>
-
         <footer>
-            <div class="text-center">
+            <div class="fixed-bottom text-center">
                 <p class="text-muted">&copy; 2020 - Mon app</p>
             </div>
         </footer>

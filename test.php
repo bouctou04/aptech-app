@@ -1,5 +1,5 @@
 <?php
-require 'model/User.php';
+require 'models/User.php';
 
 $user = new \model\User();
 
