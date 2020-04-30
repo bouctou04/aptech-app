@@ -51,7 +51,7 @@
 							<p class="h5 font-weight-bold bg-dark text-light p-2">Forum</p>
 							<ul class="">
 								<?php
-									$req_forum_aside = $bdd->query('SELECT id_forum, type_categorie, Forum.id_utilisateur, nom_utilisateur, sujet, contenu, date_pub, resolu FROM Forum INNER JOIN Categorie_Forum ON Forum.id_categorie = Categorie_Forum.id_categorie INNER JOIN Utilisateur ON Forum.id_utilisateur = Utilisateur.id_utilisateur ORDER BY id_forum DESC');
+									$req_forum_aside = $bdd->query('SELECT id_forum, type_categorie, Forum.id_utilisateur, nom_utilisateur, sujet, templates, date_pub, resolu FROM Forum INNER JOIN Categorie_Forum ON Forum.id_categorie = Categorie_Forum.id_categorie INNER JOIN Utilisateur ON Forum.id_utilisateur = Utilisateur.id_utilisateur ORDER BY id_forum DESC');
 									if($req_forum_aside->rowCount() > 0) {
 										while($donnees_forum_aside = $req_forum_aside->fetch()) { ?>
 								<li>

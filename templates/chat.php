@@ -8,13 +8,13 @@ session_start();
 	if(isset($_POST['sub_chat'])) {
 		if(!empty($_POST['message'])) {
 			$message = htmlspecialchars($_POST['message']);
-			$req = $bdd->prepare('INSERT INTO Chat(id_expediteur, contenu, date_envoi) VALUES(?, ?, NOW())');
+			$req = $bdd->prepare('INSERT INTO Chat(id_expediteur, templates, date_envoi) VALUES(?, ?, NOW())');
 			$req->execute(array($_SESSION['id'], $message));
 		} else {
 			$erreur = 'Vous ne pouvez pas envoyé un message vide !';
 		}
 	}
-	$msg = $bdd->query('SELECT nom_utilisateur, id_expediteur, contenu, date_envoi FROM Chat INNER JOIN Utilisateur ON Chat.id_expediteur = Utilisateur.id_utilisateur ORDER BY id_chat DESC LIMIT 0,20');
+	$msg = $bdd->query('SELECT nom_utilisateur, id_expediteur, templates, date_envoi FROM Chat INNER JOIN Utilisateur ON Chat.id_expediteur = Utilisateur.id_utilisateur ORDER BY id_chat DESC LIMIT 0,20');
 ?>
 <?php require 'include/header.php' ?>
 <?php require 'include/aside.php' ?>
@@ -80,7 +80,7 @@ session_start();
 							    				echo '@'.$donnees['nom_utilisateur'];
 							    			} ?>
 							    		</a> : </span> 
-							    		<span class="opacity-4 pl-2"><?= nl2br($donnees['contenu']); ?></span>
+							    		<span class="opacity-4 pl-2"><?= nl2br($donnees['templates']); ?></span>
 							    		<span class="pl-3 opacity-1 small">Il y'a<?= $donnees['date_envoi']; ?></span>
 							    	</td>
 							    	<?php 
@@ -105,4 +105,4 @@ session_start();
 						</div>
 <?php require 'include/footer.php' ?>
 
-<?php } else { header('Location: ../old-index.php'); } ?>
+<?php } else { header('Location: ../old-old_index.php'); } ?>

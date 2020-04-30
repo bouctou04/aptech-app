@@ -1,5 +1,7 @@
 <?php
 require_once '../../libraries/database.php';
-$school_fixtures = "INSERT INTO `school` (`id`, `full_name`, `acronym`, `sign_date`) VALUES (NULL, 'APTECH MALI', 'APTECH-MALI', '2020-04-02'), (NULL, 'Technolab ISTA', 'Technolab ISTA', '2020-04-30')";
-$user_category = "INSERT INTO `user_category` (`id`, `field`) VALUES ('', 'super_admin'), ('', 'admin'), ('', 'teacher'), ('', 'student')";
+$super_users_fixtures = "INSERT INTO `super_users` (`id`, `last_name`, `first_name`, `birth_date`, `sexe`, `username`, `email`, `password`, `accreditation`) VALUES (NULL, 'Maiga', 'Baba', '1990-04-15', 'M', 'bouctou04', 'bmaiga04@gmail.com', '3e2a7b439cc921d678faca6dc14f70c17ed883ea', '2'), (NULL, 'Coulibaly', 'Dafe', '1998-04-08', 'M', 'dafe00', 'dafe@gmail.com', '3e2a7b439cc921d678faca6dc14f70c17ed883ea', '0')";
+$school_fixtures = "INSERT INTO `school` (`id`, `super_users_id`, `full_name`, `acronym`, `sign_date`) VALUES (NULL, '1', 'Technolab ISTA', 'TECHNOLAB-ISTA', '2020-04-30'), (NULL, '2', 'Aptech Mali', 'APTECH-MALI', '2020-04-30')";
+$user_category_fixtures = "INSERT INTO `user_category` (`id`, `field`) VALUES (NULL, 'admin'), (NULL, 'teacher'), (NULL, 'student')";
+$users_fixtures = "INSERT INTO `users` (`id`, `user_category_id`, `school_id`, `last_name`, `first_name`, `birth_date`, `sexe`, `username`, `email`, `password`) VALUES (NULL, '1', '2', 'Camara', 'Maimouna', '1990-04-06', 'F', 'maicam23', 'mai@gmail.com', '3e2a7b439cc921d678faca6dc14f70c17ed883ea'), (NULL, '3', '2', 'Bamba', 'Keleti', '1998-04-07', 'M', 'bamba', 'bamaba@gmail.com', '3e2a7b439cc921d678faca6dc14f70c17ed883ea')";
 $fixtures = get_pdo()->prepare($school_fixtures);

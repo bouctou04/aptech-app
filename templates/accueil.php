@@ -3,20 +3,20 @@
 session_start();
 
 // Connexion à la base de données
-$bdd = new PDO('mysql:host=127.0.0.1;dbname=gestion_universitaire_2;charset=utf8', 'root', '');
+$bdd = new PDO('mysql:host=127.0.0.1;dbname=aptech_app;charset=utf8', 'root', '');
 
 // Si la session existe et est active
-if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
-	require '../frontend/Form.class.php';
+if(isset($_SESSION['user']) AND $_SESSION['user'] != 0) {
+	require '../libraries/Form.class.php';
 	$form = new Form();
 
 	// Si le formulaire post article est renvoyé
 	if(isset($_POST['sub_actu'])) {
-		// Le contenu de POST ne peut pas être vide
-		if(!empty($_POST['titre']) AND !empty($_POST['contenu'])) {
+		// Le templates de POST ne peut pas être vide
+		if(!empty($_POST['titre']) AND !empty($_POST['templates'])) {
 			// Sécurité pour les données renvoyées
 			$titre = htmlspecialchars($_POST['titre']);
-			$contenu = htmlspecialchars($_POST['contenu']);
+			$contenu = htmlspecialchars($_POST['templates']);
 
 			//Vérification de la présence d'image
 			if(isset($_FILES['img'])) {
@@ -36,10 +36,10 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 			} else { $chemin = '';}
 
 			// Insertion des données dans la base de données
-			$ins_article = $bdd->prepare('INSERT INTO Article(id_utilisateur, titre, contenu, date_pub, image) VALUES(:id_utilisateur, :titre, :contenu, NOW(), :image)');
-			$ins_article->execute(array('id_utilisateur' => $_SESSION['id'], 'titre' => $titre, 'contenu' => $contenu, 'image' => $chemin));
-			
-		// Fermeture de if()	
+			$ins_article = $bdd->prepare('INSERT INTO Article(id_utilisateur, titre, templates, date_pub, image) VALUES(:id_utilisateur, :titre, :templates, NOW(), :image)');
+			$ins_article->execute(array('id_utilisateur' => $_SESSION['id'], 'titre' => $titre, 'templates' => $contenu, 'image' => $chemin));
+
+		// Fermeture de if()
 		}
 		// Si un champ est resté vide
 		else {
@@ -52,7 +52,7 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 	$articles_par_page = 5;
 
 	// Nombre total d'article
-	$articles_total_req = $bdd->query('SELECT id_article FROM Article');
+	$articles_total_req = $bdd->query('SELECT id FROM articles');
 	$articles_total = $articles_total_req->rowCount();
 
 	// Nombre total de page
@@ -65,7 +65,7 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 
 		// Déclaration de la page courante
 		$page_courante = $_GET['page'];
-	} 
+	}
 	// Si la page n'est pas déclarée on l'initialise automatiquement à la 1ère page
 	else {
 		// Initialisation de la page courante si elle n'est pas de définie
@@ -83,9 +83,9 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 					<div class="col-12 col-lg-9 border-left">
 
 
-							<?php 
+							<?php
 								// L'utilisateur doit être 'Administrateur pour pouvoir publier un article'
-								if($_SESSION['id_category'] == 1){ 
+								if($_SESSION['id_category'] == 1){
 							?>
 
 							<div class="col-12">
@@ -111,16 +111,16 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 
 							<?php
 								// Si on peut récupérer au moins 1 article
-								if($req_actu->rowCount() > 0) { 
+								if($req_actu->rowCount() > 0) {
 
 									// Récupération de la colonne de l'article
 									while($donnees = $req_actu->fetch()) { ?>
-								 
+
 						<article class="row p-2 ml-2">
 							<div class="col-12">
 								<h3><a href="article.php?id=<?= $donnees['id_article'] ?>"><?= $donnees['titre'] ?></a></h3>
 								<p class="">
-									<?= $donnees['contenu'] ?>
+									<?= $donnees['templates'] ?>
 								</p>
 								<p class="opacity-1">
 									<?= $donnees['date_pub'] ?>
@@ -132,16 +132,16 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 							 }
 							 // Fermeture de if()
 						 }
-						 // Si aucun article n'a été recupéré 
+						 // Si aucun article n'a été recupéré
 						 else { ?>
 							<article class="row">
 								<h4 class="col-12 text-center">Aucun article</h4>
 							</article>
 						 <?php
-						 	// Fermeture de else 
-							} 
+						 	// Fermeture de else
+							}
 							?>
-	
+
 						<nav aria-label="...">
 						  <ul class="pagination">
 						    <li class="page-item disabled">
@@ -155,18 +155,18 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 						 			 <li class="page-item active"><a class="page-link" href="accueil.php?page=<?= $i ?>"><?= $i ?></a></li>
 						 		<?php
 						 		// Fermeture de if()
-						 		} 
+						 		}
 						 		// Si nous ne sommes pas la page courante
 						 		else {
 						 	 ?>
 						    <li class="page-item"><a class="page-link" href="accueil.php?page=<?= $i ?>"><?= $i ?></a></li>
-						    <?php 
+						    <?php
 						    	// Fermeture de else
 								}
 								//Fermeture de for()
 							 	}
 							 ?>
-						    
+
 						      <!-- <a class="page-link" href="#">Next</a> -->
 						    </li>
 						  </ul>
@@ -182,7 +182,7 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 <?php require 'include/footer.php' ?>
 <?php
 	// Fermeture de if($_SESSION)
-	} 
+	}
 	// Si la session n'existe pas
-	else { header('Location: ../old-index.php'); }
+	else { header('Location: ../old-old_index.php'); }
  ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $bdd = new PDO('mysql:host=127.0.0.1;dbname=gestion_universitaire_2;charset=utf8', 'root', '');
-$msg = $bdd->query('SELECT nom_utilisateur, id_expediteur, contenu, date_envoi FROM Chat INNER JOIN Utilisateur ON Chat.id_expediteur = Utilisateur.id_utilisateur ORDER BY id_chat DESC LIMIT 0,20');
+$msg = $bdd->query('SELECT nom_utilisateur, id_expediteur, templates, date_envoi FROM Chat INNER JOIN Utilisateur ON Chat.id_expediteur = Utilisateur.id_utilisateur ORDER BY id_chat DESC LIMIT 0,20');
 							    		if($msg->rowCount() > 0) {
 							    			while($donnees = $msg->fetch()) { 
 							    	?>
@@ -13,7 +13,7 @@ $msg = $bdd->query('SELECT nom_utilisateur, id_expediteur, contenu, date_envoi F
 							    				echo '@'.$donnees['nom_utilisateur'];
 							    			} ?>
 							    		</a> : </span> 
-							    		<span class="opacity-4 pl-2"><?= nl2br($donnees['contenu']); ?></span>
+							    		<span class="opacity-4 pl-2"><?= nl2br($donnees['templates']); ?></span>
 							    		<span class="pl-3 opacity-1 small">Il y'a<?= $donnees['date_envoi']; ?></span>
 							    	</td>
 							    	<?php 

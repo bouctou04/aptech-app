@@ -32,4 +32,4 @@ if(isset($_SESSION['id']) AND !empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
 							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 						</div>
 <?php require 'include/footer.php' ?>
-<?php } else { header('Location: ..old-index.php'); } ?>
+<?php } else { header('Location: ..old-old_index.php'); } ?>

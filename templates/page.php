@@ -20,8 +20,8 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 			//Un peu de sécurité pour les données
 			$contenu = htmlspecialchars($_POST['contenu_commentaire']);
 			// Insertion du commentaire dans la base de données
-			$req_add_commentaire = $bdd->prepare('INSERT INTO Commentaire(id_categorie, id_utilisateur, id_article, contenu, date_commentaire) VALUES(:id_categorie, :id_utilisateur, :id_article, :contenu, NOW())');
-			$req_add_commentaire->execute(array('id_categorie' => 2, 'id_utilisateur' => $_SESSION['id'], 'id_article' => $getid, 'contenu' => $contenu));
+			$req_add_commentaire = $bdd->prepare('INSERT INTO Commentaire(id_categorie, id_utilisateur, id_article, templates, date_commentaire) VALUES(:id_categorie, :id_utilisateur, :id_article, :templates, NOW())');
+			$req_add_commentaire->execute(array('id_categorie' => 2, 'id_utilisateur' => $_SESSION['id'], 'id_article' => $getid, 'templates' => $contenu));
 		}
 			// Si u champ requis est invalide
 		 else {
@@ -30,11 +30,11 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 	}
 
 	// Selection des commentaires dans la base de données correspondant au paramètre
-	$req_select_commentaire = $bdd->prepare('SELECT Utilisateur.id_utilisateur, Utilisateur.nom_utilisateur, Commentaire.contenu, Commentaire.contenu, Commentaire.date_commentaire FROM Commentaire INNER JOIN categorie_commentaire ON categorie_commentaire.id_categorie = Commentaire.id_categorie INNER JOIN Utilisateur ON Utilisateur.id_utilisateur = Commentaire.id_utilisateur WHERE Commentaire.id_categorie = 2 AND Commentaire.id_article = :id_article');
+	$req_select_commentaire = $bdd->prepare('SELECT Utilisateur.id_utilisateur, Utilisateur.nom_utilisateur, Commentaire.templates, Commentaire.templates, Commentaire.date_commentaire FROM Commentaire INNER JOIN categorie_commentaire ON categorie_commentaire.id_categorie = Commentaire.id_categorie INNER JOIN Utilisateur ON Utilisateur.id_utilisateur = Commentaire.id_utilisateur WHERE Commentaire.id_categorie = 2 AND Commentaire.id_article = :id_article');
 	$req_select_commentaire->execute(array('id_article' => $getid));
 
 	// Selection du topic selon le paramètre
-	$req = $bdd->prepare('SELECT id_forum, type_categorie, Forum.id_utilisateur, nom_utilisateur, sujet, contenu, date_pub, resolu FROM Forum INNER JOIN Categorie_Forum ON Forum.id_categorie = Categorie_Forum.id_categorie INNER JOIN Utilisateur ON Forum.id_utilisateur = Utilisateur.id_utilisateur WHERE id_forum = :id_forum');
+	$req = $bdd->prepare('SELECT id_forum, type_categorie, Forum.id_utilisateur, nom_utilisateur, sujet, templates, date_pub, resolu FROM Forum INNER JOIN Categorie_Forum ON Forum.id_categorie = Categorie_Forum.id_categorie INNER JOIN Utilisateur ON Forum.id_utilisateur = Utilisateur.id_utilisateur WHERE id_forum = :id_forum');
 	$req->execute(array('id_forum' => $getid));
 	// Récupération des infos du topic
 	while($donnees = $req->fetch()){
@@ -47,16 +47,16 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 							<?php
 								if(isset($donnees['img'])){ ?>
 							<p class="col-12">
-								<a href="../templates/media/img/unnamed.gif"><img src="../templates/media/img/unnamed.gif" class="w-100"></a>
+								<a href="media/img/unnamed.gif"><img src="media/img/unnamed.gif" class="w-100"></a>
 							</p>
 							<?php
 								}
 							?>
 							<p class="col-12">
-								<?= $donnees['contenu'] ?>
+								<?= $donnees['templates'] ?>
 							</p>
 							<p class="offset-2 col-8 offset-2">
-								<img class="w-100" src="../templates/media/img/unnamed.gif">
+								<img class="w-100" src="media/img/unnamed.gif">
 							</p>
 							<p class="col-12">
 								<span class="opacity-1"><?= $donnees['date_pub'] ?></span>
@@ -94,7 +94,7 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 							    			while($donnees_comment = $req_select_commentaire->fetch()) { ?>
 							    	<td class="row">
 							    		<span class="font-weight-bold">@<?= $donnees_comment['nom_utilisateur'] ?> : </span> 
-							    		<span class="opacity-4 pl-2"><?= $donnees_comment['contenu'] ?></span>
+							    		<span class="opacity-4 pl-2"><?= $donnees_comment['templates'] ?></span>
 							    		<span class="pl-3 opacity-1 small"><?= $donnees_comment['date_commentaire'] ?></span>
 							    	</td>
 							    	<?php 
@@ -131,6 +131,6 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 <?php require 'include/footer.php' ?>
 <?php 
 	}else { header('Location: 404.php'); }
-	 } else { header('Location: ../old-index.php'); }
+	 } else { header('Location: ../old-old_index.php'); }
 	
  ?>

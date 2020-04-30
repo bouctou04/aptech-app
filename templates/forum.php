@@ -12,14 +12,14 @@ session_start();
 	if(isset($_POST['sub_forum'])) {
 		//var_dump($_POST);
 		// On s'assure que tous les champs requis sont valide
-		if(!empty($_POST['sujet']) AND !empty($_POST['categorie']) AND !empty($_POST['contenu'])) {
+		if(!empty($_POST['sujet']) AND !empty($_POST['categorie']) AND !empty($_POST['templates'])) {
 			// Un peu de sécurité pour les données
 			$sujet = htmlspecialchars($_POST['sujet']);
 			$categorie = intval($_POST['categorie']);
-			$contenu = htmlspecialchars($_POST['contenu']);
+			$contenu = htmlspecialchars($_POST['templates']);
 			$image = '';
 				// Insertion du topic dans la base de données
-				$ins = $bdd->prepare('INSERT INTO Forum(id_categorie, id_utilisateur, sujet, contenu, date_pub, resolu, image) VALUES(?, ?, ?, ?, NOW(), 0, ?)');
+				$ins = $bdd->prepare('INSERT INTO Forum(id_categorie, id_utilisateur, sujet, templates, date_pub, resolu, image) VALUES(?, ?, ?, ?, NOW(), 0, ?)');
 				$resultat = $ins->execute(array($categorie, $_SESSION['id'], $sujet, $contenu, $image));
 		}
 		// Si un champ requis n'est pas valide
@@ -29,7 +29,7 @@ session_start();
 	}
 
 	// Récuperation des topics de la base de données
-	$req = $bdd->query('SELECT id_forum, type_categorie, Forum.id_utilisateur, nom_utilisateur, sujet, contenu, date_pub, resolu FROM Forum INNER JOIN Categorie_Forum ON Forum.id_categorie = Categorie_Forum.id_categorie INNER JOIN Utilisateur ON Forum.id_utilisateur = Utilisateur.id_utilisateur ORDER BY id_forum DESC');
+	$req = $bdd->query('SELECT id_forum, type_categorie, Forum.id_utilisateur, nom_utilisateur, sujet, templates, date_pub, resolu FROM Forum INNER JOIN Categorie_Forum ON Forum.id_categorie = Categorie_Forum.id_categorie INNER JOIN Utilisateur ON Forum.id_utilisateur = Utilisateur.id_utilisateur ORDER BY id_forum DESC');
 	//var_dump($req->fetch());
 ?>
 <?php require 'include/header.php' ?>
@@ -129,6 +129,6 @@ session_start();
  // Si la session n'est pas valide
  else {
  	// Rédirection
- 	header('Location: ../old-index.php');
+ 	header('Location: ../old-old_index.php');
  }
  ?>

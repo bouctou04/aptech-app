@@ -11,7 +11,7 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] > 0) {
 	$form = new Form();
 
 	// Récupération des messages depuis la base de données
-	$req = $bdd->prepare('SELECT DISTINCT id_utilisateur, nom_utilisateur, contenu, date_envoi FROM Message INNER JOIN Utilisateur ON Utilisateur.id_utilisateur = Message.id_expediteur WHERE id_expediteur = :mon_id OR id_destinataire = :mon_id');
+	$req = $bdd->prepare('SELECT DISTINCT id_utilisateur, nom_utilisateur, templates, date_envoi FROM Message INNER JOIN Utilisateur ON Utilisateur.id_utilisateur = Message.id_expediteur WHERE id_expediteur = :mon_id OR id_destinataire = :mon_id');
 	$req->execute(array('mon_id' => $_SESSION['id']));
 	//print_r($req->fetch());
 ?>
@@ -31,10 +31,10 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] > 0) {
 							    		 ?>
 							    	<td class="row">
 							    		<div class="pr-2">
-							    			<img src="../templates/media/img/FHI.png" class="rounded-pill" width="30">
+							    			<img src="media/img/FHI.png" class="rounded-pill" width="30">
 							    		</div>
 							    		<span class="font-weight-bold"><a href="ecrire_message.php?id=<?= $donnees['id_utilisateur'] ?>">@<?= $donnees['nom_utilisateur'] ?></a> : Moi </span> 
-							    		<span class="opacity-4 pl-2"><?= $donnees['contenu'] ?></span>
+							    		<span class="opacity-4 pl-2"><?= $donnees['templates'] ?></span>
 							    		<span class="pl-3 opacity-1 small">Il y'a 20min</span>
 							    	</td>
 							    <?php 
@@ -70,5 +70,5 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] > 0) {
 // Si la session n'est pas valide
  else {
  	// Rédirection
-	header('Location: ../old-index.php');
+	header('Location: ../old-old_index.php');
 }

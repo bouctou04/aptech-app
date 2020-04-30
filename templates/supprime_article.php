@@ -26,5 +26,5 @@ if(isset($_SESSION['id']) AND !empty($_SESSION['id']) AND $_SESSION['id_category
 // Si la session n'est pas active
  else {
  	// Redirection
-	header('Location: ../old-index.php');
+	header('Location: ../old-old_index.php');
 }

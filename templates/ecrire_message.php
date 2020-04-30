@@ -20,7 +20,7 @@ session_start();
 			// Le message doit être envoyé à destinataire different de la session active
 			if($_SESSION['id'] != $_GET['id']) {
 			// Insertion du message dans la base de données
-			$ins = $bdd->prepare('INSERT INTO Message(id_expediteur, id_destinataire, contenu, date_envoi) VALUES(?, ?, ?, NOW())');
+			$ins = $bdd->prepare('INSERT INTO Message(id_expediteur, id_destinataire, templates, date_envoi) VALUES(?, ?, ?, NOW())');
 			$ins->execute(array($_SESSION['id'], $_GET['id'], $msg));
 			}
 			// Si le destinataire correspond à la session active
@@ -35,7 +35,7 @@ session_start();
 	}
 
 	// Récupération des messages entre $_SESSION['id'] && $_GET['id']
-	$req_msg = $bdd->prepare('SELECT nom_utilisateur, id_expediteur, id_destinataire, contenu, date_envoi FROM Message INNER JOIN Utilisateur ON Utilisateur.id_utilisateur = Message.id_expediteur WHERE (id_expediteur = :id_expediteur AND id_destinataire = :id_destinataire) OR (id_expediteur = :id_destinataire AND id_destinataire = :id_expediteur) ORDER BY id_message DESC');
+	$req_msg = $bdd->prepare('SELECT nom_utilisateur, id_expediteur, id_destinataire, templates, date_envoi FROM Message INNER JOIN Utilisateur ON Utilisateur.id_utilisateur = Message.id_expediteur WHERE (id_expediteur = :id_expediteur AND id_destinataire = :id_destinataire) OR (id_expediteur = :id_destinataire AND id_destinataire = :id_expediteur) ORDER BY id_message DESC');
 	$req_msg->execute(array('id_expediteur' => $_SESSION['id'], 'id_destinataire' => $_GET['id']));
 ?>
 <?php require 'include/header.php' ?>
@@ -75,10 +75,10 @@ session_start();
 							    		 ?>
 							    	<td class="row">
 							    		<div class="pr-2">
-							    			<img src="../templates/media/img/FHI.png" class="rounded-pill" width="30">
+							    			<img src="media/img/FHI.png" class="rounded-pill" width="30">
 							    		</div>
 							    		<span class="font-weight-bold"><?php if($donnees['id_expediteur'] == $_SESSION['id']) { echo 'Moi : '; } else { echo '@'.$donnees['nom_utilisateur']; } ?> </span> 
-							    		<span class="opacity-4 pl-2"><?= $donnees['contenu']; ?></span>
+							    		<span class="opacity-4 pl-2"><?= $donnees['templates']; ?></span>
 							    		<span class="pl-3 opacity-1 small">Il y'a 20min</span>
 							    	</td>
 							    	<?php
@@ -103,5 +103,5 @@ session_start();
 						</div>
 <?php require 'include/footer.php' ?>
 <?php 
-} else { header('Location: ../old-index.php'); }
-	} else { header('Location: ../old-index.php'); } ?>
+} else { header('Location: ../old-old_index.php'); }
+	} else { header('Location: ../old-old_index.php'); } ?>
