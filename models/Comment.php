@@ -18,7 +18,7 @@ class Comment extends Model
      * @param int $article_id
      * @return array
      */
-    public function findAllBy(int $category_id, int $article_id) {
+    public function findAllBy(int $category_id = 1, int $article_id) {
         $category_id = intval($category_id);
         $article_id = intval($article_id);
         $req = $this->pdo->prepare("SELECT comments.id, users.id, users.username, comments.comment_category_id, comments.user_id, comments.article_id, comments.content, comments.pub_date FROM {$this->table} INNER JOIN users WHERE comment_category_id = :category_id AND article_id = :article_id");
@@ -26,6 +26,12 @@ class Comment extends Model
         return $req->fetchAll();
     }
 
+    /**
+     * @param int $category_id
+     * @param int $user_id
+     * @param int $article_id
+     * @param string $content
+     */
     public function insert(int $category_id, int $user_id, int $article_id, string $content) {
         $category_id = intval($category_id);
         $user_id = intval($user_id);

@@ -51,6 +51,10 @@ abstract class Model
         $req->execute(array());
     }
 
+    /*public function update(int $id):void {
+        // Modifier un élément
+    } */
+
     /**
      * @param $id
      */

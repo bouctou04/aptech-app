@@ -63,7 +63,7 @@ class User extends Model
     public function __construct()
     {
         $this->table = "users";
-        $this->pdo = get_pdo();
+        parent::__construct();
     }
 
     /**

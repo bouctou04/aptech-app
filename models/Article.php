@@ -20,4 +20,13 @@ class Article extends Model
         $req = $this->pdo->prepare("INSERT INTO {$this->table}(users_id, subject, content, send_date, file) VALUES(:user_id, :subject, :content, NOW(), :file) ");
         $req->execute(compact('user_id', 'subject', 'content', 'file'));
     }
+
+    public function update(int $id, string $subject, string $content): void
+    {
+        $id = intval($id);
+        $subject = htmlspecialchars($subject);
+        $content = htmlspecialchars(nl2br($content));
+        $req = $this->pdo->prepare("UPDATE {$this->table} SET subject = :subject, content = :content WHERE id = :id");
+        $req->execute(compact('id','subject', 'content'));
+    }
 }

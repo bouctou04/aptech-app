@@ -90,7 +90,7 @@ $depart = ($page_courante - 1) * $articles_par_page;
     <?php
     // Affichage d'article
     if(!empty($article->findAll())) {
-        foreach ($article->findAll("ORDER BY id DESC LIMIT $depart, $articles_par_page") as $donnees) { ?>
+        foreach ($article->findAll("ORDER BY id DESC LIMIT $depart, $articles_par_page") as $donnees): ?>
             <article class="row p-2 ml-2">
                 <div class="col-12">
                     <h3><a href="article.php?id=<?= $donnees['id'] ?>"><?= $donnees['subject'] ?></a></h3>
@@ -103,7 +103,7 @@ $depart = ($page_courante - 1) * $articles_par_page;
                 </div>
             </article>
          <?php
-        }
+        endforeach;
     } elseif (empty($article->findAll())) { ?>
         <article class="row">
             <h4 class="col-12 text-center">Aucun article</h4>
