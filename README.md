@@ -1,5 +1,5 @@
-#README
-
+README
+===============
 La participation au développement de ce présent application requiert une version 7.4^ de PHP avec une version 5.x^ de mySQL.
 
 Pour se mettre à niveau, vous devez exécuter la dernière version du fichier se trouvant dans le repertoire ____/libraries/migrations/____ 
@@ -9,7 +9,8 @@ Et pour exécuter des jeux de fausses données dans la base de données afin de 
 Le projet est décomposé en 3 grandes parties =>
 ###libraries - models - templates
 
-##libraries
+/libraries
+=========================
 Ce repertoire contient essentiellement les différents fichiers qui pourraient être réutilisés dans d'autres applications différentes de celle là.
 
 On y remarque 2 répertoires
@@ -20,10 +21,12 @@ On y remarque 2 répertoires
     
     Le fichier __/libraries/Form.class.php__ est utilisé pour le formatage des formulaires utilisé dans l'application.
 
-##models
+/models
+==========================
 
 Ce répertoire contient l'ensemble des class nécessaire à l'interraction avec la base de données.
 
-##templates
+/templates
+==========================
 
 Ce répertoire contient tous les fichiers nécessaire à la vue de l'application, regroupe également les différents feuilles de style **css, js, fontawesome**, et aussi les fichiers media **image...**. Certains de ces fichiers contiennent quelques lignes SQL, mais se verront d'être corriger plus tard.
