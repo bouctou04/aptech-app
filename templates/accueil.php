@@ -7,8 +7,6 @@ $article = new \Model\Article();
 
 // Si la session existe et est active
 if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
-require '../libraries/Form.class.php';
-$form = new Form();
 
 // Si le formulaire post article est renvoyé
 if(isset($_POST['submitted'])) {
@@ -16,6 +14,7 @@ if(isset($_POST['submitted'])) {
     if(!empty($_POST['subject']) AND !empty($_POST['content'])) {
         // Insert article
         $article->insert($_SESSION['id'], $_POST['subject'], $_POST['content']);
+        $success = "Votre article a bien été publié";
     }
     // Si un champ est resté vide
     else {
@@ -59,12 +58,18 @@ $depart = ($page_courante - 1) * $articles_par_page;
         ?>
         <div class="col-12">
             <form method="POST" class="form" enctype="multipart/form-data">
+                <?php
+                require '../libraries/Form.class.php';
+                $form = new Form();
+                ?>
                 <h4>Publier un nouvel article ...</h4>
                 <div class="form-group">
-                    <input type="text" name="subject" class="form-control" placeholder="Titre de l'article">
+                    <?php $form->input("text", "subject", "subject", "form-control", '"Titre de l\'article"'); ?>
                 </div>
                 <div class="form-group">
-                    <textarea name="content" class="form-control" rows="5" placeholder="Le contenu de l'article ici ..."></textarea>
+                    <?php
+                    $form->textarea("content", "form-control", "content", "Le contenu de l'article ...");
+                    ?>
                 </div>
                 <div class="form-group">
                     <input type="file" name="file" class="form-control">
@@ -73,12 +78,8 @@ $depart = ($page_courante - 1) * $articles_par_page;
                     <button type="submit" name="submitted" class="btn btn-success w-100">Publier l'article</button>
                 </div>
                 <?php
-                if(isset($erreur)){ ?>
-                    <div class="text-center alert alert-danger small">
-                        <?= $erreur; ?>
-                    </div>
-                    <?php
-                }
+                    $form->get_error(isset($erreur) ? $erreur : NULL);
+                    $form->get_success(isset($success) ? $success : NULL);
                 ?>
             </form>
         </div>
