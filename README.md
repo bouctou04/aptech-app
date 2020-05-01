@@ -1,27 +1,29 @@
-# DESCRIPTION DES RÉPERTOIRES
----------------------------------------
+#README
 
-##/backend
+La participation au développement de ce présent application requiert une version 7.4^ de PHP avec une version 5.x^ de mySQL.
 
+Pour se mettre à niveau, vous devez exécuter la dernière version du fichier se trouvant dans le repertoire ____/libraries/migrations/____ 
 
- ==> Dossier contenant 2 fichiers
-	**db.class.php** ==> Class permettant la connexion à la base de donnée
-	**Login.class.php** ==> Ce fichier n'est quasiment pas utilisé dans le processus de développement de l'application (du moins pas encore)
-======================================================
+Et pour exécuter des jeux de fausses données dans la base de données afin de tester rapidement les différentes fonctionnalités, vous devez exécuter les contenu des différentes variables dans le fichier ___/libraries/fixtures/fixtures.php___ qui vous conviennent dans votre base de données. Il s'agit des requêtes SQL permettant la création de données dans les tables.
 
-## /contenu
+Le projet est décomposé en 3 grandes parties =>
+###libraries - models - templates
 
+##libraries
+Ce repertoire contient essentiellement les différents fichiers qui pourraient être réutilisés dans d'autres applications différentes de celle là.
 
-	==> Ce fihier regroupe l'ensemble des fichiers liés à la vue de l'application, étant donné que l'architecture MVC n'est pas tout à fait respectée dans le projet, les fichiers de ce repertoire contient à la fois des traitement, des vues, et des controlleurs 
-/contenu/include ==> Ce repertoire contient essentiellement les fichiers repetitifs nécessaires à l'avancement de l'application
-=====================================================
+On y remarque 2 répertoires
+1. ___/libraries/fixtures___: Il s'agit du dossier contenant l'application des jeux de fausses données dans la base de données
+2. ___/libraries/migrations___: Il s'agit des différentes migration de la base de données suivant un étant évolutif.
 
-##/frontend
+    Pour les modifications des différentes informations de la base données, rendez-vous vers le fichier ___/libraries/Database.php___
+    
+    Le fichier __/libraries/Form.class.php__ est utilisé pour le formatage des formulaires utilisé dans l'application.
 
+##models
 
- ==> Ce repértoire contient un seul fichier
-	**Form.class.php** ==> Ce fichier est utilisé pour les formulaires de l'application (pas dans toutes les sections)
-/media ==> Ce repertoire regroupe l'ensemble des fichiers media contenu dans l'application
-/style ==> Régroupe les feuilles de styles, JS, fonts de l'application.
+Ce répertoire contient l'ensemble des class nécessaire à l'interraction avec la base de données.
 
-##Executer les lignes du fichier dev.php dans votre serveur de base de données pour pouvoir lancer le processus d'utilisation ou de développement.
+##templates
+
+Ce répertoire contient tous les fichiers nécessaire à la vue de l'application, regroupe également les différents feuilles de style **css, js, fontawesome**, et aussi les fichiers media **image...**. Certains de ces fichiers contiennent quelques lignes SQL, mais se verront d'être corriger plus tard.
