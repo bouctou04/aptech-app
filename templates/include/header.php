@@ -1,5 +1,5 @@
 <?php
-	//require 'en_ligne.php';
+
 ?>
 <!DOCTYPE html>
 <html>

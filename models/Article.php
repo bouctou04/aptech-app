@@ -7,12 +7,21 @@ require 'Model.php';
 
 class Article extends Model
 {
+    /**
+     * Article constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->table = "articles";
     }
 
+    /**
+     * @param int $user_id
+     * @param string $subject
+     * @param string $content
+     * @param string|null $file
+     */
     public function insert(int $user_id, string $subject, string $content, ?string $file = NULL): void {
         $user_id = intval($user_id);
         $subject = htmlspecialchars($subject);
@@ -21,6 +30,11 @@ class Article extends Model
         $req->execute(compact('user_id', 'subject', 'content', 'file'));
     }
 
+    /**
+     * @param int $id
+     * @param string $subject
+     * @param string $content
+     */
     public function update(int $id, string $subject, string $content): void
     {
         $id = intval($id);

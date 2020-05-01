@@ -7,6 +7,9 @@ require_once 'Model.php';
 
 class Comment extends Model
 {
+    /**
+     * Comment constructor.
+     */
     public function __construct()
     {
         $this->table = "comments";

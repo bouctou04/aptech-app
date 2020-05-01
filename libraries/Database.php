@@ -9,6 +9,9 @@ class Database {
     private string $db_password = "";
     private static $pdo = NULL;
 
+    /**
+     * @return PDO|null
+     */
     public static function get_pdo() {
         self::$pdo = new PDO("mysql:host=127.0.0.1;dbname=aptech_app", "root", "", [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
