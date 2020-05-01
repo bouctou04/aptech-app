@@ -1,5 +1,5 @@
 <?php
-require_once '../../libraries/database.php';
+require_once '../../libraries/Database.php';
 $super_users_fixtures = "INSERT INTO `super_users` (`id`, `last_name`, `first_name`, `birth_date`, `sexe`, `username`, `email`, `password`, `accreditation`) VALUES (NULL, 'Maiga', 'Baba', '1990-04-15', 'M', 'bouctou04', 'bmaiga04@gmail.com', '3e2a7b439cc921d678faca6dc14f70c17ed883ea', '2'), (NULL, 'Coulibaly', 'Dafe', '1998-04-08', 'M', 'dafe00', 'dafe@gmail.com', '3e2a7b439cc921d678faca6dc14f70c17ed883ea', '0')";
 $school_fixtures = "INSERT INTO `school` (`id`, `super_users_id`, `full_name`, `acronym`, `sign_date`) VALUES (NULL, '1', 'Technolab ISTA', 'TECHNOLAB-ISTA', '2020-04-30'), (NULL, '2', 'Aptech Mali', 'APTECH-MALI', '2020-04-30')";
 $user_category_fixtures = "INSERT INTO `user_category` (`id`, `field`) VALUES (NULL, 'admin'), (NULL, 'teacher'), (NULL, 'student')";

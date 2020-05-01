@@ -9,7 +9,7 @@ class Article extends Model
 {
     public function __construct()
     {
-        $this->pdo = get_pdo();
+        $this->pdo = \Database::get_pdo();
         $this->table = "articles";
     }
 

@@ -24,7 +24,7 @@ if(isset($_POST['submitted'])) {
 }
 
 // Nombre d'article par page
-$articles_par_page = 1;
+$articles_par_page = 5;
 
 // Nombre total d'article
 $articles_total = $article->row_count();

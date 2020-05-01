@@ -3,7 +3,7 @@
 
 namespace Model;
 
-require '../libraries/database.php';
+require '../libraries/Database.php';
 
 abstract class Model
 {
@@ -19,7 +19,7 @@ abstract class Model
 
     public function __construct()
     {
-        $this->pdo = get_pdo();
+        $this->pdo = \Database::get_pdo();
     }
 
     /**
