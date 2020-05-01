@@ -1,9 +1,10 @@
-	<footer>
-							<div class="text-center">
-								
-							</div>
-						</footer>
-				</section>
+
+</section>
+<footer class="mt-3">
+    <div class="col-12">
+        <p class="text-center text-muted">&copy; 2020 - Mon app</p>
+    </div>
+</footer>
 
 		<!-- Begin Script Import -->
 		<script src="style/js/jquery.js"></script>
@@ -13,7 +14,7 @@
 		<script>
 			setInterval('load_chat()', 500);
 			function load_chat() {
-				$('#chat').load('include/load_chat.php');
+				$('#chat').load('load_chat.php');
 				}
 
 			setInterval('load_inline()', 500);

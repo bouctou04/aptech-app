@@ -76,6 +76,7 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
         </table>
     </div>
 <?php
+    require_once 'include/footer.php';
 } else {
     header("Location: ../index.php");
 }
