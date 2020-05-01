@@ -32,6 +32,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#"><span class="fa fa-comments"></span> Discussion générale</a>
                     </li>
+                    <?php
+                    if($_SESSION['category_id'] == 1) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="inscription.php"><span class="fa fa-user-plus"></span> Ajouter un utilisateur</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><span class="fa fa-smile"></span> Forum</a>
                     </li>
@@ -45,4 +53,4 @@
             </div>
             <a class="text-light text-decoration-none" href="logout.php"><span class="fa fa-power-off"></span> Déconnexion</a>
         </nav>
-        <section class="row">
+        <section class="mt-auto row col-12">
