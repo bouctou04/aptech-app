@@ -30,7 +30,7 @@
                         <a class="nav-link" href="#"><span class="fa fa-envelope"></span> Message</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><span class="fa fa-comments"></span> Discussion générale</a>
+                        <a class="nav-link" href="chat.php"><span class="fa fa-comments"></span> Discussion générale</a>
                     </li>
                     <?php
                     if($_SESSION['category_id'] == 1) { ?>

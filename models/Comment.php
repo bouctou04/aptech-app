@@ -21,7 +21,7 @@ class Comment extends Model
     public function findAllBy(int $category_id = 1, int $article_id) {
         $category_id = intval($category_id);
         $article_id = intval($article_id);
-        $req = $this->pdo->prepare("SELECT comments.id, users.id, users.username, comments.comment_category_id, comments.user_id, comments.article_id, comments.content, comments.pub_date FROM {$this->table} INNER JOIN users WHERE comment_category_id = :category_id AND article_id = :article_id");
+        $req = $this->pdo->prepare("SELECT users.username, comments.comment_category_id, comments.user_id, comments.article_id, comments.content, comments.pub_date FROM {$this->table} INNER JOIN users WHERE comment_category_id = :category_id AND article_id = :article_id");
         $req->execute(compact('category_id', 'article_id'));
         return $req->fetchAll();
     }

@@ -133,14 +133,14 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                 <tr>
                     <?php
                     if(!empty($comment->findAllBy(1, $getid))) {
-                        foreach ($comment->findAllBy(1, $getid) as $donnees) { ?>
+                        foreach ($comment->findAllBy(1, $getid) as $donnees): ?>
                             <td class="row">
                                 <span class="font-weight-bold">@<?= $donnees['username'] ?></span>
                                 <span class="opacity-4 pl-2"><?= $donnees['content'] ?></span>
                                 <span class="pl-3 opacity-1 small"><?= $donnees['pub_date'] ?></span>
                             </td>
                         <?php
-                        }
+                        endforeach;
                     } else { ?>
                     <td>Pas de commentaire sur cet article !</td>
                     <?php
