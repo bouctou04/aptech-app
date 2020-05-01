@@ -36,8 +36,44 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                         <?php $form->get_success(isset($success)? $success : NULL); ?>
                     </form>
                 </div>
+                <div class="d-none d-lg-inline d-xl-inline col-4 bg-light">
+                    <div class="font-weight-bold text-center bg-primary text-light p-2">Utilisateurs connectés (6)</div>
+                        <ul>
+                            <li>@maicam23</li>
+                            <li>@maicam23</li>
+                            <li>@maicam23</li>
+                            <li>@maicam23</li>
+                        </ul>
+                </div>
             </div>
         </div>
+        <table class="table">
+            <tr id="chat">
+                <?php
+                    if(!empty($chat->findAll())) {
+                        foreach ($chat->findAll("INNER JOIN users ON users.id = chat.users_id ORDER BY send_date DESC LIMIT 0, 15") as $donnees): ?>
+                            <td class="row">
+                                <?php
+                                if($_SESSION['id'] == $donnees['users_id']) { ?>
+                                 <span class="font-weight-bold">Moi</span>
+                                <?php
+                                } else { ?>
+                                 <span class="font-weight-bold"><a href="ecrire_message.php?id=<?= $donnees['users_id'] ?>" class="text-decoration-none">@<?= $donnees['username'] ?></a></span>
+                                <?php
+                                }
+                                ?>
+                                <span class="text-muted pl-2"><?= nl2br($donnees['content']); ?></span>
+                                <span class="pl-3 opacity-1 small">Il y'a <?= $donnees['send_date']; ?></span>
+                            </td>
+                        <?php
+                            endforeach;
+                    } else { ?>
+                        <td class="row">Pad de message dans le salon de chat ...</td>
+                    <?php
+                    }
+                ?>
+            </tr>
+        </table>
     </div>
 <?php
 } else {
