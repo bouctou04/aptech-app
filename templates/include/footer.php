@@ -7,10 +7,10 @@
 </footer>
 
 		<!-- Begin Script Import -->
-		<script src="style/js/jquery.js"></script>
-		<script src="style/js/popper.js"></script>
-		<script src="style/js/main.js"></script>
-		<script src="style/js/app.js"></script>
+		<script src="/templates/style/js/jquery.js"></script>
+		<script src="/templates/style/js/popper.js"></script>
+		<script src="/templates/style/js/main.js"></script>
+		<script src="/templates/style/js/app.js"></script>
 		<script>
 			setInterval('load_chat()', 500);
 			function load_chat() {
@@ -28,6 +28,5 @@
 			// 	}
 		</script>
 		<!-- End Script Import -->
-
 	</body>
 </html>

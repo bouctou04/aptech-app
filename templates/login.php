@@ -42,12 +42,12 @@ if(isset($_POST['submitted'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="/aptech-app/">
+    <!-- <base href="/aptech-app/"> -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="templates/style/css/main.css">
-    <link rel="stylesheet" type="text/css" href="templates/style/font/css/all.css">
-    <link rel="stylesheet" type="text/css" href="templates/style/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/templates/style/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/templates/style/font/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/templates/style/css/style.css">
     <title></title>
 </head>
 <body>
@@ -103,7 +103,7 @@ if(isset($_POST['submitted'])) {
         </div>
     </div>
 </div>
-<script src="templates/style/js/jquery.js"></script>
-<script src="templates/style/js/app.js"></script>
+<script src="/templates/style/js/jquery.js"></script>
+<script src="/templates/style/js/app.js"></script>
 </body>
 </html>
