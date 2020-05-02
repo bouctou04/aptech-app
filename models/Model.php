@@ -49,6 +49,9 @@ abstract class Model
         return $req->fetchAll();
     }
 
+    /**
+     * @param string|null $sql
+     */
     public function findQuery(?string $sql) {
         $req = $this->pdo->prepare($sql);
         $req->execute(array());
@@ -66,6 +69,9 @@ abstract class Model
         $req->execute(compact('id'));
     }
 
+    /**
+     * @return int
+     */
     public function row_count() {
         $req = $this->pdo->query("SELECT id FROM {$this->table}");
         return $req->rowCount();

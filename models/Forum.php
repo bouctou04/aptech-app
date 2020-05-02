@@ -7,12 +7,21 @@ require_once 'Model.php';
 
 class Forum extends Model
 {
+    /**
+     * Forum constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->table = "forum";
     }
 
+    /**
+     * @param int $user_id
+     * @param string $subject
+     * @param string $content
+     * @param int|null $resolved
+     */
     public function insert(int $user_id, string $subject, string $content, ?int $resolved = 0) {
         $user_id = intval($user_id);
         $subject = htmlspecialchars($subject);
