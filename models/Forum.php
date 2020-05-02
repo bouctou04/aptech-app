@@ -29,4 +29,10 @@ class Forum extends Model
         $req = $this->pdo->prepare("INSERT INTO {$this->table}(users_id, subject, content, pub_date, resolved) VALUES(:user_id, :subject, :content, NOW(), :resolved)");
         $req->execute(compact('user_id', 'subject', 'content', 'resolved'));
     }
+
+    public function setResolved(int $resolved) {
+        $resolved = intval($resolved);
+        $req = $this->pdo->prepare("UPDATE {$this->table} SET resolved = :resolved");
+        $req->execute(compact('resolved'));
+    }
 }

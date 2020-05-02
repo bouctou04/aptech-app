@@ -15,7 +15,7 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                         foreach ($forum->findAll() as $donnees): ?>
                     <tr>
                         <td>
-                            <h4 class="d-inline"><a href="page.php"><?= $donnees['subject'] ?></a></h4>
+                            <h4 class="d-inline"><a href="page.php?id=<?= $donnees['id'] ?>"><?= $donnees['subject'] ?></a></h4>
                             <?php
                             if($donnees['resolved'] === 1) { ?>
                                 <span class="float-right bg-success p-2 text-light">Résolu</span>
