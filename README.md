@@ -1,4 +1,4 @@
-README
+APTECH-APP PROJECT
 ===============
 La participation au développement de ce présent application requiert une version 7.4^ de PHP avec une version 5.x^ de mySQL.
 
@@ -6,7 +6,9 @@ Pour se mettre à niveau, vous devez exécuter la dernière version du fichier s
 
 Et pour exécuter des jeux de fausses données dans la base de données afin de tester rapidement les différentes fonctionnalités, vous devez exécuter les contenu des différentes variables dans le fichier ___/libraries/fixtures/fixtures.php___ qui vous conviennent dans votre base de données. Il s'agit des requêtes SQL permettant la création de données dans les tables.
 
-Pour se mettre à niveau concernant la version de PHP, vous pouvez extraire le fichier __/libraries/phpunit/php-7.4.5.tar.gz__ dans votre emplacement où est installé PHP
+Pour se mettre à niveau concernant la version de PHP sous les systèmes UNIX, vous pouvez extraire le fichier __/libraries/phpunit/php-7.4.5.tar.gz__ dans votre emplacement où est installé PHP
+
+Pour les versions windows télécharger le fichiers https://windows.php.net/downloads/releases/php-7.4.5-nts-Win32-vc15-x64.zip.
 
 Le projet est décomposé en 3 grandes parties =>
 ###libraries - models - templates
