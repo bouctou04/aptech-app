@@ -41,7 +41,7 @@
                     }
                     ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><span class="fa fa-smile"></span> Forum</a>
+                        <a class="nav-link" href="forum.php"><span class="fa fa-smile"></span> Forum</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><span class="fa fa-users"></span> Abonnés</a>
