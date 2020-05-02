@@ -36,15 +36,16 @@ abstract class Model
     }
 
     /**
-     * @param string|null $order
+     * @param string|null $query
      * @return array
      */
     public function findAll(?string $query = NULL) {
         if($query != NULL) {
             $sql = "SELECT * FROM {$this->table} $query";
-        } elseif ($query === NULL) {
-            $sql = "SELECT * FROM {$this->table}";
         }
+
+        $sql = "SELECT * FROM {$this->table}";
+
         $req = $this->pdo->query($sql);
         return $req->fetchAll();
     }
