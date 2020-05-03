@@ -3,7 +3,8 @@
 
 namespace Model;
 
-require 'Model.php';
+require_once 'Model.php';
+require_once '../libraries/Mail.php';
 
 class User extends Model
 {
@@ -114,6 +115,10 @@ class User extends Model
 
         $req = $this->pdo->prepare("INSERT INTO {$this->table}(user_category_id, school_id, last_name, first_name, birth_date, sexe, username, email, password) VALUES(:user_category_id, :school_id, :last_name, :first_name, :birth_date, :sexe, :username, :email, :password)");
         $req->execute(compact('user_category_id', 'school_id', 'last_name', 'first_name', 'birth_date', 'sexe', 'username', 'email', 'password'));
+
+        // Sending mail
+        $mail = new \Mail();
+        $mail->sendMail();
         echo "Mot de passe : " .$passwordn;
     }
 
@@ -180,10 +185,14 @@ class User extends Model
      * @return bool
      */
     public function verifyEmail(string $email):bool {
-        $req = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE email = :email");
-        $req->execute(compact('email'));
-        if($req->rowCount() > 0) {
-            return true;
+        if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $req = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE email = :email");
+            $req->execute(compact('email'));
+            if($req->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
