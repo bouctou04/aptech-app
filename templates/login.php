@@ -30,6 +30,7 @@ if(isset($_POST['submitted'])) {
         if($login->login($_POST['username'], $_POST['password']) === true) {
             $_SESSION['id'] = $login->getId();
             $_SESSION['category_id'] = $login->getId();
+            $_SESSION['school_id'] = $login->getSchoolId();
             header("Location: accueil.php");
         } else {
             $erreur = "Les identifiants fournis ne correspondent à aucun compte dans nos fichiers, veuillez vérifier que ces informations sont correctes !";

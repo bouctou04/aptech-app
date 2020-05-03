@@ -40,11 +40,11 @@ abstract class Model
      * @return array
      */
     public function findAll(?string $query = NULL) {
+        $sql = "SELECT * FROM {$this->table}";
+
         if($query != NULL) {
             $sql = "SELECT * FROM {$this->table} $query";
         }
-
-        $sql = "SELECT * FROM {$this->table}";
 
         $req = $this->pdo->query($sql);
         return $req->fetchAll();

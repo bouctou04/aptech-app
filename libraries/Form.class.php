@@ -37,9 +37,9 @@ class Form
      * @param $option_text
      * @param $option_value
      */
-    public function select($select_name, $select_class, $option_text, $option_value): void
+    public function select($name, $class, $option_text, $option_value): void
     {
-        echo '<select name=' . $select_name . ' class=' . $select_class . '>' . '<option value=' . $option_value . '>' . $option_text . '</option>' . '</select>';
+        echo '<select name=' . $name . ' class=' . $class . '>' . '<option value=' . $option_value . '>' . $option_text . '</option>' . '</select>';
     }
 
     /**
