@@ -3,6 +3,33 @@ session_start();
 if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
     require_once '../models/Forum.php';
     $forum = new \Model\Forum();
+
+    // Nombre d'article par page
+    $articles_par_page = 5;
+
+// Nombre total d'article
+    $articles_total = $forum->row_count();
+
+// Nombre total de page
+    $page_totale = ceil($articles_total / $articles_par_page);
+
+//Vérification de la déclaration d'une page
+    if(isset($_GET['page']) AND !empty($_GET['page'])) {
+        // Un  peu de sécurité pour le paramètre de la page
+        $_GET['page'] = intval($_GET['page']);
+
+        // Déclaration de la page courante
+        $page_courante = $_GET['page'];
+    }
+// Si la page n'est pas déclarée on l'initialise automatiquement à la 1ère page
+    else {
+        // Initialisation de la page courante si elle n'est pas de définie
+        $page_courante = 1;
+    }
+
+// Départ d'affichage d'article par page
+    $depart = ($page_courante - 1) * $articles_par_page;
+
     require_once 'include/header.php';
     require_once 'include/aside.php';?>
     <div class="col-12 col-lg-9 col-xl-9">
@@ -12,7 +39,7 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                 <tbody>
                     <?php
                     if(!empty($forum->findAll())) {
-                        foreach ($forum->findAll() as $donnees): ?>
+                        foreach ($forum->findAll("ORDER BY id DESC LIMIT $depart, $articles_par_page") as $donnees): ?>
                     <tr>
                         <td>
                             <h4 class="d-inline"><a href="page.php?id=<?= $donnees['id'] ?>"><?= $donnees['subject'] ?></a></h4>
@@ -40,6 +67,49 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
 
                 </tbody>
             </table>
+
+            <nav class="offset-4 col-4 offset-4" aria-label="...">
+                <ul class="pagination pagination-sm">
+                    <?php
+                    if($page_courante != 1){ ?>
+                        <li class="page-item">
+                            <span class="page-link"><a href="forum.php?page=<?= $page_courante - 1 ?>">&laquo;</a></span>
+                        </li>
+                        <?php
+                    }else{ ?>
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo;</span>
+                        </li>
+                        <?php
+                    }
+                    for($i = 1; $i <= $page_totale; $i++) {
+                        if($i == $page_courante) { ?>
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link"><?= $i ?><span class="sr-only">(current)</span></a>
+                            </li>
+                            <?php
+                        } else { ?>
+                            <li class="page-item" aria-current="page">
+                                <a class="page-link" href="forum.php?page=<?= $i ?>"><?= $i ?><span class="sr-only">(current)</span></a>
+                            </li>
+                            <?php
+                        }
+
+                    }
+                    ?>
+                    <?php
+                    if($page_courante == $page_totale){ ?>
+                        <li class="page-item disabled">
+                            <span class="page-link">&raquo</span>
+                        </li>
+                        <?php
+                    } else { ?>
+                        <a class="page-link" href="forum.php?page=<?= $page_courante + 1 ?>">&raquo</a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </nav>
+
             <form method="POST">
                 <?php
                 require_once '../libraries/Form.class.php';

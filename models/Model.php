@@ -77,4 +77,15 @@ abstract class Model
         $req = $this->pdo->query("SELECT id FROM {$this->table}");
         return $req->rowCount();
     }
+
+    public function paginator() {
+        $total_post = $this->row_count();
+        /**
+         * current_page
+         * start
+         * post_per_page
+         * total_post
+         * total_page
+         */
+    }
 }
