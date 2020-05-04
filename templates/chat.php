@@ -55,10 +55,10 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                             <td class="row">
                                 <?php
                                 if($_SESSION['id'] == $donnees['users_id']) { ?>
-                                 <span class="font-weight-bold">Moi</span>
+                                 <span class="font-weight-bold">Moi:</span>
                                 <?php
                                 } else { ?>
-                                 <span class="font-weight-bold"><a href="ecrire_message.php?id=<?= $donnees['users_id'] ?>" class="text-decoration-none">@<?= $donnees['username'] ?></a></span>
+                                 <span class="font-weight-bold"><a href="ecrire_message.php?id=<?= $donnees['users_id'] ?>" class="text-decoration-none">@<?= $donnees['username'] ?>:</a></span>
                                 <?php
                                 }
                                 ?>
@@ -68,7 +68,7 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                         <?php
                             endforeach;
                     } else { ?>
-                        <td class="row">Pad de message dans le salon de chat ...</td>
+                        <td class="row">Pas de message dans le salon de chat ...</td>
                     <?php
                     }
                 ?>
