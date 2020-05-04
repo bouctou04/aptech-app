@@ -94,11 +94,14 @@ $depart = ($page_courante - 1) * $articles_par_page;
             <article class="row p-2 ml-2">
                 <div class="col-12">
                     <h3><a href="article.php?id=<?= $donnees['id'] ?>"><?= $donnees['subject'] ?></a></h3>
-                    <p class="">
-                        <?= $donnees['content'] ?>
+                    <p class="text-justify">
+                        <?= $donnees['excerpt'] ?>
                     </p>
                     <p class="opacity-1">
                         <?= $donnees['send_date'] ?>
+                    </p>
+                    <p>
+                        <a class="btn btn-secondary" href="article.php?id=<?= $donnees['id'] ?>">Lire la suite</a>
                     </p>
                 </div>
             </article>
