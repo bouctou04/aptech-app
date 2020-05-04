@@ -8,9 +8,6 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
         }
         require_once '../models/Message.php';
         $message = new \Model\Message();
-        if(empty($message->findReceptor($getid))){
-            header("Location: 404.php");
-        }
 
         require_once 'include/header.php';
         require_once 'include/aside.php';
@@ -49,7 +46,7 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                 if(!empty($message->findAllVisible($_SESSION['id'], $getid))) {
                     foreach ($message->findAllVisible($_SESSION['id'], $getid) as $donnees): ?>
                     <td class="row">
-                        <span class="font-weight-bold"><?php if($donnees['sender_id'] == $_SESSION['id']) { echo 'Moi : '; } else { echo '@'.$donnees['username']; } ?> </span>
+                        <span class="font-weight-bold"><?php if($donnees['sender_id'] == $_SESSION['id']) { echo 'Moi: '; } else { echo '@'.$donnees['username'].':'; } ?> </span>
                         <span class="opacity-4 pl-2"><?= $donnees['content']; ?></span>
                         <span class="pl-3 opacity-1 small"><?= $donnees['send_date']; ?></span>
                     </td>
