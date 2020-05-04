@@ -118,8 +118,15 @@ class User extends Model
 
         // Sending mail
         $mail = new \Mail();
-        $mail->sendMail();
-        echo "Mot de passe : " .$passwordn;
+        $message = "
+                    <html>
+                        <body>
+                            <h1>Bravo $last_name $first_name Votre inscription sur la plateforme APTECH a bien été pris en compte</h1>
+                              Vous pouvez vous connecter avec vos identifiants ci dessous <br> Email: $email <br> Identifiant: $username <br> Mot de passe: $passwordn
+                        </body>
+                    </html>
+                    ";
+        $mail->sendMail("bmaiga08@gmail.com", "Votre inscription sur APTECHAPP.com a bien été pris en compte !", $message);
     }
 
     /**
