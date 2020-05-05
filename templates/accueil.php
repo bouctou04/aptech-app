@@ -51,38 +51,55 @@ $depart = ($page_courante - 1) * $articles_par_page;
 ?>
 <?php require 'include/header.php' ?>
 <?php require 'include/aside.php' ?>
-<div class="col-12 col-lg-9 border-left">
+<div class="col l8">
         <?php
             // L'utilisateur doit être 'Administrateur pour pouvoir publier un article'
             if($_SESSION['category_id'] == 1){
         ?>
-        <div class="col-12">
-            <form method="POST" class="form" enctype="multipart/form-data">
                 <?php
                 require '../libraries/Form.class.php';
                 $form = new Form();
                 ?>
-                <h4>Publier un nouvel article ...</h4>
-                <div class="form-group">
-                    <?php $form->input("text", "subject", "subject", "form-control", '"Titre de l\'article"'); ?>
-                </div>
-                <div class="form-group">
-                    <?php
-                    $form->textarea("content", "form-control", "content", "Le contenu de l'article ...");
-                    ?>
-                </div>
-                <div class="form-group">
-                    <input type="file" name="file" class="form-control">
-                </div>
-                <div class="form-group">
-                    <button type="submit" name="submitted" class="btn btn-success w-100">Publier l'article</button>
-                </div>
-                <?php
-                    $form->get_error(isset($erreur) ? $erreur : NULL);
-                    $form->get_success(isset($success) ? $success : NULL);
-                ?>
-            </form>
-        </div>
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header">Publier un article</div>
+                        <div class="collapsible-body">
+                            <form method="POST" class="">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="subject" type="text" class="validate" name="subject">
+                                        <label for="subject">Titre de l'article</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="content" class="materialize-textarea" name="content"></textarea>
+                                        <label for="content">Contenu de l'article</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>Fichier</span>
+                                            <input type="file" multiple>
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text" placeholder="Charger un fichier">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <button class="btn waves-effect waves-light light-blue darken-4 col s12" type="submit" name="submitted">Publier</button>
+                                </div>
+                                <?php
+                                if(isset($erreur)):
+                                    echo $erreur;
+                                endif;
+                                ?>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
         <?php
             }
         ?>
@@ -93,7 +110,7 @@ $depart = ($page_courante - 1) * $articles_par_page;
         foreach ($article->findAll("ORDER BY id DESC LIMIT $depart, $articles_par_page") as $donnees): ?>
             <article class="row p-2 ml-2">
                 <div class="col-12">
-                    <h3><a href="article.php?id=<?= $donnees['id'] ?>"><?= $donnees['subject'] ?></a></h3>
+                    <h1 class="title"><a href="article.php?id=<?= $donnees['id'] ?>"><?= $donnees['subject'] ?></a></h1>
                     <p class="text-justify">
                         <?= $donnees['excerpt'] ?>
                     </p>
@@ -101,7 +118,7 @@ $depart = ($page_courante - 1) * $articles_par_page;
                         <?= $donnees['send_date'] ?>
                     </p>
                     <p>
-                        <a class="btn btn-secondary" href="article.php?id=<?= $donnees['id'] ?>">Lire la suite</a>
+                        <a class="btn light-blue darken-4" href="article.php?id=<?= $donnees['id'] ?>">Lire la suite</a>
                     </p>
                 </div>
             </article>

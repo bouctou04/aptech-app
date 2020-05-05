@@ -9,10 +9,32 @@
 		<!-- Begin Script Import -->
 		<script src="/templates/style/js/jquery.js"></script>
 		<script src="/templates/style/js/popper.js"></script>
-		<script src="/templates/style/js/main.js"></script>
+		<script src="/templates/style/materialize/js/materialize.js"></script>
 		<script src="/templates/style/js/app.js"></script>
 		<script>
-			setInterval('load_chat()', 500);
+            $(document).ready(function(){
+                $('.sidenav').sidenav();
+            });
+
+            $(document).ready(function(){
+                $('.collapsible').collapsible();
+            });
+
+            $(document).ready(function() {
+                $('input#input_text, textarea#textarea2').characterCounter();
+            });
+
+            $('.dropdown-trigger').dropdown();
+
+            $(document).ready(function(){
+                $('.carousel').carousel();
+            });
+
+            $(document).ready(function(){
+                $('.modal').modal();
+            });
+
+            setInterval('load_chat()', 500);
 			function load_chat() {
 				$('#chat').load('load_chat.php');
 				}

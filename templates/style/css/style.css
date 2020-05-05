@@ -1,6 +1,4 @@
-a.nav-link {
-	color: red;
-}
+
 .opacity-1 {
 	opacity: 0.4;
 }
@@ -33,9 +31,6 @@ div > div > p > a {
 	padding: 14px;
 }
 
-section {
-	margin-top: 70px;
-}
 
 p > img {
 	height: 340px;
@@ -57,6 +52,10 @@ p > img {
   border-color: #007bff;
 }
 
+.title {
+	font-size: 1.5rem;
+}
+
 /* Pour sm */
 @media (min-width: 576px) {}
 
@@ -70,6 +69,7 @@ p > img {
 	.my-lg-10 {
   	margin-top: 3rem !important;
 	}
+
 }
 
 /* Pour xl très grand */
