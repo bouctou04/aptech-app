@@ -53,4 +53,4 @@
             </div>
             <a class="text-light text-decoration-none" href="logout.php"><span class="fa fa-power-off"></span> Déconnexion</a>
         </nav>
-        <section class="mt-auto row col-12">
+        <section class="row col-12">

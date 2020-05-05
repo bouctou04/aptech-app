@@ -1,6 +1,3 @@
-a.nav-link {
-	color: red;
-}
 .opacity-1 {
 	opacity: 0.4;
 }
@@ -17,44 +14,9 @@ a.nav-link {
 	font-family: "Ubuntu Condensed";
 }
 
-.bg-set {
-	background-color: #dddddd;
-}
-
-footer > div > p > a:hover {
-	background-color: white;
-	border-radius: 50%;
-}
-footer > div > p > a {
-	padding: 10px;
-}
-
-div > div > p > a {
-	padding: 14px;
-}
-
-section {
-	margin-top: 70px;
-}
-
-p > img {
-	height: 340px;
-	width: 300px;
-}
-
-.letter-spacing-2 {
-	letter-spacing: 1px;
-}
-
 .mt-n6,
 .my-n6 {
 	margin-top: -4rem !important;
-}
-
-.table .thead-primary th {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
 }
 
 /* Pour sm */
