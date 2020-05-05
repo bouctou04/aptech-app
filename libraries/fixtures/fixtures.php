@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../../templates/style/css/main-4.css">
+<link rel="stylesheet" href="../../templates/style/css/bootstrap-4.4.1.css">
 <link rel="stylesheet" href="../../templates/style/font/css/all.css">
 <link rel="stylesheet" href="../../templates/style/css/style.css.css">
 

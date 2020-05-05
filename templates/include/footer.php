@@ -9,7 +9,7 @@
 		<!-- Begin Script Import -->
 		<script src="/templates/style/js/jquery.js"></script>
 		<script src="/templates/style/js/popper.js"></script>
-		<script src="/templates/style/js/main.js"></script>
+		<script src="/templates/style/js/bootstrap.js"></script>
 		<script src="/templates/style/js/app.js"></script>
 		<script>
 			setInterval('load_chat()', 500);

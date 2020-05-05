@@ -7,7 +7,7 @@
 		<!-- <base href="/aptech-app/templates/"> -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="/templates/style/css/main-4.css">
+		<link rel="stylesheet" type="text/css" href="/templates/style/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="/templates/style/font/css/all.css">
 		<link rel="stylesheet" type="text/css" href="/templates/style/css/style.css">
 		<title></title>
