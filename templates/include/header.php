@@ -117,8 +117,8 @@
                     <img src="media/img/">
                 </div>
                 <a href="#user"><img class="circle" src="media/img/profile.jpg"></a>
-                <a href="#name"><span class="white-text name">John Doe <?= $_SESSION['id'] ?></span></a>
-                <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                <a href="#name"><span class="white-text name font-weight-bold"><?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name']?></span></a>
+                <a href="#email"><span class="white-text email">@<?= $_SESSION['username'] ?></span></a>
             </div></li>
         <li><a class="waves-effect white-text" href="#!"><span class="fa fa-user"></span> Afficher mon profile</a></li>
         <li><a class="waves-effect white-text" href="#!"><span class="fa fa-pen"></span> Editer mon profile</a></li>
