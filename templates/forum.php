@@ -114,12 +114,12 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                 </tbody>
             </table>
 
-            <nav class="offset-4 col-4 offset-4" aria-label="...">
+            <div class="offset-4 col-4">
                 <ul class="pagination pagination-sm">
                     <?php
                     if($page_courante != 1){ ?>
                         <li class="page-item">
-                            <span class="page-link"><a href="forum.php?page=<?= $page_courante - 1 ?>">&laquo;</a></span>
+                            <a class="page-link" href="forum.php?page=<?= $page_courante - 1 ?>">&laquo;</a>
                         </li>
                         <?php
                     }else{ ?>
@@ -130,8 +130,8 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                     }
                     for($i = 1; $i <= $page_totale; $i++) {
                         if($i == $page_courante) { ?>
-                            <li class="page-item active" aria-current="page">
-                                <a class="page-link"><?= $i ?><span class="sr-only">(current)</span></a>
+                            <li class="page-item teal white-text" aria-current="page">
+                                <a class="page-link teal white-text"><?= $i ?><span class="sr-only">(current)</span></a>
                             </li>
                             <?php
                         } else { ?>
@@ -154,7 +154,7 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                         </li>
                     <?php } ?>
                 </ul>
-            </nav>
+            </div>
         </div>
     </div>
 <?php

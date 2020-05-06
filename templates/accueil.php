@@ -125,47 +125,48 @@ $depart = ($page_courante - 1) * $articles_par_page;
     }
     ?>
 
-    <nav class="offset-4 col-4 offset-4" aria-label="...">
-        <ul class="pagination pagination-sm">
-            <?php
-            if($page_courante != 1){ ?>
-                <li class="page-item">
-                    <span class="page-link"><a href="accueil.php?page=<?= $page_courante - 1 ?>">&laquo;</a></span>
-                </li>
+
+        <div class="offset-4 col-4">
+            <ul class="pagination pagination-sm">
                 <?php
-            }else{ ?>
-                <li class="page-item disabled">
-                    <span class="page-link">&laquo;</span>
-                </li>
-                <?php
-            }
-            for($i = 1; $i <= $page_totale; $i++) {
-                if($i == $page_courante) { ?>
-                    <li class="page-item active" aria-current="page">
-                        <a class="page-link"><?= $i ?><span class="sr-only">(current)</span></a>
+                if($page_courante != 1){ ?>
+                    <li class="page-item">
+                        <a class="page-link" href="accueil.php?page=<?= $page_courante - 1 ?>">&laquo;</a>
                     </li>
                     <?php
-                } else { ?>
-                    <li class="page-item" aria-current="page">
-                        <a class="page-link" href="accueil.php?page=<?= $i ?>"><?= $i ?><span class="sr-only">(current)</span></a>
+                }else{ ?>
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;</span>
                     </li>
                     <?php
                 }
+                for($i = 1; $i <= $page_totale; $i++) {
+                    if($i == $page_courante) { ?>
+                        <li class="page-item  teal white-text" aria-current="page">
+                            <a class="page-link teal white-text"><?= $i ?><span class="sr-only">(current)</span></a>
+                        </li>
+                        <?php
+                    } else { ?>
+                        <li class="page-item" aria-current="page">
+                            <a class="page-link" href="accueil.php?page=<?= $i ?>"><?= $i ?><span class="sr-only">(current)</span></a>
+                        </li>
+                        <?php
+                    }
 
-            }
-            ?>
-            <?php
-            if($page_courante == $page_totale){ ?>
-                <li class="page-item disabled">
-                    <span class="page-link">&raquo</span>
-                </li>
+                }
+                ?>
                 <?php
-            } else { ?>
-                <a class="page-link" href="accueil.php?page=<?= $page_courante + 1 ?>">&raquo</a>
-                </li>
-            <?php } ?>
-        </ul>
-    </nav>
+                if($page_courante == $page_totale){ ?>
+                    <li class="page-item disabled">
+                        <span class="page-link">&raquo</span>
+                    </li>
+                    <?php
+                } else { ?>
+                    <a class="page-link" href="accueil.php?page=<?= $page_courante + 1 ?>">&raquo</a>
+                    </li>
+                <?php } ?>
+            </ul>
+        </div>
 </div>
 <?php
     require_once 'include/aside.php';

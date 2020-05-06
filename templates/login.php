@@ -66,11 +66,11 @@ if(isset($_POST['submitted'])) {
             <div class="col-12 pt-4">
                 <form class="form" method="POST">
                     <div class="input-field">
-                        <?php $form->input('text', 'username', 'mail', 'validate', NULL, $value_username); ?>
+                        <?php $form->input('text', 'username', 'mail', 'validate', NULL, NULL, $value_username); ?>
                         <?php $form->label('mail', 'Nom d\'utilisateur ou Adresse Mail'); ?>
                     </div>
                     <div class="input-field">
-                        <?php $form->input('password', 'password', 'mdp', 'validate', NULL, $value_password); ?>
+                        <?php $form->input('password', 'password', 'mdp', 'validate', NULL, NULL, $value_password); ?>
                         <?php $form->label('mdp', 'Mot de passe'); ?>
                     </div>
                     <div class="input-field">
