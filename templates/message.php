@@ -2,11 +2,10 @@
 session_start();
 if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
     require_once 'include/header.php';
-    require_once 'include/aside.php';
     require_once '../models/Message.php';
     $message = new \Model\Message(); ?>
-    <div class="col-12 col-lg-9 col-xl-9">
-        <h3 class="text-center font-weight-bold">Boîte de reception</h3>
+    <div class="col-12">
+        <h1 class="title mt-n3 font-weight-bold">Boîte de réception</h1>
         <div class="col-12">
             <table class="table">
                 <tbody>

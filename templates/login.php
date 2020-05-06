@@ -47,6 +47,7 @@ if(isset($_POST['submitted'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/templates/style/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/templates/style/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="/templates/style/font/css/all.css">
     <link rel="stylesheet" type="text/css" href="/templates/style/css/style.css">
     <title></title>
@@ -57,27 +58,31 @@ if(isset($_POST['submitted'])) {
         <!-- <img src="media/img/background_02.gif" class="position-absolute h-100 w-100"> -->
         <div class="box offset-lg-3 offset-md-2 col-md-8 col-lg-6 col-sm-12 offset-md-2 offset-lg-3 mt-lg-10 bg-light shadow-lg p-4">
             <div class="mw-100 h1 display-3 text-center">
-                <span class="fa fa-expand text-primary"></span>
+               <span class="fa fa-expand waves-effect teal-text"></span>
             </div>
             <div class="h4 font-weight-bold text-center mb-4">
                 Se connecter à son espace universitaire !
             </div>
             <div class="col-12 pt-4">
                 <form class="form" method="POST">
-                    <div class="form-group">
-                        <?php $form->label('mail', 'Nom d\'utilisateur ou Adresse Mail', '"font-weight-bold h6"'); ?>
-                        <?php $form->input('text', 'username', 'mail', 'form-control', '"Nom d\'utilisateur"', $value_username); ?>
+                    <div class="input-field">
+                        <?php $form->input('text', 'username', 'mail', 'validate', NULL, $value_username); ?>
+                        <?php $form->label('mail', 'Nom d\'utilisateur ou Adresse Mail'); ?>
+                    </div>
+                    <div class="input-field">
+                        <?php $form->input('password', 'password', 'mdp', 'validate', NULL, $value_password); ?>
+                        <?php $form->label('mdp', 'Mot de passe'); ?>
+                    </div>
+                    <div class="input-field">
+                        <p>
+                            <label>
+                                <?php $form->input('checkbox', 'remember_me', 'remember') ?>
+                                <span>Se souvenir de moi sur cet appareil.</span>
+                            </label>
+                        </p>
                     </div>
                     <div class="form-group">
-                        <?php $form->label('mdp', 'Mot de passe', 'font-weight-bold h6'); ?>
-                        <?php $form->input('password', 'password', 'mdp', 'form-control', '"Mot de passe"', $value_password); ?>
-                    </div>
-                    <div class="form-group">
-                        <?php $form->label('en_ligne', 'Se souvenir de moi sur cet appareil', 'small'); ?>
-                        <?php $form->input('checkbox', 'remember_me', 'en_ligne', 'ml-2') ?>
-                    </div>
-                    <div class="form-group">
-                        <?php $form->btn('submit', 'submitted', 'Se connecter', '"btn btn-primary w-100"'); ?>
+                        <?php $form->btn('submit', 'submitted', 'Se connecter', '"waves-effect waves-light btn w-100"'); ?>
                     </div>
                     <?php
                     if(isset($erreur)){ ?>
@@ -105,6 +110,7 @@ if(isset($_POST['submitted'])) {
     </div>
 </div>
 <script src="/templates/style/js/jquery.js"></script>
+<script src="/templates/style/js/materialize.js"></script>
 <script src="/templates/style/js/app.js"></script>
 </body>
 </html>

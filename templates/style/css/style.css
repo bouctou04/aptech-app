@@ -13,6 +13,9 @@
 .name {
 	font-family: "Ubuntu Condensed";
 }
+.title {
+	font-size: 1.5rem;
+}
 
 .mt-n6,
 .my-n6 {
@@ -20,13 +23,25 @@
 }
 
 /* Pour sm */
-@media (min-width: 576px) {}
+@media (min-width: 576px) {
+	.title {
+		font-size: 1.5rem;
+	}
+}
 
 /* Pour md */
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+	.title {
+		font-size: 1.8rem;
+	}
+}
 
 /* Pour lg */
 @media (min-width: 992px) {
+
+	.title {
+		font-size: 1.9rem;
+	}
 
 	.mt-lg-10,
 	.my-lg-10 {

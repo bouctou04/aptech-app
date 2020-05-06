@@ -30,11 +30,53 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
 // Départ d'affichage d'article par page
     $depart = ($page_courante - 1) * $articles_par_page;
 
-    require_once 'include/header.php';
-    require_once 'include/aside.php';?>
-    <div class="col-12 col-lg-9 col-xl-9">
-        <h3 class="text-center font-weight-bold">Forum</h3>
+    require_once 'include/header.php'; ?>
+    <div class="col-12">
+        <h1 class="title mt-n3 font-weight-bold">Forum</h1>
         <div class="col-12">
+            <form method="POST">
+                <?php
+                require_once '../libraries/Form.class.php';
+                $form = new Form();
+                if(isset($_POST['submitted'])) {
+                    if(!empty($_POST['subject']) AND !empty($_POST['content'])) {
+                        $forum->insert($_SESSION['id'], $_POST['subject'], $_POST['content']);
+                        $success = "Votre topic a été publié avec succès !";
+                    } else {
+                        $error = "Veuillez remplir le topic SVP !";
+                    }
+                }
+                ?>
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header"><span class="font-weight-bold">Publier un article</span></div>
+                        <div class="collapsible-body">
+                            <div class="input-field">
+                                <?php
+                                $form->input("text", "subject", "subject", "validate", "255");
+                                $form->label("subject", "Sujet du topic");
+                                ?>
+                            </div>
+                            <div class="input-field">
+                                <?php
+                                $form->textarea("content", "content");
+                                $form->label("content", "Contenu du topic");
+                                ?>
+                            </div>
+                            <div class="form-group">
+                                <?php
+                                $form->btn("submit", "submitted", "Poster le topic", '"btn btn-success font-weight-bold w-100"');
+                                ?>
+                            </div>
+                            <?php
+                            $form->get_error(isset($error)? $error : NULL);
+                            $form->get_success(isset($success)? $success : NULL);
+                            ?>
+                        </div>
+                    </li>
+                </ul>
+
+            </form>
             <table class="table">
                 <tbody>
                     <?php
@@ -42,7 +84,7 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                         foreach ($forum->findAll("ORDER BY id DESC LIMIT $depart, $articles_par_page") as $donnees): ?>
                     <tr>
                         <td>
-                            <h4 class="d-inline"><a href="page.php?id=<?= $donnees['id'] ?>"><?= $donnees['subject'] ?></a></h4>
+                            <h1 class="title d-inline"><a href="page.php?id=<?= $donnees['id'] ?>"><?= $donnees['subject'] ?></a></h1>
                             <?php
                             if($donnees['resolved'] == 1) { ?>
                                 <span class="float-right bg-success p-2 text-light">Résolu</span>
@@ -109,42 +151,6 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                     <?php } ?>
                 </ul>
             </nav>
-
-            <form method="POST">
-                <?php
-                require_once '../libraries/Form.class.php';
-                $form = new Form();
-                if(isset($_POST['submitted'])) {
-                    if(!empty($_POST['subject']) AND !empty($_POST['content'])) {
-                        $forum->insert($_SESSION['id'], $_POST['subject'], $_POST['content']);
-                        $success = "Votre topic a été publié avec succès !";
-                    } else {
-                        $error = "Veuillez remplir le topic SVP !";
-                    }
-                }
-                ?>
-                <div class="form-group">
-                    <?php
-                    $form->label("subject", "Sujet du topic", "font-weight-bold h6");
-                    $form->input("text", "subject", "subject", "form-control", '"Écrivez ici le titre de votre topic"');
-                    ?>
-                </div>
-                <div class="form-group">
-                    <?php
-                    $form->label("content", "Contenu du topic", "font-weight-bold h6");
-                    $form->textarea("content", "form-control", "content", "Contenu du topic");
-                    ?>
-                </div>
-                <div class="form-group">
-                    <?php
-                    $form->btn("submit", "submitted", "Poster le topic", '"btn btn-success font-weight-bold w-100"');
-                    ?>
-                </div>
-                <?php
-                $form->get_error(isset($error)? $error : NULL);
-                $form->get_success(isset($success)? $success : NULL);
-                ?>
-            </form>
         </div>
     </div>
 <?php

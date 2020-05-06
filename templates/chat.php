@@ -2,7 +2,6 @@
 session_start();
 if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
     require_once 'include/header.php';
-    require_once  'include/aside.php';
     require_once '../models/Chat.php';
     $chat = new \Model\Chat();
 
@@ -16,8 +15,8 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
         }
     }
     ?>
-    <div class="col-12 col-lg-9 col-xl-9">
-        <h3 class="text-center font-weight-bold">Discussion générale</h3>
+    <div class="col-12 col-lg-8">
+        <h1 class="title mt-n3 font-weight-bold">Salon de chat</h1>
         <div class="col-12">
             <div class="row">
                 <div class="col-lg-8 col-12">
@@ -26,54 +25,62 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                         require_once '../libraries/Form.class.php';
                         $form = new Form();
                         ?>
-                        <div class="form-group">
-                            <?php $form->textarea("message", "form-control", "message", "Écrire un message ...", "5"); ?>
+                        <div class="input-field">
+                            <?php
+                            $form->textarea("message", "message", "materialize-textarea", "255");
+                            $form->label("message", "<span class='fa fa-envelope'></span> Écrivez votre message ici ...");
+                            ?>
                         </div>
-                        <div class="form-group">
-                            <?php $form->btn("submit", "submitted", "Envoyer le message", '"btn btn-success w-100"'); ?>
+                        <div class="input-field">
+                            <?php $form->btn("submit", "submitted", "Envoyer", '"btn left"'); ?>
                         </div>
-                        <?php $form->get_error(isset($erreur)? $erreur : NULL); ?>
-                        <?php $form->get_success(isset($success)? $success : NULL); ?>
                     </form>
-                </div>
-                <div class="d-none d-lg-inline d-xl-inline col-4 bg-light">
-                    <div class="font-weight-bold text-center bg-primary text-light p-2">Utilisateurs connectés (6)</div>
-                        <ul>
-                            <li>@maicam23</li>
-                            <li>@maicam23</li>
-                            <li>@maicam23</li>
-                            <li>@maicam23</li>
-                        </ul>
                 </div>
             </div>
         </div>
-        <table class="table">
-            <tr id="chat">
+
+            <div id="chat">
                 <?php
                     if(!empty($chat->findAll())) {
-                        foreach ($chat->findAll("INNER JOIN users ON users.id = chat.users_id ORDER BY send_date DESC LIMIT 0, 15") as $donnees): ?>
-                            <td class="row">
+                        foreach ($chat->findAll("INNER JOIN users ON users.id = chat.users_id ORDER BY send_date DESC LIMIT 0, 30") as $donnees): ?>
+                            <div class="">
                                 <?php
-                                if($_SESSION['id'] == $donnees['users_id']) { ?>
-                                 <span class="font-weight-bold">Moi:</span>
-                                <?php
+                                if($_SESSION['id'] == $donnees['id']) { ?>
+                                    <div class="chip">
+                                        <img src="media/img/profile.jpg" alt="Contact Person">
+                                        <span class="font-weight-bold">Moi:</span>
+                                        <span class="ml-2"><?= nl2br($donnees['content']); ?></span>
+                                        <small><?= $donnees['send_date']; ?></small>
+                                    </div>
+                                    <?php
                                 } else { ?>
-                                 <span class="font-weight-bold"><a href="ecrire_message.php?id=<?= $donnees['users_id'] ?>" class="text-decoration-none">@<?= $donnees['username'] ?>:</a></span>
-                                <?php
+                                    <div class="chip">
+                                        <img src="media/img/profile.jpg" alt="Contact Person">
+                                        <span class="font-weight-bold"><a href="ecrire_message.php?id=<?= $donnees['users_id'] ?>"><?= $donnees['username'] ?></a>:</span>
+                                        <span class="ml-2"><?= nl2br($donnees['content']); ?></span>
+                                        <small class="text-muted"><?= $donnees['send_date']; ?></small>
+                                    </div>
+                                    <?php
                                 }
                                 ?>
-                                <span class="text-muted pl-2"><?= nl2br($donnees['content']); ?></span>
-                                <span class="pl-3 opacity-1 small">Il y'a <?= $donnees['send_date']; ?></span>
-                            </td>
+                            </div>
                         <?php
                             endforeach;
                     } else { ?>
-                        <td class="row">Pas de message dans le salon de chat ...</td>
+                        <div class="row">Pas de message dans le salon de chat ...</div>
                     <?php
                     }
                 ?>
-            </tr>
-        </table>
+            </div>
+    </div>
+    <div class="d-none d-lg-inline d-xl-inline col-4">
+        <div class="font-weight-bold text-center teal text-light p-2">Utilisateurs connectés (6)</div>
+        <ul>
+            <li>@maicam23</li>
+            <li>@maicam23</li>
+            <li>@maicam23</li>
+            <li>@maicam23</li>
+        </ul>
     </div>
 <?php
     require_once 'include/footer.php';

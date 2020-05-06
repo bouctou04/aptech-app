@@ -7,7 +7,6 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
         require_once '../libraries/Form.class.php';
         $form = new Form();
         require_once 'include/header.php';
-        require_once 'include/aside.php';
 
         /**
          * @param string $category
@@ -34,18 +33,18 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
 
         }
         ?>
-        <div class="col-12 col-lg-9 col-xl-9">
-            <h3 class="text-center font-weight-bold">Inscription</h3>
+        <div class="col-12">
+            <h1 class="title mt-n3 font-weight-bold">Inscription</h1>
             <div class="col-12">
                 <div class="container">
                     <div class="">
                         <div class="<?= $etape2 ?> form-group">
-                            <a href="inscription.php" class="btn btn-secondary btn-sm">
-                                <span class="fa fa-chevron-circle-left"></span> Révenir dans la selection des catégories
+                            <a href="inscription.php" class="waves-effect waves-light btn grey btn-sm">
+                                <span class="fa fa-chevron-circle-left"></span> Précedent
                             </a>
                         </div>
                         <div class="form-group">
-                            <a href="inscription.php?etape1=administrator" class="<?= $etape1 ?> btn btn-primary w-100 font-weight-bold">Ajouter un(e) gestionnaire</a>
+                            <a href="inscription.php?etape1=administrator" class="<?= $etape1 ?> btn btn-primary w-100 font-weight-bold">Ajouter un(e) adminstrateur</a>
                         </div>
                         <div class="form-group">
                             <a href="inscription.php?etape1=teacher" class="<?= $etape1 ?> btn btn-primary w-100 font-weight-bold">Ajouter un(e) professeur</a>
@@ -74,44 +73,66 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                                 }
                             }
                             ?>
-                            <div class="<?= $etape2 ?> text-center"><h3 class="font-weight-bold">Renseigner les coordonnées de l'utilisateur</h3></div>
-                            <div class="<?= $etape2 ?> form-group input-group">
-                                <div class="input-group-prepend">
-                                    <?php
-                                    $form->label("last_name", "Nom et Prénom", "input-group-text");
-                                    ?>
+                            <div class="<?= $etape2 ?> text-center"><h3 class="title">Renseigner les coordonnées de l'utilisateur</h3></div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="<?= $etape2 ?>input-field">
+                                        <?php
+                                        $form->input("text", "last_name", "last_name", "validate", "10");
+                                        $form->label("last_name", "Nom de famille");
+                                        ?>
+                                    </div>
                                 </div>
-                                <?php
-                                $form->input("text", "last_name", "last_name", "$etape2 form-control", '"Nom de famille"');
-                                $form->input("text", "first_name", "last_name", "$etape2 form-control", "Prénom");
-                                ?>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="<?= $etape2 ?>input-field">
+                                        <?php
+                                        $form->input("text", "first_name", "first_name", "validate");
+                                        $form->label("first_name", "Prénom");
+                                        ?>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="<?= $etape2 ?> form-group input-group">
-                                <div class="input-group-prepend">
-                                    <?php
-                                    $form->label("birth_date", "Date Naiss. et Sexe", "input-group-text");
-                                    ?>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="<?= $etape2 ?>input-field">
+                                        <?php
+                                        $form->input("date", "birth_date", "birth_date", "validate");
+                                        $form->label("birth_date", "Date de naissance");
+                                        ?>
+                                    </div>
                                 </div>
-                                <?php
-                                $form->input("date", "birth_date", "birth_date", "$etape2 form-control");
-                                ?>
-                                <select class="form-control" name="sexe" id="" required>
-                                    <option value="">Selectionner</option>
-                                    <option value="M">Homme</option>
-                                    <option value="F">Femme</option>
-                                </select>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="<?= $etape2 ?>input-field">
+                                        <select name="sexe" id="sexe">
+                                            <option value="" disabled selected>Selectionner le sexe</option>
+                                            <option value="M">Homme</option>
+                                            <option value="F">Femme</option>
+                                        </select>
+                                        <?php
+                                        $form->label("sexe", "Sexe");
+                                        ?>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="<?= $etape2 ?> form-group input-group">
-                                <div class="input-group-prepend">
-                                    <?php
-                                    $form->label("mail", "Adresse e-mail", "input-group-text");
-                                    ?>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="<?= $etape2 ?>input-field">
+                                        <?php
+                                        $form->input("email", "mail", "mail", "validate");
+                                        $form->label("mail", "Adresse email");
+                                        ?>
+                                        <span class="helper-text" data-error="Mauvais adresse email" data-success="Format d'adresse valide"></span>
+                                    </div>
                                 </div>
-                                <?php
-                                $form->input("email", "mail", "mail", "$etape2 form-control", '"Adresse e-mail"');
-                                ?>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="<?= $etape2 ?>input-field">
+                                        <?php
+                                        $form->input("email", "mail_confirm", "mail_confirm", "validate");
+                                        $form->label("mail_confirm", "Confirmation d'adresse email");
+                                        ?>
+                                        <span class="helper-text" data-error="Mauvais adresse email" data-success="Format d'adresse valide"></span>
+                                    </div>
+                                </div>
                             </div>
 
                             <?php
@@ -174,6 +195,7 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
             </div>
         </div>
 <?php
+        require_once 'include/footer.php';
     } else {
         header("Location: 404.php");
     }

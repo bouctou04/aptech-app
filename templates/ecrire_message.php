@@ -10,11 +10,10 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
         $message = new \Model\Message();
 
         require_once 'include/header.php';
-        require_once 'include/aside.php';
         require_once '../libraries/Form.class.php';
          ?>
-<div class="col-12 col-lg-9 col-xl-9">
-    <h3 class="text-center font-weight-bold">Messages</h3>
+<div class="col-12">
+    <h1 class="title font-weight-bold">Messages</h1>
     <div class="col-12">
         <form method="POST">
             <?php
@@ -28,11 +27,22 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                 }
             }
             ?>
-            <div class="form-group">
-                <?php $form->textarea("message", "form-control", "message", "Écrire votre message ici ..."); ?>
-            </div>
-            <div class="form-group">
-                <?php $form->btn("submit", "submitted", "Envoyer le message", '"btn btn-success w-100"'); ?>
+            <div class="row">
+                <div class="col-8">
+                    <div class="input-field">
+                        <?php
+                        $form->textarea("message", "message", "materialize-textarea", "255");
+                        $form->label("message", "<span class='fa fa-envelope'></span> Écrire votre message ici ...");
+                        ?>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-field">
+                            <?php
+                            $form->btn("submit", "submitted", "Envoyer", "btn right");
+                            ?>
+                        </div>
+                    </div>
+                </div>
             </div>
             <?php
             $form->get_error(isset($error)? $error : NULL);

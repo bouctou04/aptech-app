@@ -50,39 +50,45 @@ $depart = ($page_courante - 1) * $articles_par_page;
 
 ?>
 <?php require 'include/header.php' ?>
-<?php require 'include/aside.php' ?>
-<div class="col-12 col-lg-9 border-left">
+<div class="col-12 col-lg-8">
         <?php
             // L'utilisateur doit être 'Administrateur pour pouvoir publier un article'
             if($_SESSION['category_id'] == 1){
         ?>
-        <div class="col-12">
-            <form method="POST" class="form" enctype="multipart/form-data">
+
                 <?php
                 require '../libraries/Form.class.php';
                 $form = new Form();
                 ?>
-                <h4>Publier un nouvel article ...</h4>
-                <div class="form-group">
-                    <?php $form->input("text", "subject", "subject", "form-control", '"Titre de l\'article"'); ?>
-                </div>
-                <div class="form-group">
-                    <?php
-                    $form->textarea("content", "form-control", "content", "Le contenu de l'article ...");
-                    ?>
-                </div>
-                <div class="form-group">
-                    <input type="file" name="file" class="form-control">
-                </div>
-                <div class="form-group">
-                    <button type="submit" name="submitted" class="btn btn-success w-100">Publier l'article</button>
-                </div>
-                <?php
-                    $form->get_error(isset($erreur) ? $erreur : NULL);
-                    $form->get_success(isset($success) ? $success : NULL);
-                ?>
-            </form>
-        </div>
+                <form method="POST">
+                    <ul class="collapsible">
+                        <li>
+                            <div class="collapsible-header"><span class="font-weight-bold">Publier un article</span></div>
+                            <div class="collapsible-body">
+                                    <div class="input-field">
+                                        <?php
+                                        $form->input("text", "subject", "subject", "validate", "255");
+                                        $form->label("subject", "Titre de l'article");
+                                        ?>
+                                    </div>
+                                    <div class="input-field">
+                                        <?php
+                                        $form->textarea("content", "content", "materialize-textarea");
+                                        $form->label("content", "Contenu de l'article");
+                                        ?>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" name="submitted" class="btn btn-success w-100">Publier l'article</button>
+                                    </div>
+                                    <?php
+                                    $form->get_error(isset($erreur) ? $erreur : NULL);
+                                    $form->get_success(isset($success) ? $success : NULL);
+                                    ?>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
         <?php
             }
         ?>
@@ -91,9 +97,9 @@ $depart = ($page_courante - 1) * $articles_par_page;
     // Affichage d'article
     if(!empty($article->findAll())) {
         foreach ($article->findAll("ORDER BY id DESC LIMIT $depart, $articles_par_page") as $donnees): ?>
-            <article class="row p-2 ml-2">
+            <article class="">
                 <div class="col-12">
-                    <h3><a href="article.php?id=<?= $donnees['id'] ?>"><?= $donnees['subject'] ?></a></h3>
+                    <h1 class="title"><a href="article.php?id=<?= $donnees['id'] ?>"><?= $donnees['subject'] ?></a></h1>
                     <p class="text-justify">
                         <?= $donnees['excerpt'] ?>
                     </p>
@@ -156,8 +162,10 @@ $depart = ($page_courante - 1) * $articles_par_page;
             <?php } ?>
         </ul>
     </nav>
-
-<?php require 'include/footer.php' ?>
+</div>
+<?php
+    require_once 'include/aside.php';
+    require 'include/footer.php' ?>
 <?php
 // Fermeture de if($_SESSION)
 }

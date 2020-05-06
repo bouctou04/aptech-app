@@ -7,14 +7,13 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
         $getid = intval($_GET['id']);
         require_once '../models/Comment.php';
         $comment = new \Model\Comment();
-        require_once 'include/header.php';
-        require_once 'include/aside.php'; ?>
-        <div class="col-12 col-lg-9 border-left">
+        require_once 'include/header.php'; ?>
+        <div class="col-12 mt-n4">
             <?php
             foreach ($forum->find($getid) as $donnees):
             ?>
             <article class="row p-2 ml-2">
-                <h2 class="text-dark"><?= $donnees['subject'] ?></h2>
+                <h1 class="title p-3 white-text teal"><?= $donnees['subject'] ?></h1>
                 <p class="col-12">
                     <?= $donnees['content'] ?>
                 </p>

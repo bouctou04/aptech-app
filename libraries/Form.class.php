@@ -7,15 +7,20 @@ class Form
      * @param $title
      * @param $class
      */
-    public function label($for, $title, $class): void
+    public function label(?string $for = "field", ?string $title = "Input field", ?string $class = NULL): void
     {
         echo '<label for=' . $for . ' class=' . $class . '>' . $title . '</label>';
     }
 
-    public function input($type, $name, $id, $class, $placeholder = NULL, $value = ''): void
+    public function input(?string $type = "text", ?string $name = "field", ?string $id = "field", ?string $class = NULL, ?string $data_length = NULL, ?string $placeholder = NULL, ?string $value = NULL): void
     {
-        echo '<input type=' . $type . ' name=' . $name . ' id=' . $id . ' class=' . $class . ' placeholder=' . $placeholder . ' value=' . $value . '>';
-        //echo '<input type='.$type.' placeholder='.$placeholder.'>';
+        if($placeholder) {
+            echo '<input type=' . $type . ' name=' . $name . ' id=' . $id . ' class=' . $class . ' placeholder=' . $placeholder . ' value=' . $value . '>';
+        } elseif ($data_length) {
+            echo '<input type=' . $type . ' name=' . $name . ' id=' . $id . ' class=' . $class . ' data-length=' . $data_length . ' value=' . $value . '>';
+        } else {
+            echo '<input type=' . $type . ' name=' . $name . ' id=' . $id . ' class=' . $class . ' value=' . $value . '>';
+        }
     }
 
     /**
@@ -26,9 +31,16 @@ class Form
      * @param string $rows
      * @param string $text
      */
-    public function textarea($name, $class, $id, $placeholder, $rows = '5', $text = ''): void
+    public function textarea(?string $name = "field", ?string $id, ?string $class = "materialize-textarea", ?string $data_length = NULL, ?string $placeholder = NULL, ?string $rows = NULL, ?string $text = NULL): void
     {
-        echo '<textarea name="' . $name . '" class="' . $class . '" id="' . $id . '" placeholder="' . $placeholder . '" rows="' . $rows . '">' . $text . '</textarea>';
+        if($placeholder) {
+            echo '<textarea name="' . $name . '" class="' . $class . '" id="' . $id . '" placeholder="' . $placeholder . '" rows="' . $rows . '">' . $text . '</textarea>';
+        } elseif ($data_length) {
+            echo '<textarea name="' . $name . '" class="' . $class . '" id="' . $id . '" data-length="' . $data_length . '" rows="' . $rows . '">' . $text . '</textarea>';
+        } else {
+            echo '<textarea name="' . $name . '" class="' . $class . '" id="' . $id . '" rows="' . $rows . '">' . $text . '</textarea>';
+
+        }
     }
 
     /**
