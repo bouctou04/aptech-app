@@ -28,10 +28,10 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
         // Edite article
         if($_SESSION['id'] === 1): ?>
             <div class="row">
-                <div class="col-4 col-sm-6">
+                <div class="col-4 col-lg-3">
                     <a class="waves-effect waves-light btn modal-trigger" href="#edit"><span class="fa fa-pen"></span> Modifier l'article</a>
                 </div>
-                <div class="col-4 col-sm-6">
+                <div class="col-4 col-lg-3">
                     <a class="waves-effect waves-light red darken-2 btn modal-trigger" href="#delete"><span class="fa fa-trash"></span> Supprimer l'article</a>
                 </div>
             </div>
@@ -132,15 +132,17 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
             </tbody>
         </table>
         <form method="POST" class="form">
-            <div class="input-field">
-                <?php
-                $form->textarea("content", "content");
-                $form->label("content", "Rédiger un commentaire ...");
-                $form->btn("submit", "submitted", "Publier", "'btn right'");
-                ?>
+            <div class="container">
+                <div class="input-field">
+                    <?php
+                    $form->textarea("content", "content");
+                    $form->label("content", "Rédiger un commentaire ...");
+                    $form->btn("submit", "submitted", "Publier", "'btn right'");
+                    ?>
+                </div>
+                <?php $form->get_error(isset($erreur) ? $erreur : NULL) ?>
+                <?php $form->get_success(isset($success) ? $success : NULL) ?>
             </div>
-            <?php $form->get_error(isset($erreur) ? $erreur : NULL) ?>
-            <?php $form->get_success(isset($success) ? $success : NULL) ?>
         </form>
     </div>
 </div>

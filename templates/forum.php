@@ -40,8 +40,12 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                 $form = new Form();
                 if(isset($_POST['submitted'])) {
                     if(!empty($_POST['subject']) AND !empty($_POST['content'])) {
-                        $forum->insert($_SESSION['id'], $_POST['subject'], $_POST['content']);
-                        $success = "Votre topic a été publié avec succès !";
+                        if(strlen($_POST['subject']) <= 255) {
+                            $forum->insert($_SESSION['id'], $_POST['subject'], $_POST['content']);
+                            $success = "Votre topic a été publié avec succès !";
+                        } else {
+                            $error = "Le titre du topic ne doit pas dépasser 255 caractères !";
+                        }
                     } else {
                         $error = "Veuillez remplir le topic SVP !";
                     }

@@ -140,23 +140,43 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
 
                                 ?>
                                 <hr>
-                                <div class="<?= $etape2 ?> text-center"><h3 class="font-weight-bold">Informations complémentaires de l'étudiant</h3></div>
-                                <div class="<?= $etape2 ?> form-group input-group">
-                                    <div class="input-group-prepend">
-                                        <?php
-                                        $form->label("last_name", "Filière - Niveau - Période", "input-group-text");
-                                        ?>
-                                    </div>
-                                    <select class="form-control" name="filiere" id="" required>
-                                        <option value="">Selectionner la Filière</option>
-                                    </select>
-                                    <select class="form-control" name="niveau" id="" required>
-                                        <option value="">Selectionner le niveau</option>
-                                    </select>
-                                    <select class="form-control" name="periode" id="" required>
-                                        <option value="">Selectionner la période</option>
-                                    </select>
+                                <div class="<?= $etape2 ?> text-center">
+                                    <div class="title">Informations complémentaires de l'étudiant</div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <div class="<?= $etape2 ?>input-field">
+                                            <select name="filiere" id="filiere">
+                                                <option value="" disabled selected>Selectionner la filière</option>
+                                            </select>
+                                            <?php
+                                            $form->label("filiere", "Filière");
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <div class="<?= $etape2 ?>input-field">
+                                            <select name="niveau" id="niveau">
+                                                <option value="" disabled selected>Selectionner le niveau</option>
+                                            </select>
+                                            <?php
+                                            $form->label("niveau", "Niveau");
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <div class="<?= $etape2 ?>input-field">
+                                            <select name="periode" id="niveau">
+                                                <option value="" disabled selected>Selectionner la période</option>
+                                            </select>
+                                            <?php
+                                            $form->label("periode", "Période");
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <?php
                             }
                             ?>

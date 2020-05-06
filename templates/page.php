@@ -84,15 +84,14 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
                         }
                     }
                     ?>
-                    <div class="form-group">
-                        <?php
-                        $form->textarea("content", "form-control", "content", "Rédigez un commentaire ici ...", "4");
-                        ?>
-                    </div>
-                    <div class="form-group">
-                        <?php
-                        $form->btn("submit", "submitted", "Poster le commentaire", '"btn btn-success font-weight-bold w-100"');
-                        ?>
+                    <div class="container">
+                        <div class="input-field">
+                            <?php
+                            $form->textarea("content", "content", "materialize-textarea");
+                            $form->label("content", "Rédigez votre commentaire ...");
+                            $form->btn("submit", "submitted", "Poster le commentaire", "btn");
+                            ?>
+                        </div>
                     </div>
                     <?php
                     $form->get_error(isset($error) ? $error : NULL);

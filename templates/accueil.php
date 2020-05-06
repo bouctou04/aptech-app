@@ -12,9 +12,13 @@ if(isset($_SESSION['id']) AND $_SESSION['id'] != 0) {
 if(isset($_POST['submitted'])) {
     // Le templates de POST ne peut pas être vide
     if(!empty($_POST['subject']) AND !empty($_POST['content'])) {
-        // Insert article
-        $article->insert($_SESSION['id'], $_POST['subject'], $_POST['content']);
-        $success = "Votre article a bien été publié";
+        if(strlen($_POST['subject']) <= 255 ) {
+            // Insert article
+            $article->insert($_SESSION['id'], $_POST['subject'], $_POST['content']);
+            $success = "Votre article a bien été publié";
+        } else {
+            $erreur = "Le titre de votre article ne doit pas dépasser 255 caractères !";
+        }
     }
     // Si un champ est resté vide
     else {

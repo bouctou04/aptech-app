@@ -8,8 +8,12 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
     // Form submitted
     if(isset($_POST['submitted'])) {
         if(!empty($_POST['message'])) {
-            $chat->insert($_SESSION['id'], $_POST['message']);
-            $success = "Message envoyé avec succès";
+            if(strlen($_POST['message']) <= 255) {
+                $chat->insert($_SESSION['id'], $_POST['message']);
+                $success = "Message envoyé avec succès";
+            }else {
+                $erreur = "Votre message ne doit pas dépasser 255 caractères !";
+            }
         } else {
             $erreur = "Vous ne pouvez pas envoyé en message vide !";
         }

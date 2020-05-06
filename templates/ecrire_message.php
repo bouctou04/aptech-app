@@ -20,8 +20,12 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
             $form = new Form();
             if(isset($_POST['submitted'])) {
                 if(!empty($_POST['message'])) {
-                    $message->insert($_SESSION['id'], $getid, $_POST['message']);
-                    $success = "Message bien envoyé !";
+                    if(strlen($_POST['message']) <= 255) {
+                        $message->insert($_SESSION['id'], $getid, $_POST['message']);
+                        $success = "Message bien envoyé !";
+                    } else {
+                        $error = "Votre message ne doit pas dépasser 255 caractères !";
+                    }
                 } else {
                     $error = "Vous ne pouvez pas envoyer un message vide !";
                 }
