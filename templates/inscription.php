@@ -36,7 +36,7 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
         <div class="col-12">
             <h1 class="title mt-n3 font-weight-bold">Inscription</h1>
             <div class="col-12">
-                <div class="container">
+                <div class="">
                     <div class="">
                         <div class="<?= $etape2 ?> form-group">
                             <a href="inscription.php" class="waves-effect waves-light btn grey btn-sm">
