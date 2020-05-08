@@ -122,7 +122,7 @@ $depart = ($page_courante - 1) * $articles_par_page;
             <h4 class="col-12 text-center">Aucun article</h4>
         </article>
     <?php
-    }
+    } echo $depart;
     ?>
 
 

@@ -12,11 +12,12 @@ class Database {
      * @return PDO|null
      */
     public static function get_pdo() {
-        self::$pdo = new PDO(self::$dsn.":host=".self::$host.";dbname=".self::$db_name, self::$db_user, self::$db_password, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ]);
-
+        if(self::$pdo === NULL) {
+            self::$pdo = new PDO(self::$dsn.":host=".self::$host.";dbname=".self::$db_name, self::$db_user, self::$db_password, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]);
+        }
         return self::$pdo;
     }
 }

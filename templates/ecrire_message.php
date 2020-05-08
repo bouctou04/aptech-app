@@ -8,7 +8,7 @@ if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
         }
         require_once '../models/Message.php';
         $message = new \Model\Message();
-
+        $message->setRead($getid);
         require_once 'include/header.php';
         require_once '../libraries/Form.class.php';
          ?>

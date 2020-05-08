@@ -1,5 +1,6 @@
 <?php
-
+    require_once '../models/Message.php';
+    $message = new \Model\Message();
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,14 @@
     <nav>
         <div class="nav-wrapper teal">
             <a class="brand-logo right" href="accueil.php">APTECH</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><span class="material-icons"><i class="fa fa-bars"></i></span></a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><span class="material-icons"><i class="fa fa-bars"></i>
+                <?php
+                if($message->getUnread($_SESSION['id']) > 0) { ?>
+                    <span class="red new badge"><?= $message->getUnread($_SESSION['id']) ?></span>
+                    <?php
+                }
+                ?>
+                </span></a>
             <ul class="left hide-on-med-and-down">
                 <li>
                     <a class="" href="accueil.php"><span class="fa fa-home"></span> Accueil <span class="sr-only">(current)</span></a>
@@ -26,7 +34,14 @@
                 <a href="#"><span class="fa fa-user"></span> Profile</a>
                 </li>
                 <li>
-                    <a href="message.php"><span class="fa fa-envelope"></span> Message</a>
+                    <a href="message.php"><span class="fa fa-envelope"></span> Message
+                        <?php
+                        if($message->getUnread($_SESSION['id']) > 0) { ?>
+                            <span class="red new badge"><?= $message->getUnread($_SESSION['id']) ?></span>
+                        <?php
+                        }
+                        ?>
+                    </a>
                 </li>
                 <li>
                     <a href="chat.php"><span class="fa fa-comments"></span> Discussion générale</a>
@@ -60,7 +75,14 @@
             <a href="#"><span class="fa fa-user"></span> Profile</a>
         </li>
         <li>
-            <a href="message.php"><span class="fa fa-envelope"></span> Message</a>
+            <a href="message.php"><span class="fa fa-envelope"></span> Message
+                <?php
+                if($message->getUnread($_SESSION['id']) > 0) { ?>
+                    <span class="red new badge"><?= $message->getUnread($_SESSION['id']) ?></span>
+                    <?php
+                }
+                ?>
+            </a>
         </li>
         <li>
             <a href="chat.php"><span class="fa fa-comments"></span> Discussion générale</a>

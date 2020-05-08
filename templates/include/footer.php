@@ -2,7 +2,7 @@
 </section>
 <footer class="mt-3">
     <div class="col-12">
-        <p class="text-center text-muted">&copy; 2020 - Mon app</p>
+       <!-- <p class="text-center text-muted">&copy; 2020 - Mon app</p> -->
     </div>
 </footer>
 
