@@ -3,7 +3,7 @@
 
 namespace Model;
 
-require 'Model.php';
+require_once "Model.php";
 
 class Article extends Model
 {
@@ -14,6 +14,20 @@ class Article extends Model
     {
         parent::__construct();
         $this->table = "articles";
+    }
+
+    /**
+     * @param int $id
+     * @param string $subject
+     * @param string $content
+     */
+    public function update(int $id, string $subject, string $content): void
+    {
+        $id = intval($id);
+        $subject = htmlspecialchars($subject);
+        $content = htmlspecialchars(nl2br($content));
+        $req = $this->pdo->prepare("UPDATE {$this->table} SET subject = :subject, content = :content WHERE id = :id");
+        $req->execute(compact('id','subject', 'content'));
     }
 
     /**
@@ -29,19 +43,5 @@ class Article extends Model
         $excerpt = substr($content, 0, 255);
         $req = $this->pdo->prepare("INSERT INTO {$this->table}(users_id, subject, excerpt, content, send_date, file) VALUES(:user_id, :subject, :excerpt, :content, NOW(), :file) ");
         $req->execute(compact('user_id', 'subject', 'excerpt', 'content', 'file'));
-    }
-
-    /**
-     * @param int $id
-     * @param string $subject
-     * @param string $content
-     */
-    public function update(int $id, string $subject, string $content): void
-    {
-        $id = intval($id);
-        $subject = htmlspecialchars($subject);
-        $content = htmlspecialchars(nl2br($content));
-        $req = $this->pdo->prepare("UPDATE {$this->table} SET subject = :subject, content = :content WHERE id = :id");
-        $req->execute(compact('id','subject', 'content'));
     }
 }

@@ -30,6 +30,10 @@ class Forum extends Model
         $req->execute(compact('user_id', 'subject', 'content', 'resolved'));
     }
 
+    /**
+     * @param int $id
+     * @param int $resolved
+     */
     public function setResolved(int $id, int $resolved) {
         $resolved = intval($resolved);
         $req = $this->pdo->prepare("UPDATE {$this->table} SET resolved = :resolved WHERE id = :id");

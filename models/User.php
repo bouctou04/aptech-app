@@ -4,7 +4,10 @@
 namespace Model;
 
 require_once 'Model.php';
-require_once '../libraries/Mail.php';
+require_once 'libraries/Mail.php';
+
+use App\Mail;
+
 
 class User extends Model
 {
@@ -117,7 +120,7 @@ class User extends Model
         $req->execute(compact('user_category_id', 'school_id', 'last_name', 'first_name', 'birth_date', 'sexe', 'username', 'email', 'password'));
 
         // Sending mail
-        $mail = new \Mail();
+        $mail = new Mail();
         $message = "
                     <html>
                         <body>

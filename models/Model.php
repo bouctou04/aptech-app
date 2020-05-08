@@ -3,12 +3,12 @@
 
 namespace Model;
 
-require '../libraries/Database.php';
+require_once "Database.php";
 
-abstract class Model
+abstract class Model extends Database
 {
     /**
-     * @var \PDO
+     * @var \PDO|null
      */
     protected $pdo;
 
@@ -18,21 +18,16 @@ abstract class Model
     protected $table;
 
     /**
+     * @var
+     */
+    protected $post_per_page = 10;
+
+    /**
      * Model constructor.
      */
     public function __construct()
     {
-        $this->pdo = \Database::get_pdo();
-    }
-
-    /**
-     * @param $id
-     * @return bool|\PDOStatement
-     */
-    public function find($id) {
-        $req = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id = :id");
-        $req->execute(compact('id'));
-        return $req->fetchAll();
+        $this->pdo = Database::get_pdo();
     }
 
     /**
@@ -40,52 +35,45 @@ abstract class Model
      * @return array
      */
     public function findAll(?string $query = NULL) {
-        $sql = "SELECT * FROM {$this->table}";
-
-        if($query != NULL) {
-            $sql = "SELECT * FROM {$this->table} $query";
+        if($query) {
+            $sql = "SELECT * FROM {$this->table}";
+            $sql .= " ". $query;
+        } else {
+            $sql = "SELECT * FROM {$this->table}";
         }
 
         $req = $this->pdo->query($sql);
+
         return $req->fetchAll();
     }
 
     /**
-     * @param string|null $sql
+     * @param int $id
+     * @return array
      */
-    public function findQuery(?string $sql) {
-        $req = $this->pdo->prepare($sql);
-        $req->execute(array());
+    public function find(int $id) {
+        $req = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id = :id");
+        $req->execute(compact('id'));
+        return $req->fetchAll();
     }
 
-    /*public function update(int $id):void {
-        // Modifier un élément
-    } */
-
     /**
-     * @param $id
+     * @param int $id
      */
     public function delete(int $id) {
         $req = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = :id");
         $req->execute(compact('id'));
     }
 
-    /**
-     * @return int
-     */
-    public function row_count() {
+    public function getUrl(int $id) {
+        $article = $this->find($id);
+        $id = $article[0]['id'];
+        return $this->table. ".php?id=". $id;
+    }
+
+    public function rowCount() {
         $req = $this->pdo->query("SELECT id FROM {$this->table}");
         return $req->rowCount();
     }
 
-    public function paginator() {
-        $total_post = $this->row_count();
-        /**
-         * current_page
-         * start
-         * post_per_page
-         * total_post
-         * total_page
-         */
-    }
 }
