@@ -9,9 +9,9 @@
 <div class="container">
 
 <?php
-require_once '../../libraries/Database.php';
+require_once '../../models/Database.php';
 
-$pdo = Database::get_pdo();
+$pdo = \Model\Database::get_pdo();
 
 $pdo->exec("DELETE FROM super_users");
 $super_users_fixtures = "INSERT INTO `super_users` (`id`, `last_name`, `first_name`, `birth_date`, `sexe`, `username`, `email`, `password`, `accreditation`) VALUES (NULL, 'Maiga', 'Baba', '1990-04-15', 'M', 'bouctou04', 'bmaiga04@gmail.com', '3e2a7b439cc921d678faca6dc14f70c17ed883ea', '2'), (NULL, 'Coulibaly', 'Dafe', '1998-04-08', 'M', 'dafe00', 'dafe@gmail.com', '3e2a7b439cc921d678faca6dc14f70c17ed883ea', '0')";

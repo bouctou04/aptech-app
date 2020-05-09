@@ -156,6 +156,7 @@
             $('.datepicker').datepicker();
             $('select').formSelect();
             $('input#input_text, input#subject, textarea#message, textarea#textarea2').characterCounter();
+            $('.tabs').tabs();
         });
 
         // 	setInterval('load_messages()', 500);
