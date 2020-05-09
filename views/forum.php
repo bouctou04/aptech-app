@@ -51,7 +51,7 @@
             <tbody>
             <?php
             // Paginator
-            $article_per_page = 5;
+            $article_per_page = 10;
             $total_article = $forum->rowCount();
             $total_page = ceil($total_article / $article_per_page);
             if(isset($_GET['index']) AND !empty($_GET['index'])) {

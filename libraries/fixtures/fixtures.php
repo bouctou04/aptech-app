@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="../../templates/style/css/bootstrap-4.4.1.css">
-<link rel="stylesheet" href="../../templates/style/font/css/all.css">
-<link rel="stylesheet" href="../../templates/style/css/style.css.css">
+<link rel="stylesheet" href="../../public/css/bootstrap.css">
+<link rel="stylesheet" href="../../public/font/css/all.css">
+<link rel="stylesheet" href="../../public/css/style.css.css">
 
 <div class="jumbotron">
     <h1>Create fixtures from database</h1>
