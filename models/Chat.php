@@ -3,7 +3,7 @@
 
 namespace Model;
 
-require_once 'Model.php';
+require_once "Model.php";
 
 class Chat extends Model
 {

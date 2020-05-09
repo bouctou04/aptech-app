@@ -4,7 +4,10 @@
 namespace Model;
 
 require_once 'Model.php';
-require_once '../libraries/Mail.php';
+require_once 'libraries/Mail.php';
+
+use App\Mail;
+
 
 class User extends Model
 {
@@ -117,7 +120,7 @@ class User extends Model
         $req->execute(compact('user_category_id', 'school_id', 'last_name', 'first_name', 'birth_date', 'sexe', 'username', 'email', 'password'));
 
         // Sending mail
-        $mail = new \Mail();
+        $mail = new Mail();
         $message = "
                     <html>
                         <body>
@@ -356,4 +359,105 @@ class User extends Model
     public function setPassword(string $password) {
         $this->password = $password;
     }
+  /**
+   * fonction lister les menbres
+   */ 
+    public function liste_user_admin($id_user,$id_school){
+            $req_liste_menbre  =  $this->get_pdo()->prepare("SELECT* FROM users WHERE school_id = ? AND user_category_id = ? AND id != ?");
+            $req_liste_menbre->execute(array($id_school,1,$id_user));
+            while($reponse  = $req_liste_menbre->fetch()){
+                ?>
+                <div id="page_centrale">
+                    <div id = "page_principale">
+                            <div id ="div_img">
+                                <img src="\Model\dc.jpg" alt="inconu">
+                            </div>
+                            <div id = "div_nom">  
+                                <strong><?php echo $reponse["first_name"]."<br>".$reponse["last_name"]; ?></strong>
+                            </div>
+                            <div id = "btn">
+                                <button> <strong>Un Message</strong></button>
+                            </div>
+                    </div>
+                </div>
+                <?php    
+            }
+    }
+    public function liste_users_student($id_user,$id_school){
+        $req_liste_menbre  =  $this->get_pdo()->prepare("SELECT* FROM users WHERE school_id = ? AND user_category_id != ? AND id != ? ");
+        $req_liste_menbre->execute(array($id_school,1,$id_user));
+        while($reponse  = $req_liste_menbre->fetch()){
+            ?>
+            <div id="page_centrale">
+                <div id = "page_principale">
+                        <div id ="div_img">
+                            <img src="dc.jpg" alt="">
+                        </div>
+                        <div id = "div_nom">  
+                            <strong><?php echo $reponse["first_name"]."<br>".$reponse["last_name"]; ?></strong>
+                        </div>
+                        <div id = "btn">
+                            <button> <strong>Un Message</strong></button>
+                        </div>
+                </div>
+            </div>
+            <?php
+        }            
+    }   
 }
+?>
+<!-- css pour profil -->
+<style>
+        #page_centrale{
+                    width:100%;
+                    margin-top:10px;
+                    position: relative;
+                    border: 1px solid rgba(3, 19, 247, 0.87) ;
+                    box-shadow: 1PX 1px 2px green;
+                    margin-bottom:10px;
+                    background-color:#009688;
+                    border-radius :10px;
+        }
+        #page_principale{
+                    padding :10px;       
+        }
+        #div_img{
+                    display:inline-block;
+                    width :15%;
+                    height: 65px;
+                    margin-right: 10px;
+                    background-color:white;
+        }
+        #div_nom{
+                    display:inline-block;
+                    width :20%;
+                    vertical-align: top;
+                    padding-top: 5px;
+        }
+        #div_nom strong{
+        font-size:1.3em;
+        color: white;
+        }
+        img{
+                    height: 100%;
+                    width:100%;
+                    color:white;   
+        }
+        #btn{
+             position:absolute;
+             right: 5px;
+             bottom: 25px;
+             width : 100px;  
+        }
+        #btn button{
+                    width :100%;
+                    height: 35px;
+        }
+        @media all and (max-width:900px){
+             #div_img{
+                 width :80px;
+                 height: 65px;
+                 margin-right: 5px;
+             }
+        }
+</style> 

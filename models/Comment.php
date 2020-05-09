@@ -3,7 +3,7 @@
 
 namespace Model;
 
-require_once 'Model.php';
+require_once "Model.php";
 
 class Comment extends Model
 {
@@ -12,8 +12,8 @@ class Comment extends Model
      */
     public function __construct()
     {
-        $this->table = "comments";
         parent::__construct();
+        $this->table = "comments";
     }
 
     /**
@@ -21,7 +21,7 @@ class Comment extends Model
      * @param int $article_id
      * @return array
      */
-    public function findAllBy(int $category_id = 1, int $article_id) {
+    public function findBy(int $category_id = 1, int $article_id) {
         $category_id = intval($category_id);
         $article_id = intval($article_id);
         $req = $this->pdo->prepare("SELECT users.username, comments.comment_category_id, comments.user_id, comments.article_id, comments.content, comments.pub_date FROM {$this->table} INNER JOIN users ON users.id = comments.user_id WHERE comment_category_id = :category_id AND article_id = :article_id");

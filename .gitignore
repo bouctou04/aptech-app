@@ -1,4 +1,8 @@
 test.php
+<<<<<<< HEAD
 test.html
 templates/style/materialize/*
 templates/style/materialize-v1.0.0.zip
+=======
+test.html
+>>>>>>> 8aa6977bb07c68945216ca354ea8522413c54a25
