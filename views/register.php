@@ -51,7 +51,11 @@ if($_SESSION['id'] == 1) {
                             if(!empty($_POST['last_name']) AND !empty($_POST['first_name'])AND !empty($_POST['birth_date']) AND !empty($_POST['sexe']) AND !empty($_POST['mail'])) {
                                 if($user->verifyUsername('p') == false) {
                                     if($user->verifyEmail($_POST['mail']) == false) {
-                                        $user->insert(get_user_category($_GET['etape1']), $_SESSION['school_id'], $_POST['last_name'], $_POST['first_name'], $_POST['birth_date'], $_POST['sexe'], $_POST['mail']);
+                                        if($_POST['mail'] == $_POST['mail_confirm']) {
+                                            $user->insert(get_user_category($_GET['etape1']), $_SESSION['school_id'], $_POST['last_name'], $_POST['first_name'], $_POST['birth_date'], $_POST['sexe'], $_POST['mail']);
+                                        } else {
+                                            $error = "Les adresses mails ne correspondent pas !";
+                                        }
                                     } else {
                                         $error = "Adresse email existant";
                                     }

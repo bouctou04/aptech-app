@@ -6,11 +6,37 @@
 if($_SESSION['category_id'] == 1) {
     // Si le formulaire post article est renvoyé
     if(isset($_POST['submitted'])) {
-        // Le templates de POST ne peut pas être vide
+        // Le formulaire de POST ne peut pas être vide
         if(!empty($_POST['subject']) AND !empty($_POST['content'])) {
+            $article_file = NULL;
             if(strlen($_POST['subject']) <= 255 ) {
+                // Upload file
+                if(isset($_FILES['file-input']) AND !empty($_FILES['file-input']['name'])) {
+                    $name = $_FILES['file-input']['name'];
+                    $type = strtolower(substr(strrchr($name, "."), 1));
+                    $tmp_name = $_FILES['file-input']['tmp_name'];
+                    $file_error = $_FILES['file-input']['error'];
+                    $size = $_FILES['file-input']['size'];
+
+                    $max_size = 2097152;
+                    $type_accept = array("jpg", "png", "gif", "jpeg");
+
+                    if($size <= $max_size) {
+                        if(in_array($type, $type_accept)) {
+                            $path = 'public/media/article/img/'. $_POST['subject'] . '-' . date('d-m-Y') . '.' . $type;
+                            $file_upload = move_uploaded_file($tmp_name, $path);
+                            if($file_upload) {
+                                $article_file = $path;
+                            }
+                        } else {
+                            $erreur = "Votre fichier doit ếtre au format (jpg, jpeg, png, gif)";
+                        }
+                    } else {
+                        $erreur = "Votre fichier ne doit pas dépasser 2Mo";
+                    }
+                }
                 // Insert article
-                $article->insert($_SESSION['id'], $_POST['subject'], $_POST['content']);
+                $article->insert($_SESSION['id'], $_POST['subject'], $_POST['content'], $article_file);
                 $success = "Votre article a bien été publié";
             } else {
                 $erreur = "Le titre de votre article ne doit pas dépasser 255 caractères !";
@@ -23,7 +49,7 @@ if($_SESSION['category_id'] == 1) {
     }
     ?>
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <ul class="collapsible">
             <li>
                 <div class="collapsible-header"><span class="font-weight-bold">Publier un article</span></div>
@@ -39,6 +65,15 @@ if($_SESSION['category_id'] == 1) {
                         $form->textarea("content", "content", "materialize-textarea");
                         $form->label("content", "Contenu de l'article");
                         ?>
+                    </div>
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>Image</span>
+                            <?php $form->input("file", "file-input"); ?>
+                        </div>
+                        <div class="file-path-wrapper">
+                            <?php $form->input("text", "file", "file", "file-path validate", NULL, '"Importer une image (facultatif)"'); ?>
+                        </div>
                     </div>
 
                     <div class="form-group">

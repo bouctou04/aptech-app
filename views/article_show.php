@@ -5,14 +5,21 @@
         $article = new \Model\Article();
         if(!empty($article->find($getid))) {
             foreach ($article->find($getid) as $datas):
-                $page_title = $datas['subject'];
-                echo "
+                $page_title = $datas['subject']; ?>
                     <article>
-                        <h1 class='title teal white-text p-3'>$datas[subject]</h1>
-                        <p class='col-12 justify'>$datas[content]</p>
-                        <p class='col-2 opacity-1'>$datas[send_date]</p>
+                        <h1 class="title teal white-text p-3"><?= $datas['subject'] ?></h1>
+                        <?php
+                        if($datas['file'] != NULL) { ?>
+                            <p class="">
+                                <a href="<?= $datas['file'] ?>"><img src="<?= $datas['file'] ?>" class="responsive-img" alt="<?= $datas['subject'] ?>" title="<?= $datas['subject'] ?>"></a>
+                            </p>
+                        <?php
+                        }
+                        ?>
+                        <p class="col-12 justify"><?= $datas['content'] ?></p>
+                        <p class="col-2 opacity-1"><?= $datas['send_date'] ?></p>
                     </article>
-                ";
+            <?php
             // Edit or delete article if admin
             if($_SESSION['id'] === 1): ?>
                 <div class="row">

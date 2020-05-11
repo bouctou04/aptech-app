@@ -22,12 +22,26 @@ class Forum extends Model
      * @param string $content
      * @param int|null $resolved
      */
-    public function insert(int $user_id, string $subject, string $content, ?int $resolved = 0) {
+    public function insert(int $user_id, string $subject, string $content, ?string $file = NULL, ?int $resolved = 0) {
         $user_id = intval($user_id);
         $subject = htmlspecialchars($subject);
         $content = htmlspecialchars(nl2br($content));
-        $req = $this->pdo->prepare("INSERT INTO {$this->table}(users_id, subject, content, pub_date, resolved) VALUES(:user_id, :subject, :content, NOW(), :resolved)");
-        $req->execute(compact('user_id', 'subject', 'content', 'resolved'));
+        $req = $this->pdo->prepare("INSERT INTO {$this->table}(users_id, subject, content, pub_date, resolved, file) VALUES(:user_id, :subject, :content, NOW(), :resolved , :file)");
+        $req->execute(compact('user_id', 'subject', 'content', 'resolved', 'file'));
+    }
+
+    /**
+     * @param int $id
+     * @param string $subject
+     * @param string $content
+     */
+    public function update(int $id, string $subject, string $content): void
+    {
+        $id = intval($id);
+        $subject = htmlspecialchars($subject);
+        $content = htmlspecialchars(nl2br($content));
+        $req = $this->pdo->prepare("UPDATE {$this->table} SET subject = :subject, content = :content WHERE id = :id");
+        $req->execute(compact('id','subject', 'content'));
     }
 
     /**

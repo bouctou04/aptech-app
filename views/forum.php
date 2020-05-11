@@ -1,14 +1,40 @@
 <div class="col-12">
     <h1 class="title mt-n3 font-weight-bold">Forum</h1>
     <div class="col-12">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             <?php
             $form = new \App\Form();
             $forum = new \Model\Forum();
             if(isset($_POST['submitted'])) {
+                $forum_file = NULL;
                 if(!empty($_POST['subject']) AND !empty($_POST['content'])) {
                     if(strlen($_POST['subject']) <= 255) {
-                        $forum->insert($_SESSION['id'], $_POST['subject'], $_POST['content']);
+                        // Upload file
+                        if(isset($_FILES['file-input']) AND !empty($_FILES['file-input']['name'])) {
+                            $name = $_FILES['file-input']['name'];
+                            $type = strtolower(substr(strrchr($name, "."), 1));
+                            $tmp_name = $_FILES['file-input']['tmp_name'];
+                            $file_error = $_FILES['file-input']['error'];
+                            $size = $_FILES['file-input']['size'];
+
+                            $max_size = 2097152;
+                            $type_accept = array("jpg", "png", "gif", "jpeg");
+
+                            if($size <= $max_size) {
+                                if(in_array($type, $type_accept)) {
+                                    $path = 'public/media/forum/img/'. $_POST['subject'] . '-' . date('d-m-Y') . '.' . $type;
+                                    $file_upload = move_uploaded_file($tmp_name, $path);
+                                    if($file_upload) {
+                                        $forum_file = $path;
+                                    }
+                                } else {
+                                    $erreur = "Votre fichier doit ếtre au format (jpg, jpeg, png, gif)";
+                                }
+                            } else {
+                                $erreur = "Votre fichier ne doit pas dépasser 2Mo";
+                            }
+                        }
+                        $forum->insert($_SESSION['id'], $_POST['subject'], $_POST['content'], $forum_file);
                         $success = "Votre topic a été publié avec succès !";
                     } else {
                         $error = "Le titre du topic ne doit pas dépasser 255 caractères !";
@@ -33,6 +59,15 @@
                             $form->textarea("content", "content");
                             $form->label("content", "Contenu du topic");
                             ?>
+                        </div>
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Image</span>
+                                <?php $form->input("file", "file-input"); ?>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <?php $form->input("text", "file", "file", "file-path validate", NULL, '"Importer une image (facultatif)"'); ?>
+                            </div>
                         </div>
                         <div class="form-group">
                             <?php
