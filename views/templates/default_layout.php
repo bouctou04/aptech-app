@@ -120,6 +120,7 @@
             </div></li>
         <li><a class="waves-effect white-text" href="#!"><span class="fa fa-user"></span> Afficher mon profile</a></li>
         <li><a class="waves-effect white-text" href="#!"><span class="fa fa-pen"></span> Editer mon profile</a></li>
+        <li><a class="waves-effect white-text" href="index.php?page=space"><span class="fa fa-border-style"></span> Mon espace</a></li>
         <li><div class="divider"></div></li>
         <li><a class="waves-effect white-text" href="index.php?page=logout"><span class="fa fa-sign-out-alt"></span> Se déconnecter</a></li>
     </ul>

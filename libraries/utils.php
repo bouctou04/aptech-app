@@ -61,6 +61,20 @@ function render($url, $variables = []) {
         case 'logout':
             require_once 'views/logout.php';
             break;
+        case 'space':
+            if($_SESSION['category_id'] == 1) {
+                $page_title = 'Espace administration';
+                require_once 'views/admin_space.php';
+            } elseif ($_SESSION['category_id'] == 2) {
+                $page_title = 'Espace professeur';
+                require_once 'views/teacher_space.php';
+            } elseif ($_SESSION['category_id'] == 3) {
+                $page_title = 'Espace étudiant';
+                require_once 'views/student_space.php';
+            } else {
+                require_once 'views/404.php';
+            }
+            break;
         default:
             $page_title = "404 Page non trouvée !";
             require_once 'views/404.php';

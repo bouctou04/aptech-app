@@ -29,7 +29,7 @@ if(isset($_POST['submitted'])) {
         $login = new \Model\User();
         if($login->login($_POST['username'], $_POST['password']) === true) {
             $_SESSION['id'] = $login->getId();
-            $_SESSION['category_id'] = $login->getId();
+            $_SESSION['category_id'] = $login->getCategoryId();
             $_SESSION['school_id'] = $login->getSchoolId();
             $_SESSION['last_name'] = $login->getLastName();
             $_SESSION['first_name'] = $login->getFirstName();
