@@ -92,7 +92,7 @@ class User extends Model
      */
     public function findAll(?string $query = NULL) {
         if($query) {
-            $sql = "SELECT user_category.id AS category_id, user_category.field, users.id AS id, users.user_category_id, users.school_id, users.last_name, users.first_name, users.username FROM {$this->table}";
+            $sql = "SELECT user_category.id AS category_id, user_category.field, users.id AS id, users.user_category_id, users.school_id, users.last_name, users.first_name, users.username, users.profile FROM {$this->table}";
             $sql .= " ". $query;
         } else {
             $sql = "SELECT * FROM {$this->table}";

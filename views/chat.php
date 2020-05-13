@@ -46,18 +46,12 @@
                                         </div>
                                         <time><?= $datas['send_date'] ?></time>
                                     </li>
-                                    <!--<div class="chip">
-                    <img src="public/media/img/profile.jpg" alt="Contact Person">
-                    <span class="font-weight-bold">Moi:</span>
-                    <span class="ml-2"><?= nl2br($datas['content']); ?></span>
-                    <small><?= $datas['send_date']; ?></small>
-                </div> -->
                                     <?php
                                 } else { ?>
                                     <li class="dest">
                                         <div class="message_dest black white-text col-6">
                                             <div class="chip black white-text">
-                                                <img src="public/media/img/profile.jpg" alt="Contact Person">
+                                                <img src="<?= $datas['profile'] ?>" alt="Contact Person">
                                                 <span class="font-weight-bold"><a href="index.php?page=read_message&&id=<?= $datas['users_id'] ?>"><?= $datas['username'] ?></a>:</span>
                                             </div>
                                             <?= $datas['content'] ?>

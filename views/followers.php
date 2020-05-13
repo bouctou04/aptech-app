@@ -8,7 +8,7 @@
             if($datas['id'] != $_SESSION['id']) { ?>
                 <ul class="collection">
                     <li class="collection-item avatar">
-                        <img src="public/media/img/profile.jpg" alt="" class="circle">
+                        <img src="<?= $datas['profile'] ?>" alt="" class="circle">
                         <a href="index.php?page=profile&&id=<?= $datas['id'] ?>"><span class="title font-weight-bold">@<?= $datas['username'] ?></span></a>
                         <p class="text-muted">
                             <?= $datas['field'] ?>
