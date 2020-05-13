@@ -14,7 +14,7 @@
                         <td><?= $datas['field'] ?></td>
                         <td><?= $datas['acronym'] ?></td>
                         <td><a href="#!"><span class="fa fa-eye"></span> Voir le profil</a></td>
-                        <td><a href="#!"><span class="fa fa-envelope"></span> Envoyer un message</a></td>
+                        <td><a href="index.php?page=read_message&&id=<?= $datas['id'] ?>"><span class="fa fa-envelope"></span> Envoyer un message</a></td>
                     </tr>
             <?php
             endforeach; ?>

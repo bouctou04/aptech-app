@@ -36,28 +36,38 @@
                 <div id="chat">
                     <?php
                     if(!empty($chat->findAll())) {
-                        foreach ($chat->findAll("INNER JOIN users ON users.id = chat.users_id ORDER BY send_date DESC LIMIT 0, 15") as $donnees): ?>
-                            <div class="scrolling">
+                        foreach ($chat->findAll("INNER JOIN users ON users.id = chat.users_id ORDER BY send_date DESC LIMIT 0, 15") as $datas): ?>
+                            <ol class="list-unstyled messages overflow-auto">
                                 <?php
-                                if($_SESSION['id'] == $donnees['id']) { ?>
-                                    <div class="chip">
-                                        <img src="public/media/img/profile.jpg" alt="Contact Person">
-                                        <span class="font-weight-bold">Moi:</span>
-                                        <span class="ml-2"><?= nl2br($donnees['content']); ?></span>
-                                        <small><?= $donnees['send_date']; ?></small>
-                                    </div>
+                                if($_SESSION['id'] == $datas['id']) { ?>
+                                    <li class="me">
+                                        <div class="message teal white-text col-6">
+                                            <?= $datas['content'] ?>
+                                        </div>
+                                        <time><?= $datas['send_date'] ?></time>
+                                    </li>
+                                    <!--<div class="chip">
+                    <img src="public/media/img/profile.jpg" alt="Contact Person">
+                    <span class="font-weight-bold">Moi:</span>
+                    <span class="ml-2"><?= nl2br($datas['content']); ?></span>
+                    <small><?= $datas['send_date']; ?></small>
+                </div> -->
                                     <?php
                                 } else { ?>
-                                    <div class="chip">
-                                        <img src="public/media/img/profile.jpg" alt="Contact Person">
-                                        <span class="font-weight-bold"><a href="ecrire_message.php?id=<?= $donnees['users_id'] ?>"><?= $donnees['username'] ?></a>:</span>
-                                        <span class="ml-2"><?= nl2br($donnees['content']); ?></span>
-                                        <small class="text-muted"><?= $donnees['send_date']; ?></small>
-                                    </div>
+                                    <li class="dest">
+                                        <div class="message_dest blue-grey white-text col-6">
+                                            <div class="chip blue-grey">
+                                                <img src="public/media/img/profile.jpg" alt="Contact Person">
+                                                <span class="font-weight-bold"><a href="index.php?page=read_message&&id=<?= $datas['users_id'] ?>"><?= $datas['username'] ?></a>:</span>
+                                            </div>
+                                            <?= $datas['content'] ?>
+                                        </div>
+                                        <time class="d-block"><?= $datas['send_date'] ?></time>
+                                    </li>
                                     <?php
                                 }
                                 ?>
-                            </div>
+                            </ol>
                         <?php
                         endforeach;
                     } else { ?>
@@ -80,7 +90,7 @@
         <?php
         foreach($user->online($_SESSION['id']) as $user_online):
         ?>
-        <li class="collection-item"><?= $user_online['username'] ?></li>
+        <li class="collection-item font-weight-bold"><span class="fa fa-user text-success"></span> <?= $user_online['username'] ?></li>
         <?php
         endforeach;
         ?>

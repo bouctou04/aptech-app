@@ -238,7 +238,7 @@ class User extends Model
     }
 
     public function search(string $find) {
-        $req = $this->pdo->query("SELECT * FROM {$this->table} INNER JOIN user_category ON user_category.id = users.user_category_id INNER JOIN school ON school.id = users.school_id WHERE (username LIKE '%$find%') OR (last_name LIKE '%$find%') OR (first_name LIKE '%$find%') OR (last_name + ' ' + first_name LIKE '%$find%') OR (first_name + ' ' + last_name LIKE '%$find%')");
+        $req = $this->pdo->query("SELECT user_category.id AS category_id, user_category.field, users.id AS id, users.user_category_id, users.school_id, users.last_name, users.first_name, users.username, school.acronym FROM {$this->table} INNER JOIN user_category ON user_category.id = users.user_category_id INNER JOIN school ON school.id = users.school_id WHERE (username LIKE '%$find%') OR (last_name LIKE '%$find%') OR (first_name LIKE '%$find%') OR (last_name + ' ' + first_name LIKE '%$find%') OR (first_name + ' ' + last_name LIKE '%$find%')");
         return $req->fetchAll();
     }
 
@@ -255,8 +255,8 @@ class User extends Model
         $user_exist = $req_user_exist->rowCount();
 
         if($user_exist == 0) {
-            $add_user = $this->pdo->prepare("INSERT INTO online(user_id, time_online) VALUES(:id, :session_time)");
-            $add_user->execute(compact("id","session_time"));
+            $add_user = $this->pdo->prepare("INSERT INTO online(user_id, time_online) VALUES(:id, :now)");
+            $add_user->execute(compact("id","now"));
         } else {
             $update_user = $this->pdo->prepare("UPDATE online SET time_online = :now WHERE user_id = :id");
             $update_user->execute(compact("now", "id"));

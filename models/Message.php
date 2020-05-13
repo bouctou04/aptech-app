@@ -3,6 +3,7 @@
 
 namespace Model;
 
+require_once "Model.php";
 
 class Message extends Model
 {
@@ -23,7 +24,7 @@ class Message extends Model
     public function insert(int $sender_id, int $receptor_id, string $content) {
         $sender_id = intval($sender_id);
         $receptor_id = intval($receptor_id);
-        $content = htmlspecialchars(nl2br($content));
+        $content = htmlspecialchars($content);
         $req = $this->pdo->prepare("INSERT INTO {$this->table}(sender_id, receptor_id, content, send_date) VALUES(:sender_id, :receptor_id, :content, NOW())");
         $req->execute(compact('sender_id', 'receptor_id', 'content'));
     }

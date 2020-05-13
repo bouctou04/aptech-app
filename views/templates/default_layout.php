@@ -153,10 +153,14 @@ $user_online = $user->online($_SESSION['id']);
         function load_chat() {
             $('#chat').load('views/load_chat.php');
         }
+        setInterval('load_message()', 1000);
+        function load_message() {
+            $('#loadMessage').load();
+        }
 
-        setInterval('load_inline()', 500);
+        //setInterval('load_inline()', 500);
         function inline() {
-            $('#inline').load('include/en_ligne.php');
+            //$('#inline').load('include/en_ligne.php');
         }
 
         $(document).ready(function(){
