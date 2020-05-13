@@ -25,7 +25,7 @@ $user_online = $user->online($_SESSION['id']);
                     <a class="" href="index.php?page=home"><span class="fa fa-home"></span> Accueil <span class="sr-only">(current)</span></a>
                 </li>
                 <li>
-                    <a href="index.php?page=profile"><span class="fa fa-user"></span> Profile</a>
+                    <a href="index.php?page=profile&&id=<?= $_SESSION['id'] ?>"><span class="fa fa-user"></span> Profile</a>
                 </li>
                 <li>
                     <a href="index.php?page=message"><span class="fa fa-envelope"></span> Message</a>
