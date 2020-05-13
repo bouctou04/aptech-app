@@ -65,12 +65,19 @@ abstract class Model extends Database
         $req->execute(compact('id'));
     }
 
+    /**
+     * @param int $id
+     * @return string
+     */
     public function getUrl(int $id) {
         $article = $this->find($id);
         $id = $article[0]['id'];
         return $this->table. ".php?id=". $id;
     }
 
+    /**
+     * @return int
+     */
     public function rowCount() {
         $req = $this->pdo->query("SELECT id FROM {$this->table}");
         return $req->rowCount();

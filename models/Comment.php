@@ -43,4 +43,5 @@ class Comment extends Model
         $req = $this->pdo->prepare("INSERT INTO {$this->table}(comment_category_id, user_id, article_id, content, pub_date) VALUES(:category_id, :user_id, :article_id, :content, NOW())");
         $req->execute(compact('category_id', 'user_id', 'article_id', 'content'));
     }
+
 }

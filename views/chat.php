@@ -55,8 +55,8 @@
                                     <?php
                                 } else { ?>
                                     <li class="dest">
-                                        <div class="message_dest blue-grey white-text col-6">
-                                            <div class="chip blue-grey">
+                                        <div class="message_dest black white-text col-6">
+                                            <div class="chip black white-text">
                                                 <img src="public/media/img/profile.jpg" alt="Contact Person">
                                                 <span class="font-weight-bold"><a href="index.php?page=read_message&&id=<?= $datas['users_id'] ?>"><?= $datas['username'] ?></a>:</span>
                                             </div>

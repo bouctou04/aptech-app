@@ -97,12 +97,12 @@
             }
             $start = ($current_page - 1) * $article_per_page;
             if(!empty($forum->findAll())) {
-                foreach ($forum->findAll("ORDER BY id DESC LIMIT $start, $article_per_page") as $donnees): ?>
+                foreach ($forum->findAll("ORDER BY id DESC LIMIT $start, $article_per_page") as $datas): ?>
                     <tr>
                         <td>
-                            <h1 class="title d-inline"><a href="index.php?page=forum&&action=show&&id=<?= $donnees['id'] ?>"><?= $donnees['subject'] ?></a></h1>
+                            <h1 class="title d-inline"><a href="index.php?page=forum&&action=show&&id=<?= $datas['id'] ?>"><?= $datas['subject'] ?></a></h1>
                             <?php
-                            if($donnees['resolved'] == 1) { ?>
+                            if($datas['resolved'] == 1) { ?>
                                 <span class="float-right bg-success p-2 text-light">Résolu</span>
                                 <?php
                             } else { ?>
@@ -110,7 +110,12 @@
                                 <?php
                             }
                             ?>
-                            <span class="text-muted small d-block"><?= $donnees['pub_date'] ?></span>
+                            <span class="text-muted small d-block"><?= $datas['pub_date'] ?>
+                                <?php
+                                $comment = new \Model\Comment();
+                                echo '('. count($comment->findBy(2, $datas['id'])) .' Commentaire(s))';
+                                ?>
+                            </span>
                         </td>
                     </tr>
                 <?php
