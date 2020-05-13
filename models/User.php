@@ -87,6 +87,23 @@ class User extends Model
     }
 
     /**
+     * @param string|null $query
+     * @return array
+     */
+    public function findAll(?string $query = NULL) {
+        if($query) {
+            $sql = "SELECT user_category.id AS category_id, user_category.field, users.id AS id, users.user_category_id, users.school_id, users.last_name, users.first_name, users.username FROM {$this->table}";
+            $sql .= " ". $query;
+        } else {
+            $sql = "SELECT * FROM {$this->table}";
+        }
+
+        $req = $this->pdo->query($sql);
+
+        return $req->fetchAll();
+    }
+
+    /**
      * @param int $user_category_id
      * @param int $school_id
      * @param string $last_name
@@ -218,6 +235,39 @@ class User extends Model
         $integer = "0123456789";
         $password = $letterUpper. $letterLower. $integer;
         return substr(str_repeat(str_shuffle($password), random_int(self::PASSWORD_CHARACTER_REPEAT_MIN, self::PASSWORD_CHARACTER_REPEAT_MAX)), 0, self::PASSWORD_LENGTH);
+    }
+
+    public function search(string $find) {
+        $req = $this->pdo->query("SELECT * FROM {$this->table} INNER JOIN user_category ON user_category.id = users.user_category_id INNER JOIN school ON school.id = users.school_id WHERE (username LIKE '%$find%') OR (last_name LIKE '%$find%') OR (first_name LIKE '%$find%') OR (last_name + ' ' + first_name LIKE '%$find%') OR (first_name + ' ' + last_name LIKE '%$find%')");
+        return $req->fetchAll();
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function online(int $id) {
+        $session_time = 15;
+        $now = date("U");
+
+        $req_user_exist = $this->pdo->prepare("SELECT * FROM online WHERE user_id = :id");
+        $req_user_exist->execute(compact("id"));
+        $user_exist = $req_user_exist->rowCount();
+
+        if($user_exist == 0) {
+            $add_user = $this->pdo->prepare("INSERT INTO online(user_id, time_online) VALUES(:id, :session_time)");
+            $add_user->execute(compact("id","session_time"));
+        } else {
+            $update_user = $this->pdo->prepare("UPDATE online SET time_online = :now WHERE user_id = :id");
+            $update_user->execute(compact("now", "id"));
+        }
+
+        $session_delete_time = $now - $session_time;
+        $delete_user = $this->pdo->prepare("DELETE FROM online WHERE time_online < :session_delete_time");
+        $delete_user->execute(compact("session_delete_time"));
+
+        $user_online = $this->pdo->query("SELECT * FROM online INNER JOIN users ON users.id = online.user_id");
+        return $user_online->fetchAll();
     }
 
     /**

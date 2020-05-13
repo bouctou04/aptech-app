@@ -12,6 +12,10 @@
         <title><?= $page_title; ?> | APTECH</title>
     </head>
 <body>
+<?php
+$user = new \Model\User();
+$user_online = $user->online($_SESSION['id']);
+?>
     <nav>
         <div class="nav-wrapper teal">
             <a class="brand-logo right" href="index.php?page=home">APTECH</a>
@@ -41,7 +45,7 @@
                     <a href="index.php?page=forum"><span class="fa fa-smile"></span> Forum</a>
                 </li>
                 <li>
-                    <a href="index.php?page=followers"><span class="fa fa-users"></span> Abonnés</a>
+                    <a href="index.php?page=followers"><span class="fa fa-users"></span> Membres</a>
                 </li>
                 <li>
                     <a href="index.php?page=notification"><span class="fa fa-bell"></span> Notifications</a>
@@ -75,7 +79,7 @@
             <a href="index.php?page=forum"><span class="fa fa-smile"></span> Forum</a>
         </li>
         <li>
-            <a href="index.php?page=followers"><span class="fa fa-users"></span> Abonnés</a>
+            <a href="index.php?page=followers"><span class="fa fa-users"></span> Membres</a>
         </li>
         <li>
             <a href="index.php?page=notification"><span class="fa fa-bell"></span> Notifications</a>
@@ -91,9 +95,14 @@
                     <li>
                         <div class="collapsible-header"><span class="fa fa-search"></span></div>
                         <div class="collapsible-body">
-                            <form action="" class="">
+                            <?php
+                            if(isset($_GET['search'])) {
+                                redirectTo('index.php?page=search&&ss='. $_GET['search']);
+                            }
+                            ?>
+                            <form method="GET" action="index.php?page=search" class="">
                                 <div class="input-field">
-                                    <input type="search" id="search" class="validate">
+                                    <input type="search" id="search" name="search" class="validate">
                                     <label for="search"><span class="fa fa-search"></span> Rechercher une personne ...</label>
                                 </div>
                             </form>
@@ -142,7 +151,7 @@
     <script>
         setInterval('load_chat()', 500);
         function load_chat() {
-            $('#chat').load('load_chat.php');
+            $('#chat').load('views/load_chat.php');
         }
 
         setInterval('load_inline()', 500);

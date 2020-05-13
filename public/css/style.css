@@ -17,6 +17,49 @@
 	font-size: 1.5rem;
 }
 
+.messages {
+	margin: 1rem 0 0 0;
+	padding: 0 2rem;
+	max-height: 60rem;
+	overflow-y: auto;
+}
+
+.me {
+	clear: both;
+	margin-bottom: 2rem;
+}
+.dest {
+	clear: both;
+	margin-bottom: 2rem;
+}
+
+.message {
+	float: right;
+	border-radius: 2rem 2rem 0 2rem;
+	padding: 0.8rem;
+}
+.message_dest {
+	float: left;
+	border-radius: 0 2rem 2rem 2rem;
+	padding: 0.8rem;
+}
+
+.messages li time {
+	clear: both;
+	display: block;
+	color: #555555;
+	font-size: 0.7rem;
+	padding-top: 0.2rem;
+	margin-bottom: 1rem;
+}
+
+.dest > time {
+	float: left;
+}
+.me > time {
+	float: right;
+}
+
 .mt-n6,
 .my-n6 {
 	margin-top: -4rem !important;

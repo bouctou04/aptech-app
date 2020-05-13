@@ -61,6 +61,14 @@ function render($url, $variables = []) {
         case 'logout':
             require_once 'views/logout.php';
             break;
+        case 'search':
+            $page_title = "Recherche";
+            require_once 'views/search.php';
+            break;
+        case 'read_message':
+            $page_title = "Message";
+            require_once 'views/read_message.php';
+            break;
         case 'space':
             if($_SESSION['category_id'] == 1) {
                 $page_title = 'Espace administration';
