@@ -3,7 +3,6 @@
     <?php
     if(!empty($_GET['ss'])) {
         $search = new \Model\User();
-        //var_dump($search->search($_GET['ss']));
         if(!empty($search->search($_GET['ss']))) { ?>
             <table>
                 <tbody>

@@ -142,9 +142,9 @@ endforeach;
     <section class="container-lg row">
         <?= $page_content; ?>
     </section>
-    <footer class="mt-3">
+    <footer class="page-footer white bottom-sheet mt-4">
         <div class="col-12">
-            <!-- <p class="text-center text-muted">&copy; 2020 - Mon app</p> -->
+            <p class="text-center text-muted">&copy; 2020 - Mon app</p>
         </div>
     </footer>
 

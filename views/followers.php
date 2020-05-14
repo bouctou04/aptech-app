@@ -8,12 +8,14 @@
             if($datas['id'] != $_SESSION['id']) { ?>
                 <ul class="collection">
                     <li class="collection-item avatar">
-                        <img src="<?= $datas['profile'] ?>" alt="" class="circle">
-                        <a href="index.php?page=profile&&id=<?= $datas['id'] ?>"><span class="title font-weight-bold">@<?= $datas['username'] ?></span></a>
-                        <p class="text-muted">
-                            <?= $datas['field'] ?>
-                        </p>
-                        <a href="index.php?page=read_message&&id=<?= $datas['id'] ?>" class="secondary-content"><span class="fa fa-envelope"></span> Envoyer un Message</a>
+                        <div class="">
+                            <img src="<?= $datas['profile'] ?>" alt="" class="circle">
+                            <a href="index.php?page=profile&&id=<?= $datas['id'] ?>"><span class="title font-weight-bold">@<?= $datas['username'] ?></span></a>
+                            <p class="text-muted d-block">
+                                <?= $datas['field'] ?>
+                            </p>
+                        </div>
+                        <a href="index.php?page=read_message&&id=<?= $datas['id'] ?>" class="secondary-content col-2"><span class="fa fa-envelope"></span> Message</a>
                     </li>
                 </ul>
                 <?php
