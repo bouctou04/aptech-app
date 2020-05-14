@@ -241,6 +241,18 @@ class User extends Model
         }
     }
 
+    public function changePassword(int $id, string $old_password, string $new_password) {
+        $user = $this->find($id);
+        $old_password = sha1($old_password);
+        $new_password = sha1($new_password);
+        if($user[0]['password'] == $old_password) {
+            $req = $this->pdo->prepare("UPDATE {$this->table} SET password = :new_password WHERE id = :id");
+            $req->execute(compact('id', 'new_password'));
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @return false|string
      * @throws \Exception

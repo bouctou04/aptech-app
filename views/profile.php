@@ -76,7 +76,67 @@
                                     ?></li>
                                 <li class=""><span class="text-muted">Date de naissance: </span> <?= $datas['birth_date'] ?></li>
                                 <li class=""><span class="text-muted">Sexe: </span> <?php if($datas['sexe'] == 'M') { echo "Masculin"; }else{ echo "Féminin"; } ?></li>
+                                <?php
+                                if($_SESSION['id'] == $getid) {
+                                echo "<a class=\"waves-effect waves-light modal-trigger\" href=\"#change_password\">Modifier le mot de passe</a>";
+                                }
+                                ?>
+                                <!-- Modal Structure -->
+                                <div id="change_password" class="modal">
+                                    <div class="modal-content">
+                                        <?php
+                                        if(isset($_POST['submitted'])) {
+                                            if(!empty($_POST['old_password']) AND !empty($_POST['password']) AND !empty($_POST['confirm_password'])) {
+                                                if(strlen($_POST['password']) >= 6) {
+                                                    if($_POST['password'] == $_POST['confirm_password']) {
+                                                        if($user->changePassword($_SESSION['id'], $_POST['old_password'], $_POST['password']) != false) {
+                                                            $success = "Mot de passe changé avec succès !";
+                                                        } else {
+                                                            $error = "Votre ancien mot de passe est incorrect !";
+                                                        }
+                                                    } else {
+                                                        $error = "La confirmation du mot de passe ne correspond pas !";
+                                                    }
+                                                } else {
+                                                    $error = "Votre nouveau mot de passe doit dépasser 6 caractères !";
+                                                }
+                                            } else {
+                                                $error = "Veuillez remplir tous les champs !";
+                                            }
+                                        }
+                                        ?>
+                                        <h4>Modification du mot de passe</h4>
+                                        <form method="POST">
+                                            <div class="input-field">
+                                                <?php
+                                                    $form->input("password", "old_password", "old_password", "validate", "255");
+                                                    $form->label("old_password", "Ancien mot de passe...");
+                                                ?>
+                                            </div>
+                                            <div class="input-field">
+                                                <?php
+                                                    $form->input("password", "password", "password", "validate", "255");
+                                                    $form->label("password", "Nouveau mot de passe");
+                                                ?>
+                                            </div>
+                                            <div class="input-field">
+                                                <?php
+                                                    $form->input("password", "confirm_password", "confirm_password", "validate", "255");
+                                                    $form->label("confirm_password", "Confirmation du mot de passe");
+                                                ?>
+                                            </div>
 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="input-field">
+                                            <button type="submit" class="btn indigo lighten-5 black-text" data-dismiss="modal">Annuler</button>
+                                            <?php
+                                            $form->btn("submit", "submitted", "Confirmer", "btn");
+                                            ?>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
                                 <div class="border-top mt-2">
                                     <li class=""><span class="text-muted">Établissement: </span> Technolab ISTA Mali.</li>
                                     <li class=""><span class="text-muted">Catégorie: </span> Étudiant</li>
