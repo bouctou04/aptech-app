@@ -140,18 +140,28 @@ class User extends Model
         // Sending mail
         $mail = new Mail();
         $message = "
-                    <html>
-                        <body>
-                            <h1>Bravo $last_name $first_name Votre inscription sur la plateforme APTECH a bien été pris en compte</h1>
-                              Vous pouvez vous connecter avec vos identifiants ci dessous <br> Email: $email <br> Identifiant: $username <br> Mot de passe: $passwordn
-                        </body>
-                    </html>
-                    ";
+<html>
+<body  style='background: #eeeeee;'>
+<header>
+    <div style='text-align: center; font-weight: bold'><a href='#'>aptechapp-com</a></div>
+</header>
+<h1 style='background: #009688; color: white; padding: 12px; font-size: 18px; text-align: center; font-weight: bold;'>Bravo $last_name $first_name Vous avez été inscris avec succès sur aptechapp.com</h1>
+<section style='background: #FFFFFF; padding: 2rem;'>
+    <p>Salut <b>$first_name</b> <b>$last_name</b>, <br> 
+    vous venez d'être membre de la plateforme aptechapp. Ce mail est confidentiel, il contient vos identifiants de connexion, vous devez alors le gardé en sécurité !</p>
+    <p>Vos identifiants sont les suivants: <br> Email: <b>$email</b> <br> Identifiant: <b>$username</b> <br> Mot de passe: <b>$passwordn</b></p>
+    <p>Connectez-vous avec vos identifiants sur: <span style='background: #009688; padding: 2px; color: #FFFFFF'><a href='https://aptech-app-2.000webhostapp.com/' style='color: white'>aptech.com</a></span></p>
+    <p>Vous pouvez changer votre mot de passe et votre identifiant une fois connecté.</p>
+    <p>Sachez qu'il n'est pas nécessaire de répondre à ce mail.</p>
+</section>
+</body>
+</html>
+";
         $mail->sendMail("bmaiga08@gmail.com", "Votre inscription sur APTECHAPP.com a bien été pris en compte !", $message);
     }
 
     public function setProfil(int $id, string $profile) {
-        $req = $this->pdo->prepare("UPDATE {$this->table} SET profil = :profile WHERE id = :id");
+        $req = $this->pdo->prepare("UPDATE {$this->table} SET profile = :profile WHERE id = :id");
         $req->execute(compact('id', 'profile'));
     }
 
