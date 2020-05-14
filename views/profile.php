@@ -118,7 +118,7 @@
                                 <?php
                             }
                             ?>
-                            <span class="text-muted small d-block"><?= $datas['pub_date'] ?>
+                            <span class="text-muted small d-block"><?= time_elapsed_string($datas['pub_date']) ?>
                                 <?php
                                 $comment = new \Model\Comment();
                                 echo '('. count($comment->findBy(2, $datas['id'])) .' Commentaire(s))';

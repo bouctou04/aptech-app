@@ -13,7 +13,7 @@
                             <td class="row">
                                 <span class="font-weight-bold"><a href="index.php?page=read_message&&id=<?= $datas['sender_id'] ?>">@<?= $datas['username'] ?></a> </span>
                                 <span class="opacity-4 pl-2"><?= $datas['content'] ?></span>
-                                <span class="pl-3 opacity-1 small"><?= $datas['send_date'] ?></span>
+                                <span class="pl-3 opacity-1 small"><?= time_elapsed_string($datas['send_date']) ?></span>
                             </td>
                                 <?php
                             }

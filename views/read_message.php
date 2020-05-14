@@ -55,7 +55,7 @@
                                         <div class="message teal white-text col-6">
                                             <?= $datas['content'] ?>
                                         </div>
-                                        <time><?= $datas['send_date'] ?></time>
+                                        <time><?= time_elapsed_string($datas['send_date']) ?></time>
                                     </li>
                                     <?php
                                 } else { ?>
@@ -63,7 +63,7 @@
                                         <div class="message_dest blue-grey white-text col-6">
                                             <?= $datas['content'] ?>
                                         </div>
-                                        <time><?= $datas['send_date'] ?></time>
+                                        <time><?= time_elapsed_string($datas['send_date']) ?></time>
                                     </li>
                                     <?php
                                 }

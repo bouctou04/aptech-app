@@ -21,7 +21,7 @@ if(!empty($_GET['id']) AND $_GET['id'] > 0) {
                     <?= $datas['content'] ?>
                 </p>
                 <p class="col-12">
-                    <span class="text-muted small"><?= $datas['pub_date'] ?></span>
+                    <span class="text-muted small"><?= time_elapsed_string($datas['pub_date']) ?></span>
                     <?php
                     if(isset($_GET['status'])) {
                         $status = intval($_GET['status']);
@@ -133,7 +133,7 @@ if(!empty($_GET['id']) AND $_GET['id'] > 0) {
                         <li class="collection-item">
                             <span class="font-weight-bold">@<?= $datas['username'] ?></span>
                             <span class="opacity-4 pl-2"><?= $datas['content'] ?></span>
-                            <span class="pl-3 d-block opacity-1 small"><?= $datas['pub_date'] ?></span>
+                            <span class="pl-3 d-block opacity-1 small"><?= time_elapsed_string($datas['pub_date']) ?></span>
                         </li>
                     <?php
                     endforeach;

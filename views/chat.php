@@ -44,19 +44,17 @@
                                         <div class="message teal white-text col-6">
                                             <?= $datas['content'] ?>
                                         </div>
-                                        <time><?= $datas['send_date'] ?></time>
+                                        <time><?= time_elapsed_string($datas['send_date']) ?></time>
                                     </li>
                                     <?php
                                 } else { ?>
                                     <li class="dest">
-                                        <div class="message_dest black white-text col-6">
-                                            <div class="chip black white-text">
-                                                <img src="<?= $datas['profile'] ?>" alt="Contact Person">
-                                                <span class="font-weight-bold"><a href="index.php?page=read_message&&id=<?= $datas['users_id'] ?>"><?= $datas['username'] ?></a>:</span>
-                                            </div>
+                                        <div class="message_dest blue-grey white-text col-6">
+                                            <img class="rounded-circle" src="<?= $datas['profile'] ?>" width="32" alt="<?= $datas['username'] ?>">
+                                            <span class="font-weight-bold"><a class="white-text small" href="index.php?page=read_message&&id=<?= $datas['users_id'] ?>"><?= $datas['username'] ?></a>:</span>
                                             <?= $datas['content'] ?>
                                         </div>
-                                        <time class="d-block"><?= $datas['send_date'] ?></time>
+                                        <time class="d-block"><?= time_elapsed_string($datas['send_date']) ?></time>
                                     </li>
                                     <?php
                                 }

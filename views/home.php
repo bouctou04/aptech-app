@@ -106,22 +106,21 @@ if($_SESSION['category_id'] == 1) {
     $start = ($current_page - 1) * $article_per_page;
 
     if(!empty($article->findAll())) {
-        foreach ($article->findAll("ORDER BY id DESC LIMIT $start, $article_per_page") as $datas):
-            echo "
+        foreach ($article->findAll("ORDER BY id DESC LIMIT $start, $article_per_page") as $datas): ?>
             <article>
                 <div class='col-12'>
                     <h1 class='title'>
-                        <a href='index.php?page=home&&action=show&&id=$datas[id]'>$datas[subject]</a>
+                        <a href="index.php?page=home&&action=show&&id=<?= $datas['id'] ?>"><?= $datas['subject'] ?></a>
                     </h1>
                     <p class='text-justify'>
-                        $datas[excerpt]
+                        <?= $datas['excerpt'] ?>
                     </p>
                     <p class='opacity-1'>
-                        $datas[send_date]
+                        <?= time_elapsed_string($datas['send_date']) ?>
                     </p>
                 </div>
             </article>
-        ";
+    <?php
         endforeach;
     } else {
         echo "

@@ -17,7 +17,7 @@
                         }
                         ?>
                         <p class="col-12 justify"><?= $datas['content'] ?></p>
-                        <p class="col-2 opacity-1"><?= $datas['send_date'] ?></p>
+                        <p class="col-2 opacity-1"><?= time_elapsed_string($datas['send_date']) ?></p>
                     </article>
             <?php
             // Edit or delete article if admin
@@ -107,7 +107,7 @@
                         <li class="collection-item">
                             <span class="font-weight-bold">@<?= $donnees['username'] ?></span>
                             <span class="opacity-4 pl-2"><?= $donnees['content'] ?></span>
-                            <span class="pl-3 d-block opacity-1 small"><?= $donnees['pub_date'] ?></span>
+                            <span class="pl-3 d-block opacity-1 small"><?= time_elapsed_string($donnees['pub_date']) ?></span>
                         </li>
                     <?php
                     endforeach;

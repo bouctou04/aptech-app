@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "../models/Chat.php";
+require_once "../libraries/utils.php";
 $chat = new \Model\Chat();
 if(!empty($chat->findAll())) {
     foreach ($chat->findAll("INNER JOIN users ON users.id = chat.users_id ORDER BY send_date DESC LIMIT 0, 15") as $datas): ?>
@@ -11,7 +12,7 @@ if(!empty($chat->findAll())) {
                     <div class="message teal white-text col-6">
                         <?= $datas['content'] ?>
                     </div>
-                    <time><?= $datas['send_date'] ?></time>
+                    <time><?= time_elapsed_string($datas['send_date']) ?></time>
                 </li>
                 <!--<div class="chip">
                     <img src="public/media/img/profile.jpg" alt="Contact Person">
@@ -23,13 +24,11 @@ if(!empty($chat->findAll())) {
             } else { ?>
                 <li class="dest">
                     <div class="message_dest blue-grey white-text col-6">
-                        <div class="chip black white-text">
-                            <img src="<?= $datas['profile'] ?>" alt="Contact Person">
-                            <span class="font-weight-bold"><a href="index.php?page=read_message&&id=<?= $datas['users_id'] ?>"><?= $datas['username'] ?></a>:</span>
-                        </div>
+                        <img class="rounded-circle" src="<?= $datas['profile'] ?>" width="32" alt="<?= $datas['username'] ?>">
+                        <span class="font-weight-bold"><a class="white-text small" href="index.php?page=read_message&&id=<?= $datas['users_id'] ?>"><?= $datas['username'] ?></a>:</span>
                         <?= $datas['content'] ?>
                     </div>
-                    <time class="d-block"><?= $datas['send_date'] ?></time>
+                    <time class="d-block"><?= time_elapsed_string($datas['send_date']) ?></time>
                 </li>
                 <?php
             }
