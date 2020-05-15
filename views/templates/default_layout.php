@@ -48,11 +48,29 @@ $user_online = $user->online($_SESSION['id']);
                     <a href="index.php?page=followers"><span class="fa fa-users"></span> Membres</a>
                 </li>
                 <li>
-                    <a href="index.php?page=notification"><span class="fa fa-bell"></span> Notifications</a>
+                    <a class="dropdown-trigger" data-target='notification-lg' href="#"><span class="fa fa-bell"></span> Notifications</a>
                 </li>
             </ul>
         </div>
     </nav>
+
+    <!-- Dropdown Structure -->
+    <ul id='notification-lg' class='dropdown-content p-3'>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+    </ul>
+    <ul id='notification-sm' class='dropdown-content p-3'>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+        <li><a href="">Baba Maiga a participé à votre topic</a></li>
+    </ul>
 
     <ul class="sidenav" id="mobile-demo">
         <li>
@@ -82,7 +100,7 @@ $user_online = $user->online($_SESSION['id']);
             <a href="index.php?page=followers"><span class="fa fa-users"></span> Membres</a>
         </li>
         <li>
-            <a href="index.php?page=notification"><span class="fa fa-bell"></span> Notifications</a>
+            <a class="dropdown-trigger" data-target='notification-sm' href="#"><span class="fa fa-bell"></span> Notifications</a>
         </li>
     </ul>
 
@@ -177,6 +195,10 @@ endforeach;
             $('select').formSelect();
             $('input#input_text, input#subject, textarea#message, textarea#textarea2').characterCounter();
             $('.tabs').tabs();
+            $('.dropdown-trigger').dropdown({
+                'coverTrigger': false,
+                'constrainWidth': false,
+            });
         });
 
         // 	setInterval('load_messages()', 500);
