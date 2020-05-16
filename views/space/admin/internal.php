@@ -18,7 +18,7 @@ if($_GET['controller'] == 'internal' && isset($_GET['action']) AND $_GET['action
     <div class="col-4">
         <h1 class="title">Ajouter une filière</h1>
         <?php
-        if(isset($_POST['submitted'])) {
+        if(isset($_POST['submitted_faculty'])) {
             if(!empty($_POST['faculty'])) {
                 $faculty->insert($_SESSION['school_id'], $_POST['faculty']);
             } else {
@@ -35,7 +35,7 @@ if($_GET['controller'] == 'internal' && isset($_GET['action']) AND $_GET['action
             </div>
             <div class="input-field">
                 <?php
-                $form->btn("submit", "submitted", "Enregistrer", "btn");
+                $form->btn("submit", "submitted_faculty", "Enregistrer", "btn");
                 ?>
             </div>
         </form>
