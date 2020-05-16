@@ -14,12 +14,21 @@
 <body>
 <?php
 $user = new \Model\User();
+$message = new \Model\Message();
 $user_online = $user->online($_SESSION['id']);
 ?>
     <nav>
         <div class="nav-wrapper teal">
             <a class="brand-logo right" href="index.php?page=home">APTECH</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><span class="material-icons"><i class="fa fa-bars"></i></a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                <span class="material-icons"><i class="fa fa-bars"></i>
+                    <?php
+                    if($message->getUnread($_SESSION['id']) > 0) { ?>
+                        <span class="red new badge"><?= $message->getUnread($_SESSION['id']) ?></span>
+                        <?php
+                    }
+                    ?>
+            </a>
             <ul class="left hide-on-med-and-down">
                 <li>
                     <a class="" href="index.php?page=home"><span class="fa fa-home"></span> Accueil <span class="sr-only">(current)</span></a>
@@ -28,7 +37,15 @@ $user_online = $user->online($_SESSION['id']);
                     <a href="index.php?page=profile&&id=<?= $_SESSION['id'] ?>"><span class="fa fa-user"></span> Profile</a>
                 </li>
                 <li>
-                    <a href="index.php?page=message"><span class="fa fa-envelope"></span> Message</a>
+                    <a href="index.php?page=message">
+                        <span class="fa fa-envelope"></span> Message
+                        <?php
+                        if($message->getUnread($_SESSION['id']) > 0) { ?>
+                            <span class="red new badge"><?= $message->getUnread($_SESSION['id']) ?></span>
+                          <?php
+                        }
+                        ?>
+                    </a>
                 </li>
                 <li>
                     <a href="index.php?page=chat"><span class="fa fa-comments"></span> Chat</a>
@@ -80,7 +97,15 @@ $user_online = $user->online($_SESSION['id']);
             <a href="index.php?page=profile&&id=<?= $_SESSION['id'] ?>"><span class="fa fa-user"></span> Profile</a>
         </li>
         <li>
-            <a href="index.php?page=message"><span class="fa fa-envelope"></span> Message</a>
+            <a href="index.php?page=message">
+                <span class="fa fa-envelope"></span> Message
+                <?php
+                if($message->getUnread($_SESSION['id']) > 0) { ?>
+                    <span class="red new badge"><?= $message->getUnread($_SESSION['id']) ?></span>
+                    <?php
+                }
+                ?>
+            </a>
         </li>
         <li>
             <a href="index.php?page=chat"><span class="fa fa-comments"></span> Chat</a>
@@ -175,17 +200,17 @@ endforeach;
     <script>
         setInterval('load_chat()', 500);
         function load_chat() {
-            $('#chat').load('views/load_chat.php');
+            $('#chat').load('views/async/load_chat.php');
         }
-        setInterval('load_message()', 1000);
+        /* setInterval('load_message()', 1000);
         function load_message() {
-            $('#loadMessage').load();
+            $('#loadMessage').load("views/async/load_message.php");
+        } */
+        setInterval('load_reception()', 1000);
+        function load_reception() {
+            $('#reception').load('views/async/load_reception.php');
         }
 
-        //setInterval('load_inline()', 500);
-        function inline() {
-            //$('#inline').load('include/en_ligne.php');
-        }
 
         $(document).ready(function(){
             $('.sidenav').sidenav();

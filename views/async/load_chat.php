@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "../models/Chat.php";
-require_once "../libraries/utils.php";
+require_once "../../models/Chat.php";
+require_once "../../libraries/utils.php";
 $chat = new \Model\Chat();
 if(!empty($chat->findAll())) {
     foreach ($chat->findAll("INNER JOIN users ON users.id = chat.users_id ORDER BY send_date DESC LIMIT 0, 15") as $datas): ?>

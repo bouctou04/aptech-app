@@ -58,7 +58,7 @@ class Message extends Model
      * @return array
      */
     public function getReception(int $id) {
-        $req = $this->pdo->prepare("SELECT DISTINCT * FROM {$this->table} INNER JOIN users ON users.id = {$this->table}.sender_id WHERE sender_id = :id OR receptor_id = :id");
+        $req = $this->pdo->prepare("SELECT users.username, messages.id, messages.sender_id, messages.receptor_id, messages.content, messages.send_date, messages.file, messages.read  FROM {$this->table} INNER JOIN users ON users.id = {$this->table}.sender_id WHERE sender_id = :id OR receptor_id = :id");
         $req->execute(compact('id'));
         return $req->fetchAll();
     }

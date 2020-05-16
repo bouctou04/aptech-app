@@ -92,7 +92,7 @@ class User extends Model
      */
     public function findAll(?string $query = NULL) {
         if($query) {
-            $sql = "SELECT user_category.id AS category_id, user_category.field, users.id AS id, users.user_category_id, users.school_id, users.last_name, users.first_name, users.username, users.profile FROM {$this->table}";
+            $sql = "SELECT user_category.id AS category_id, user_category.field, users.id AS id, users.user_category_id AS user_category_id, users.school_id AS school_id, users.last_name, users.first_name, users.birth_date, users.sexe, users.username, users.email, users.profile FROM {$this->table}";
             $sql .= " ". $query;
         } else {
             $sql = "SELECT * FROM {$this->table}";
@@ -263,6 +263,10 @@ class User extends Model
         $integer = "0123456789";
         $password = $letterUpper. $letterLower. $integer;
         return substr(str_repeat(str_shuffle($password), random_int(self::PASSWORD_CHARACTER_REPEAT_MIN, self::PASSWORD_CHARACTER_REPEAT_MAX)), 0, self::PASSWORD_LENGTH);
+    }
+
+    public function lastId() {
+        return $this->pdo->lastInsertId();
     }
 
     public function search(string $find) {

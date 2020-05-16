@@ -72,6 +72,23 @@ function render($url, $variables = []) {
         case 'space':
             if($_SESSION['category_id'] == 1) {
                 $page_title = 'Espace administration';
+                if(!empty($_GET['controller'])) {
+                    $action = $_GET['controller'];
+                } else {
+                    $action = 'index';
+                }
+                ob_start();
+                switch ($action) {
+                    case 'register':
+                        require_once 'views/space/admin/register.php';
+                        break;
+                    case 'index':
+                        require_once 'views/space/admin/index.php';
+                        break;
+                    case 'internal':
+                        require_once 'views/space/admin/internal.php';
+                }
+                $content = ob_get_clean();
                 require_once 'views/admin_space.php';
             } elseif ($_SESSION['category_id'] == 2) {
                 $page_title = 'Espace professeur';
