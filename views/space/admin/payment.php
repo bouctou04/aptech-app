@@ -68,16 +68,14 @@
         $montant_paye = 0;
         $montant_restant = 0;
         foreach ($userHasSchool->findAll(NULL, true) as $datas) {
-
             ?>
-
         <tr>
             <td><?= $datas['last_name']. ' '. $datas['first_name'] ?></td>
-            <td>d<?= $datas['email'] ?></td>
+            <td><?= $datas['email'] ?></td>
             <td><?= $datas['faculty']. ' '. $datas['level'] ?></td>
             <td><?= $datas['amount_faculty'] ?></td>
-            <td>200.000</td>
-            <td>600.000</td>
+            <td><?= $payment->sumPayment($datas['users_id'])['amount'] ?></td>
+            <td><?= $datas['amount_faculty'] - $payment->sumPayment($datas['users_id'])['amount'] ?></td>
         </tr>
         <?php
         }

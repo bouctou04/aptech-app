@@ -2,8 +2,8 @@
 session_start();
 
 // If is set $_SESSION
-if(!empty($_SESSION['id']) AND $_SESSION['id'] > 0) {
-    //header("Location: index.php");
+if(!empty($_SESSION['super_id']) AND $_SESSION['super_id'] > 0) {
+    header("Location: index.php");
 }
 
 // Include files
@@ -25,17 +25,16 @@ if(isset($_POST['submitted'])) {
             setcookie('password', $_POST['password'], time() + 365*24*3600, null, null, false, true);
         }
         // Include User class
-        require_once 'models/User.php';
-        $login = new \Model\User();
+        require_once '../models/SuperUser.php';
+        $login = new \Model\SuperUser();
         if($login->login($_POST['username'], $_POST['password']) === true) {
-            $_SESSION['id'] = $login->getId();
-            $_SESSION['category_id'] = $login->getId();
-            $_SESSION['school_id'] = $login->getSchoolId();
+            $_SESSION['super_id'] = $login->getId();
+            $_SESSION['accreditation'] = $login->getAccreditation();
             $_SESSION['last_name'] = $login->getLastName();
             $_SESSION['first_name'] = $login->getFirstName();
             $_SESSION['username'] = $login->getUsername();
             $_SESSION['email'] = $login->getEmail();
-            header("Location: index.php");
+            header("Location: auth/index.php");
         } else {
             $erreur = "Les identifiants fournis ne correspondent à aucun compte dans nos fichiers, veuillez vérifier que ces informations sont correctes !";
         }

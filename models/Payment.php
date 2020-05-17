@@ -20,4 +20,10 @@ class Payment extends Model
         $req = $this->pdo->prepare("INSERT INTO {$this->table}(users_id, faculty_id, amount, payment_date, type) VALUES(:users_id, :faculty_id, :amount, NOW(), :type)");
         $req->execute(compact('users_id', 'faculty_id', 'amount', 'type'));
     }
+
+    public function sumPayment(int $users_id) {
+        $req = $this->pdo->prepare("SELECT SUM(amount) AS amount FROM {$this->table} WHERE users_id = :users_id");
+        $req->execute(compact('users_id'));
+        return $req->fetch();
+    }
 }

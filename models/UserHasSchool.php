@@ -31,7 +31,7 @@ class UserHasSchool extends Model
                 $sql = "SELECT * FROM {$this->table}";
                 $sql .= " ". $query;
             } else {
-                $sql = "SELECT users.id AS users_id, users.last_name, users.first_name, users.email, faculty.faculty, faculty.amount AS amount_faculty, faculty.level, payment.amount AS amount_payment FROM {$this->table} INNER JOIN users ON users.id = user_has_school.users_id INNER JOIN faculty ON faculty.id = user_has_school.faculty_id INNER JOIN payment ON users.id = payment.users_id";
+                $sql = "SELECT DISTINCT users.id AS users_id, users.last_name, users.first_name, users.email, faculty.faculty, faculty.amount AS amount_faculty, faculty.level, payment.amount AS amount_payment, payment.payment_date FROM {$this->table} INNER JOIN users ON users.id = user_has_school.users_id INNER JOIN faculty ON faculty.id = user_has_school.faculty_id INNER JOIN payment ON users.id = payment.users_id";
             }
         }
         $req = $this->pdo->query($sql);
