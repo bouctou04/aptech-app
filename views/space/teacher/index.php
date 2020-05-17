@@ -52,11 +52,11 @@
             </div>
             <div class="file-field input-field col s4 m4">
                 <div class="btn">
-                    <span>Image</span>
+                    <span>Fichier</span>
                     <?php $form->input("file", "file-input"); ?>
                 </div>
                 <div class="file-path-wrapper">
-                    <?php $form->input("text", "file", "file", "file-path validate", NULL, '"Importer une image (facultatif)"'); ?>
+                    <?php $form->input("text", "file", "file", "file-path validate", NULL, '"Importer un fichier)"'); ?>
                 </div>
             </div>
             <div class="input-field col s4 m4">

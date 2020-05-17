@@ -34,10 +34,16 @@ if($_GET['controller'] == 'internal' && isset($_GET['action']) AND $_GET['action
                 ?>
             </div>
             <div class="input-field">
-                <?php
-                $form->input("text", "level", "level", "validate", "255");
-                $form->label("faculty", "Libellé du niveau");
-                ?>
+                <select name="level" id="level">
+                    <option value="" disabled selected>Selectionner le niveau</option>
+                    <option value="Licence 1">Licence 1</option>
+                    <option value="Licence 2">Licence 2</option>
+                    <option value="Licence 3">Licence 3</option>
+                    <option value="Master 1">Master 1</option>
+                    <option value="Master 2">Master 2</option>
+                    <option value="Doctorat">Doctorat</option>
+                </select>
+                <label for="level">Selectionner le niveau</label>
             </div>
             <div class="input-field">
                 <?php
