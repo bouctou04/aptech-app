@@ -55,8 +55,10 @@ if($_SESSION['id'] == 1) {
                                             $user->insert(get_user_category($_GET['etape1']), $_SESSION['school_id'], $_POST['last_name'], $_POST['first_name'], $_POST['birth_date'], $_POST['sexe'], $_POST['mail']);
                                             if(get_user_category($_GET['etape1']) == 3) {
                                                 $userHasScool = new \Model\UserHasSchool();
+                                                $payment = new \Model\Payment();
                                                 $idUser = $user->lastId();
-                                                $userHasScool->insert($idUser, $_POST['faculty'], $_POST['level'], $_POST['period']);
+                                                $payment->insert($idUser, $_POST['faculty'], $_POST['amount']);
+                                                $userHasScool->insert($idUser, $_POST['faculty'], $_POST['period']);
                                             }
                                         } else {
                                             $error = "Les adresses mails ne correspondent pas !";
@@ -164,18 +166,9 @@ if($_SESSION['id'] == 1) {
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="<?= $etape2 ?>input-field">
-                                        <select name="level" id="level">
-                                            <option value="" disabled selected>Selectionner le niveau</option>
-                                            <?php
-                                            $level = new \Model\Level();
-                                            foreach($level->findAll("WHERE school_id = $_SESSION[school_id]") as $datas) { ?>
-                                                <option value="<?= $datas['id'] ?>"><?= $datas['level'] ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
                                         <?php
-                                        $form->label("level", "Niveau");
+                                        $form->input("number", "amount", "amount", "validate");
+                                        $form->label("amount", "Montant");
                                         ?>
                                     </div>
                                 </div>

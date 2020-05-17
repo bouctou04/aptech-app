@@ -90,9 +90,13 @@ class User extends Model
      * @param string|null $query
      * @return array
      */
-    public function findAll(?string $query = NULL) {
+    public function findAll(?string $query = NULL, ?bool $use_foreign_key = true) {
         if($query) {
-            $sql = "SELECT user_category.id AS category_id, user_category.field, users.id AS id, users.user_category_id AS user_category_id, users.school_id AS school_id, users.last_name, users.first_name, users.birth_date, users.sexe, users.username, users.email, users.profile FROM {$this->table}";
+            if($use_foreign_key) {
+                $sql = "SELECT user_category.id AS category_id, user_category.field, users.id AS id, users.user_category_id AS user_category_id, users.school_id AS school_id, users.last_name, users.first_name, users.birth_date, users.sexe, users.username, users.email, users.profile FROM {$this->table}";
+            } else {
+                $sql = "SELECT * FROM {$this->table}";
+            }
             $sql .= " ". $query;
         } else {
             $sql = "SELECT * FROM {$this->table}";

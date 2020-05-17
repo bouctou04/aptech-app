@@ -87,17 +87,57 @@ function render($url, $variables = []) {
                         break;
                     case 'internal':
                         require_once 'views/space/admin/internal.php';
+                        break;
+                    case 'payment':
+                        require_once 'views/space/admin/payment.php';
+                        break;
+                    case 'course':
+                        require_once 'views/space/admin/course.php';
+                        break;
+                    default:
+                        require_once 'views/space/admin/index.php';
                 }
                 $content = ob_get_clean();
-                require_once 'views/admin_space.php';
+                require_once 'views/space.php';
             } elseif ($_SESSION['category_id'] == 2) {
                 $page_title = 'Espace professeur';
-                require_once 'views/teacher_space.php';
+                ob_start();
+                if(!empty($_GET['controller'])) {
+                    $action = $_GET['controller'];
+                } else {
+                    $action = 'index';
+                }
+                ob_start();
+                switch ($action) {
+                    case 'index':
+                        require_once 'views/space/teacher/index.php';
+                        break;
+                    default:
+                        require_once 'views/space/teacher/index.php';
+                }
+                $content = ob_get_clean();
+                require_once 'views/space.php';
             } elseif ($_SESSION['category_id'] == 3) {
                 $page_title = 'Espace étudiant';
-                require_once 'views/student_space.php';
-            } else {
-                require_once 'views/404.php';
+                ob_start();
+                if(!empty($_GET['controller'])) {
+                    $action = $_GET['controller'];
+                } else {
+                    $action = 'index';
+                }
+                ob_start();
+                switch ($action) {
+                    case 'index':
+                        require_once 'views/space/student/index.php';
+                        break;
+                    case 'payment':
+                        require_once 'views/space/student/payment.php';
+                        break;
+                    default:
+                        require_once 'views/space/student/index.php';
+                }
+                $content = ob_get_clean();
+                require_once 'views/space.php';
             }
             break;
         default:

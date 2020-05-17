@@ -19,8 +19,8 @@ if($_GET['controller'] == 'internal' && isset($_GET['action']) AND $_GET['action
         <h1 class="title">Ajouter une filière</h1>
         <?php
         if(isset($_POST['submitted_faculty'])) {
-            if(!empty($_POST['faculty'])) {
-                $faculty->insert($_SESSION['school_id'], $_POST['faculty']);
+            if(!empty($_POST['faculty']) AND !empty($_POST['level']) AND !empty($_POST['amount'])) {
+                $faculty->insert($_SESSION['school_id'], $_POST['faculty'], $_POST['level'], $_POST['amount']);
             } else {
                 $error = "Veuillez renseigné le libellé de la filière ...";
             }
@@ -35,6 +35,18 @@ if($_GET['controller'] == 'internal' && isset($_GET['action']) AND $_GET['action
             </div>
             <div class="input-field">
                 <?php
+                $form->input("text", "level", "level", "validate", "255");
+                $form->label("faculty", "Libellé du niveau");
+                ?>
+            </div>
+            <div class="input-field">
+                <?php
+                $form->input("number", "amount", "amount", "validate", "255");
+                $form->label("amount", "Montant de la filière");
+                ?>
+            </div>
+            <div class="input-field">
+                <?php
                 $form->btn("submit", "submitted_faculty", "Enregistrer", "btn");
                 ?>
             </div>
@@ -45,7 +57,9 @@ if($_GET['controller'] == 'internal' && isset($_GET['action']) AND $_GET['action
         <table class="centered responsive-table striped">
             <thead class="teal white-text">
             <tr>
-                <th>Libellé</th>
+                <th>Filière</th>
+                <th>Niveau</th>
+                <th>Montant</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -57,6 +71,8 @@ if($_GET['controller'] == 'internal' && isset($_GET['action']) AND $_GET['action
 
                     <tr>
                         <td><?= $datas['faculty'] ?></td>
+                        <td><?= $datas['level'] ?></td>
+                        <td><?= $datas['amount'] ?></td>
                         <td>
                             <a class="btn small" href="#"><span class="fa fa-pen"></span></a>
                             <a class="btn small red darken-2" href="index.php?page=space&&controller=internal&&action=delete_faculty&&id=<?= $datas['id'] ?>"><span class="fa fa-trash"></span></a>
@@ -71,61 +87,7 @@ if($_GET['controller'] == 'internal' && isset($_GET['action']) AND $_GET['action
         </table>
     </div>
 <hr>
-<div class="col-4">
-        <h1 class="title">Ajouter un niveau d'étude</h1>
-        <?php
-        if(isset($_POST['submitted_level'])) {
-            if(!empty($_POST['level'])) {
-                $level->insert($_SESSION['school_id'], $_POST['level']);
-            } else {
-                $error = "Veuillez renseigné le libellé du niveau d'étude ...";
-            }
-        }
-        ?>
-        <form method="POST">
-            <div class="input-field">
-                <?php
-                $form->input("text", "level", "level", "validate", "255");
-                $form->label("level", "Libellé du niveau d'étude");
-                ?>
-            </div>
-            <div class="input-field">
-                <?php
-                $form->btn("submit", "submitted_level", "Enregistrer", "btn");
-                ?>
-            </div>
-        </form>
-    </div>
-    <div class="col-8">
-        <h1 class="title">Liste des niveaux</h1>
-        <table class="centered responsive-table striped">
-            <thead class="teal white-text">
-            <tr>
-                <th>Libellé</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            if(!empty($level->findAll())) {
-                foreach ($level->findAll("WHERE school_id = $_SESSION[school_id]") as $datas) {
-                    ?>
 
-                    <tr>
-                        <td><?= $datas['level'] ?></td>
-                        <td>
-                            <a class="btn small" href="#"><span class="fa fa-pen"></span></a>
-                            <a class="btn small red darken-2" href="index.php?page=space&&controller=internal&&action=delete_level&&id=<?= $datas['id'] ?>"><span class="fa fa-trash"></span></a>
-                        </td>
-                    </tr>
-
-                    <?php
-                }
-            }
-            ?>
-            </tbody>
-        </table>
-    </div>
 <div class="col-4">
         <h1 class="title">Ajouter une période</h1>
         <?php
