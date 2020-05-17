@@ -10,7 +10,7 @@
                         <img src="<?= $datas['profile'] ?>" class="responsive-img rounded" alt="">
                         <?php
                         if($_SESSION['id'] == $getid) { ?>
-                            <a class="waves-effect waves-light modal-trigger" href="#profil"><span class="fa fa-pen"></span> Modifier la photo</a>
+                            <a class="waves-effect waves-light modal-trigger" href="#profil"><span class="fa fa-camera"></span> Charger une photode profil</a>
                             <div id="profil" class="modal">
                                 <div class="modal-content">
                                     <h4>Selectionner une photo de profil</h4>
@@ -71,9 +71,61 @@
                                 <li class=""><span class="text-muted">Adresse email: </span> <?= $datas['email'] ?></li>
                                 <li class=""><span class="text-muted">Nom d'utilisateur: </span> <?= $datas['username'] ?> <?php
                                     if($_SESSION['id'] == $getid) {
-                                        echo "<a href='index.php?page=maintenance'>Modifier</a>";
+                                        echo "<a href='#username_modal' class='modal-trigger'>Modifier</a>";
                                     }
-                                    ?></li>
+                                    ?>
+                                    <div id="username_modal" class="modal">
+                                        <div class="modal-content">
+                                            <h4>Modifier votre nom d'utilisateur</h4>
+                                            <?php
+                                            if(isset($_POST['submitted_username'])) {
+                                                if(!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST['confirm_password'])) {
+                                                    if($_POST['password'] == $_POST['confirm_password']) {
+                                                       if(sha1($_POST['password']) == $_SESSION['password']) {
+                                                          if($user->verifyUsername($_POST['username']) == false) {
+                                                              $user->changeUsername($_SESSION['id'], $_POST['username']);
+                                                          } else {
+                                                              echo $_POST['username']. ' est utilisé par un autre compte !';
+                                                          }
+                                                       } else {
+                                                           $error = "Votre mot de passe est incorrect";
+                                                       }
+                                                    } else {
+                                                        $error = "Vos mots de passe ne correspondent pas !";
+                                                    }
+                                                } else {
+                                                    $error = "Veuillez remplir tous les champs";
+                                                }
+                                            }
+                                            ?>
+                                            <form method="POST">
+                                                <div class="input-field">
+                                                    <?php
+                                                    $form->input("text", "username", "username", "validate");
+                                                    $form->label("username", "Nouveau nom d'utilisateur");
+                                                    ?>
+                                                </div>
+                                                <div class="input-field">
+                                                    <?php
+                                                    $form->input("password", "password", "password", "validate");
+                                                    $form->label("password", "Votre mot de passe");
+                                                    ?>
+                                                </div>
+                                                <div class="input-field">
+                                                    <?php
+                                                    $form->input("password", "confirm_password", "confirm_password", "validate");
+                                                    $form->label("confirm_password", "Confirmez le mot de passe");
+                                                    ?>
+                                                </div>
+                                                <div class="input-field">
+                                                    <?php
+                                                    $form->btn("submit", "submitted_username", "Enregistrer","btn");
+                                                    ?>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
                                 <li class=""><span class="text-muted">Date de naissance: </span> <?= $datas['birth_date'] ?></li>
                                 <li class=""><span class="text-muted">Sexe: </span> <?php if($datas['sexe'] == 'M') { echo "Masculin"; }else{ echo "Féminin"; } ?></li>
                                 <?php

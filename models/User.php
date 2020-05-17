@@ -245,6 +245,11 @@ class User extends Model
         }
     }
 
+    public function changeUsername(int $id, string $username) {
+        $req = $this->pdo->prepare("UPDATE {$this->table} SET username = :username WHERE id = :id");
+        $req->execute(compact('username', 'id'));
+    }
+
     public function changePassword(int $id, string $old_password, string $new_password) {
         $user = $this->find($id);
         $old_password = sha1($old_password);

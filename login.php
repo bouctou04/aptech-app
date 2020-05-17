@@ -35,6 +35,7 @@ if(isset($_POST['submitted'])) {
             $_SESSION['first_name'] = $login->getFirstName();
             $_SESSION['username'] = $login->getUsername();
             $_SESSION['email'] = $login->getEmail();
+            $_SESSION['password'] = $login->getPassword();
             header("Location: index.php");
         } else {
             $erreur = "Les identifiants fournis ne correspondent à aucun compte dans nos fichiers, veuillez vérifier que ces informations sont correctes !";
