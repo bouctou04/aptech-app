@@ -15,7 +15,7 @@
                                 <?= $datas['field'] ?>
                             </p>
                         </div>
-                        <a href="index.php?page=read_message&&id=<?= $datas['id'] ?>" class="secondary-content col-2"><span class="fa fa-envelope"></span> Message</a>
+                        <a href="index.php?page=read_message&&id=<?= $datas['id'] ?>&&sender_id=<?= $_SESSION['id'] ?>" class="secondary-content col-2"><span class="fa fa-envelope"></span> Message</a>
                     </li>
                 </ul>
                 <?php

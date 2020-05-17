@@ -51,7 +51,7 @@
                                     <li class="dest">
                                         <div class="message_dest blue-grey white-text col-lg-6 col-md-6 col-sm-8">
                                             <img class="rounded-circle responsive-img" src="<?= $datas['profile'] ?>" width="30" alt="<?= $datas['username'] ?>">
-                                            <span class="font-weight-bold"><a class="white-text small" href="index.php?page=read_message&&id=<?= $datas['users_id'] ?>"><?= $datas['username'] ?></a>:</span>
+                                            <span class="font-weight-bold"><a class="white-text small" href="index.php?page=read_message&&id=<?= $datas['users_id'] ?>&&sender_id=<?= $_SESSION['id'] ?>"><?= $datas['username'] ?></a>:</span>
                                             <?= $datas['content'] ?>
                                         </div>
                                         <time class="d-block"><?= time_elapsed_string($datas['send_date']) ?></time>

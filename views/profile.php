@@ -152,7 +152,7 @@
             endforeach;
             if($_SESSION['id'] != $getid) { ?>
                 <div class="">
-                    <a class="btn" href="index.php?page=read_message&&id=<?= $getid ?>"><span class="fa fa-envelope"></span> Message</a>
+                    <a class="btn" href="index.php?page=read_message&&id=<?= $getid ?>&&sender_id=<?= $_SESSION['id'] ?>"><span class="fa fa-envelope"></span> Message</a>
                 </div>
              <?php
             }
