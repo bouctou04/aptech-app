@@ -149,10 +149,38 @@
                     </div>
                 </div>
             <?php
+            if($_SESSION['id'] != $getid) { ?>
+                <a class="btn modal-trigger" href="#modal_message"><span class="fa fa-envelope"></span> Message</a>
+                <div id="modal_message" class="modal">
+                    <form method="POST">
+                        <?php
+                        if(isset($_POST['submitted_message'])) {
+                            if(!empty($_POST['message'])) {
+                                $message = new \Model\Message();
+                                $message->insert($_SESSION['id'], $datas['id'], $_POST['message']);
+                            }
+                        }
+                        ?>
+                        <div class="modal-content">
+                            <h4>Message à <?= $datas['last_name']. ' ' .$datas['first_name'] ?></h4>
+                            <div class="input-field">
+                                <?php
+                                $form->input("text", "message", "message", "validate", "255");
+                                $form->label("message", "Écrire votre message ...");
+                                ?>
+                            </div>
+                            <?php
+                            $form->btn("submit","submitted_message", "Envoyer", "btn");
+                            ?>
+                        </div>
+                    </form>
+                </div>
+            <?php
+            }
             endforeach;
             if($_SESSION['id'] != $getid) { ?>
                 <div class="">
-                    <a class="btn" href="index.php?page=read_message&&id=<?= $getid ?>&&sender_id=<?= $_SESSION['id'] ?>"><span class="fa fa-envelope"></span> Message</a>
+
                 </div>
              <?php
             }
