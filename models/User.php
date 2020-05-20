@@ -245,11 +245,21 @@ class User extends Model
         }
     }
 
+    /**
+     * @param int $id
+     * @param string $username
+     */
     public function changeUsername(int $id, string $username) {
         $req = $this->pdo->prepare("UPDATE {$this->table} SET username = :username WHERE id = :id");
         $req->execute(compact('username', 'id'));
     }
 
+    /**
+     * @param int $id
+     * @param string $old_password
+     * @param string $new_password
+     * @return bool
+     */
     public function changePassword(int $id, string $old_password, string $new_password) {
         $user = $this->find($id);
         $old_password = sha1($old_password);
@@ -274,10 +284,17 @@ class User extends Model
         return substr(str_repeat(str_shuffle($password), random_int(self::PASSWORD_CHARACTER_REPEAT_MIN, self::PASSWORD_CHARACTER_REPEAT_MAX)), 0, self::PASSWORD_LENGTH);
     }
 
+    /**
+     * @return string
+     */
     public function lastId() {
         return $this->pdo->lastInsertId();
     }
 
+    /**
+     * @param string $find
+     * @return array
+     */
     public function search(string $find) {
         $req = $this->pdo->query("SELECT user_category.id AS category_id, user_category.field, users.id AS id, users.user_category_id, users.school_id, users.last_name, users.first_name, users.username, school.acronym FROM {$this->table} INNER JOIN user_category ON user_category.id = users.user_category_id INNER JOIN school ON school.id = users.school_id WHERE (username LIKE '%$find%') OR (last_name LIKE '%$find%') OR (first_name LIKE '%$find%') OR (last_name + ' ' + first_name LIKE '%$find%') OR (first_name + ' ' + last_name LIKE '%$find%')");
         return $req->fetchAll();

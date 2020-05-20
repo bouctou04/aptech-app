@@ -17,9 +17,12 @@ $user = new \Model\User();
 $message = new \Model\Message();
 $user_online = $user->online($_SESSION['id']);
 ?>
-    <nav>
+    <nav id="menu-unread">
         <div class="nav-wrapper teal">
-            <a class="brand-logo right" href="index.php?page=home">APTECH</a>
+            <?php
+            $school = new \Model\School();
+            ?>
+            <a class="brand-logo right" href="index.php?page=home"><?= $school->find($_SESSION['school_id'])[0]['acronym'] ?></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger">
                 <span class="material-icons"><i class="fa fa-bars"></i>
                     <?php
@@ -50,14 +53,6 @@ $user_online = $user->online($_SESSION['id']);
                 <li>
                     <a href="index.php?page=chat"><span class="fa fa-comments"></span> Chat</a>
                 </li>
-                <?php
-                if($_SESSION['category_id'] == 1) { ?>
-                    <li>
-                        <a href="index.php?page=register"><span class="fa fa-user-plus"></span> Ajouter un utilisateur</a>
-                    </li>
-                    <?php
-                }
-                ?>
                 <li>
                     <a href="index.php?page=forum"><span class="fa fa-smile"></span> Forum</a>
                 </li>
@@ -110,14 +105,6 @@ $user_online = $user->online($_SESSION['id']);
         <li>
             <a href="index.php?page=chat"><span class="fa fa-comments"></span> Chat</a>
         </li>
-        <?php
-        if($_SESSION['category_id'] == 1) { ?>
-            <li>
-                <a href="index.php?page=register"><span class="fa fa-user-plus"></span> Ajouter un utilisateur</a>
-            </li>
-            <?php
-        }
-        ?>
         <li>
             <a href="index.php?page=forum"><span class="fa fa-smile"></span> Forum</a>
         </li>
@@ -206,6 +193,11 @@ endforeach;
         function load_message() {
             $('#loadMessage').load("views/async/load_message.php");
         } */
+        setInterval('load_menu()', 5000);
+        function load_menu() {
+            $('#menu-unread').load('views/async/load_menu.php');
+        }
+
         setInterval('load_reception()', 1000);
         function load_reception() {
             $('#reception').load('views/async/load_reception.php');

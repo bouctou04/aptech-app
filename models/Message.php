@@ -63,12 +63,19 @@ class Message extends Model
         return $req->fetchAll();
     }
 
+    /**
+     * @param int $id
+     * @return int
+     */
     public function getUnread(int $id) {
         $req = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE receptor_id = :id AND `read` = 0");
         $req->execute(compact('id'));
         return $req->rowCount();
     }
 
+    /**
+     * @param int $id
+     */
     public function setRead(int $id) {
         $req = $this->pdo->prepare("UPDATE {$this->table} SET `read` = 1 WHERE id = :id");
         $req->execute(compact('id'));

@@ -6,17 +6,30 @@ namespace Model;
 
 class UserHasSchool extends Model
 {
+    /**
+     * UserHasSchool constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->table = "user_has_school";
     }
 
+    /**
+     * @param int $user_id
+     * @param int $faculty_id
+     * @param int $period_id
+     */
     public function insert(int $user_id, int $faculty_id, int $period_id) {
         $req = $this->pdo->prepare("INSERT INTO {$this->table}(users_id, faculty_id, period_id) VALUES(:user_id, :faculty_id, :period_id)");
         $req->execute(compact('user_id', 'faculty_id', 'period_id'));
     }
 
+    /**
+     * @param string|null $query
+     * @param bool|null $use_default_query
+     * @return array
+     */
     public function findAll(?string $query = NULL, ?bool $use_default_query = true)
     {
         if(!$use_default_query) {

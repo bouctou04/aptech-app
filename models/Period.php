@@ -7,12 +7,19 @@ require_once "Model.php";
 
 class Period extends Model
 {
+    /**
+     * Period constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->table = "period";
     }
 
+    /**
+     * @param int $school_id
+     * @param string $period
+     */
     public function insert(int $school_id, string $period) {
         $school_id = intval($school_id);
         $period = htmlspecialchars($period);

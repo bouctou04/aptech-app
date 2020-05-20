@@ -7,17 +7,31 @@ require_once "Model.php";
 
 class Course extends Model
 {
+    /**
+     * Course constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->table = "courses";
     }
 
+    /**
+     * @param string $domain
+     * @param int $faculty_id
+     * @param int $users_id
+     * @param string $file
+     */
     public function insert(string $domain, int $faculty_id, int $users_id, string $file) {
         $req = $this->pdo->prepare("INSERT INTO {$this->table}(domain, faculty_id, users_id, date_add, file) VALUES(:domain, :faculty_id, :users_id, NOW(), :file)");
         $req->execute(compact('domain', 'faculty_id', 'users_id', 'file'));
     }
 
+    /**
+     * @param string|null $query
+     * @param bool|null $use_default_query
+     * @return array
+     */
     public function findAll(?string $query = NULL, ?bool $use_default_query = true)
     {
         if($use_default_query) {
