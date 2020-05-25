@@ -153,14 +153,13 @@ foreach ($user->find($_SESSION['id']) as $datas): ?>
     <ul id="slide-out" class="sidenav teal">
         <li><div class="user-view">
                 <div class="background">
-                    <img src="media/img/">
+                    <img src="media">
                 </div>
                 <a href="#user"><img class="circle" src="<?= $datas['profile'] ?>"></a>
                 <a href="#name"><span class="white-text name font-weight-bold"><?= $_SESSION['first_name'] . ' ' . $_SESSION['last_name']?></span></a>
                 <a href="#email"><span class="white-text email">@<?= $_SESSION['username'] ?></span></a>
             </div></li>
         <li><a class="waves-effect white-text" href="index.php?page=profile&&id=<?= $_SESSION['id'] ?>"><span class="fa fa-user"></span> Afficher mon profile</a></li>
-        <li><a class="waves-effect white-text" href="#!"><span class="fa fa-pen"></span> Editer mon profile</a></li>
         <li><a class="waves-effect white-text" href="index.php?page=space"><span class="fa fa-border-style"></span> Mon espace</a></li>
         <li><div class="divider"></div></li>
         <li><a class="waves-effect white-text" href="index.php?page=logout"><span class="fa fa-sign-out-alt"></span> Se déconnecter</a></li>

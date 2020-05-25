@@ -28,10 +28,27 @@
         </div>
     </nav>
 
-    <ul class="sidenav blue-grey white-text" id="space-menu">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
+    <ul class="sidenav" id="space-menu">
+        <?php
+        if($_SESSION['category_id'] == 1) { ?>
+            <li><a href="index.php?page=space&&controller=index">Utilisateurs</a></li>
+            <li><a href="index.php?page=space&&controller=internal">Gestion interne</a></li>
+            <li><a href="index.php?page=space&&controller=payment">Paiement</a></li>
+            <li><a href="index.php?page=space&&controller=course">Cours</a></li>
+            <li><a href="index.php?page=maintenance">Bulletin</a></li>
+            <?php
+        } elseif ($_SESSION['category_id'] == 2) { ?>
+            <li><a href="index.php?page=space&&controller=index">Cours</a></li>
+            <li><a href="index.php?page=maintenance">Bulletin</a></li>
+            <?php
+
+        } else { ?>
+            <li><a href="index.php?page=space&&controller=payment">État de Paiement</a></li>
+            <li><a href="index.php?page=space&&controller=course">Cours</a></li>
+            <li><a href="index.php?page=maintenance">Bulletin</a></li>
+            <?php
+        }
+        ?>
     </ul>
 
     <div class="row">

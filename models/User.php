@@ -164,6 +164,11 @@ class User extends Model
         $mail->sendMail("bmaiga08@gmail.com", "Votre inscription sur APTECHAPP.com a bien été pris en compte !", $message);
     }
 
+    public function update(int $id, string $last_name, string $first_name, string $mail, string $birth_date) {
+        $req = $this->pdo->prepare("UPDATE {$this->table} SET first_name = :first_name, last_name = :last_name, email = :mail, birth_date = :birth_date WHERE id = :id");
+        $req->execute(compact('id', 'last_name', 'first_name', 'mail', 'birth_date'));
+    }
+
     public function setProfil(int $id, string $profile) {
         $req = $this->pdo->prepare("UPDATE {$this->table} SET profile = :profile WHERE id = :id");
         $req->execute(compact('id', 'profile'));
